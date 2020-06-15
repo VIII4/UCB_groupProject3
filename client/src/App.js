@@ -1,13 +1,19 @@
 import React from "react";
-import Books from "./pages/Books";
-import Nav from "./components/Nav";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Nav />
-      <Books />
-    </div>
+    <Router>
+      <div>
+        {/* Put Nav Bar here Above Switch */}
+        <Switch>
+          {/* <Route exact path="/" component={??} />
+          <Route exact path="/" component={??} />
+          <Route exact path="/" component={??} />
+          <Route component={NoMatch} /> */}
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
