@@ -6,6 +6,7 @@ function App() {
     <Router>
       <div>
         {/* Put Nav Bar here Above Switch */}
+        Coming Soon
         <Switch>
           {/* <Route exact path="/" component={??} />
           <Route exact path="/" component={??} />
