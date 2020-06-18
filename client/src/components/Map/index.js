@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
 
+const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
+
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +82,7 @@ class Map extends Component {
 
   render() {
     return (
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
+      <LoadScript googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={this.containerStyle}
           center={this.state.currentLocation}
