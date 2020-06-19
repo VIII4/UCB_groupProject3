@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
+import API from "../../utils/API";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -12,6 +13,7 @@ class Map extends Component {
         lat: 37.804363,
         lng: -122.271111,
       },
+      localIssues: [],
     };
   }
 
@@ -52,6 +54,32 @@ class Map extends Component {
     }
   };
 
+  checkNearLocation = (checkPoint, distanceKm = 0.75) => {
+    var ky = 40000 / 360;
+    var kx = Math.cos((Math.PI * this.state.currentLocation.lat) / 180.0) * ky;
+    var dx = Math.abs(this.state.currentLocation.lng - checkPoint.lng) * kx;
+    var dy = Math.abs(this.state.currentLocation.lat - checkPoint.lat) * ky;
+    return Math.sqrt(dx * dx + dy * dy) <= distanceKm;
+  };
+
+  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
+  getLocalIssues = () => {
+    //TEST REMOVE
+    let _localIssues = API.getIssues().filter((loc) =>
+      this.checkNearLocation(loc, 5)
+    );
+    this.setState({ localIssues: _localIssues });
+    // API.getIssues()
+    //   .then((res) => {
+    //     /* Filter array and return location if within radius */
+    //     let _localIssues = res.filter((loc) => this.checkNearLocation(loc));
+    //     this.setState({ localIssues: _localIssues });
+    //   })
+    //   .catch((err) => console.log(err));
+  };
+
+  //Life Cycle Events
+
   componentDidMount = () => {
     this.getUpdatedLocation();
   };
@@ -77,7 +105,7 @@ class Map extends Component {
     styles: mapStyles.wy,
   };
 
-  //Icons **WILL ADD DUF ICONS FOR ISSUES**
+  //Icons **WILL ADD DIFF ICONS FOR ISSUES**
   icons = {};
 
   render() {
@@ -88,6 +116,7 @@ class Map extends Component {
           center={this.state.currentLocation}
           zoom={15}
           options={this.options}
+          onClick={this.getLocalIssues}
         >
           <Marker position={this.state.currentLocation}></Marker>
           {/* Child components, such as markers, info windows, etc. */}
