@@ -3,6 +3,11 @@
     font-family: "Karla", sans-serif;
     font-size: larger;
     font-weight: bolder;
+    color: black;
+}
+.logo:hover {
+    color: lightgray;
+    text-decoration: none;
 }
 
 /* macro sidebar settings */
