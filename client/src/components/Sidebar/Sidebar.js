@@ -1,6 +1,11 @@
 import React from "react";
 import './Sidebar.css';
 
+// NOTE
+// events are (jquery?) usually a seperate js file that is called by 
+// html which listens to actions on the client side and reacts...
+// I like this method better...
+
 class Sidebar extends React.Component {
     openNav = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
