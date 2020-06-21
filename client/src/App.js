@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import './App.css';
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
     <Router>
       <div>
         {/* Put Nav Bar here Above Switch */}
-        <NavBar />
-          Coming Soon
-      <Switch>
+        <Sidebar />
+        <Switch>
           {/* <Route exact path="/" component={??} />
           <Route exact path="/" component={??} />
           <Route exact path="/" component={??} />
