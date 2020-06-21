@@ -1,3 +1,10 @@
+.logo{
+    float: right;
+    font-family: "Karla", sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+}
+
 /* macro sidebar settings */
 .sidebar {
     height: 25vh;

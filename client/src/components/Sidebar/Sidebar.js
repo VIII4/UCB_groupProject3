@@ -16,7 +16,7 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <body>
+            <div>
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
                     <a href="#">About</a>
@@ -27,8 +27,11 @@ class Sidebar extends React.Component {
 
                 <div id="main">
                     <button className="openbtn" onClick={this.openNav}>☰</button>
+
+                    {/* logo */}
+                    <a className="logo">Care'n</a>
                 </div>
-            </body>
+            </div>
         )
     }
 }
