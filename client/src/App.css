@@ -1,3 +1,6 @@
 body {
     font-family: "Roboto", sans-serif;
+
+    /* fake background */
+    background-image: url('./images/map.png');
 }

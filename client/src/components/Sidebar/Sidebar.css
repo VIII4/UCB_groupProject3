@@ -1,16 +1,18 @@
+/* macro sidebar settings */
 .sidebar {
-    height: 40vh;
+    height: 25vh;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color:lightgray;
+    background-color:rgba(255, 255, 255, 0);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
+/* sidebar text settings */
 .sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -34,11 +36,11 @@
 }
 
 .openbtn {
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     color: black;
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     border: none;
 }
 

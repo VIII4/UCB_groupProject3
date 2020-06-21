@@ -4,11 +4,13 @@ import './Sidebar.css';
 class Sidebar extends React.Component {
     openNav = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
+        document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
         document.getElementById("main").style.marginLeft = "30vw";
     }
 
     closeNav = () => {
         document.getElementById("carenSidebar").style.width = "0px";
+        document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
         document.getElementById("main").style.marginLeft = "0px";
     }
 
