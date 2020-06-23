@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Sidebar from "./components/Sidebar";
+import ContactsSidebar from "./components/ContactsSidebar";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/" component={??} />
           <Route component={NoMatch} /> */}
         </Switch>
+        <ContactsSidebar />
       </div>
     </Router >
   );
