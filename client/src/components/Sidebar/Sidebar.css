@@ -1,0 +1,72 @@
+.logo{
+    float: right;
+    font-family: "Karla", sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+    color: black;
+}
+.logo:hover {
+    color: lightgray;
+    text-decoration: none;
+}
+
+/* macro sidebar settings */
+.sidebar {
+    height: 25vh;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:rgba(255, 255, 255, 0);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+/* sidebar text settings */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    /* font color */
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: lightgray;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 20px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 25px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    /* padding: 10px 15px; */
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: lightgray;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
