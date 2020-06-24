@@ -26,6 +26,11 @@ class App extends Component {
           <Sidebar />
 
           <Switch>
+
+            {/* these routes will specify which components are returned
+             <Sidebar /> being outside of <Switch> ensures it will
+             always be visible regardless of the route rendered */}
+
             <Route exact path="/" component={Test} />
             {/* <Route exact path="/" component={??} />
             <Route exact path="/" component={??} />
