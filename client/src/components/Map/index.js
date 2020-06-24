@@ -1,7 +1,14 @@
+/*global google*/
 import React, { Component } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  OverlayView,
+} from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
 import API from "../../utils/API";
+import IssuesPanel from "../IssuePanel";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -107,28 +114,45 @@ class Map extends Component {
   options = {
     disableDefaultUI: true,
     styles: mapStyles.wy,
+    zoomControl: true,
   };
 
+  //
+
   //Icons **WILL ADD DIFF ICONS FOR ISSUES**
-  icons = {};
+  icons = {
+    marker: {
+      url: "/images/marker.png",
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 75, height: 75 },
+    },
+  };
 
   render() {
     return (
-      <div className="mapUnderlay">
-        <LoadScript googleMapsApiKey={API_KEY}>
-          <GoogleMap
-            mapContainerStyle={this.containerStyle}
-            center={this.state.currentLocation}
-            zoom={15}
-            options={this.options}
-            onClick={this.getLocalIssues}
+      <LoadScript googleMapsApiKey={API_KEY}>
+        <GoogleMap
+          google={this.props.google}
+          mapContainerStyle={this.containerStyle}
+          center={this.state.currentLocation}
+          zoom={15}
+          options={this.options}
+          onClick={this.getLocalIssues}
+        >
+          <OverlayView
+            position={this.state.currentLocation}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
-            <Marker position={this.state.currentLocation}></Marker>
-            {/* Child components, such as markers, info windows, etc. */}
-            <></>
-          </GoogleMap>
-        </LoadScript>
-      </div>
+            <IssuesPanel></IssuesPanel>
+          </OverlayView>
+          <Marker
+            position={this.state.currentLocation}
+            icon={this.icons.marker}
+          ></Marker>
+          {/* Child components, such as markers, info windows, etc. */}
+        </GoogleMap>
+      </LoadScript>
     );
   }
 }
