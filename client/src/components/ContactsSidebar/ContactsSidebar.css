@@ -1,3 +1,13 @@
+/*               */
+/* css variables */
+/*               */
+* {
+    --sidebarZindex: 5;
+    
+    --transparentBackground: rgba(255, 255, 255, 0);
+    --translucentBackground: rgba(211, 211, 211, .25);
+}
+
 /* macro sidebar2 settings */
 .sidebar2 {
     height: 100vh;
@@ -6,7 +16,7 @@
     z-index: 1;
     bottom: 0;
     right: 0;
-    background-color:rgba(255, 255, 255, 0);
+    background-color: var(--transparentBackground);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 50vh;
@@ -23,6 +33,8 @@
     transition: 0.3s;
 }
 
+
+
 .sidebar2 a:hover {
     color: lightgray;
 }
@@ -31,6 +43,7 @@
     position: absolute;
     bottom: 0;
     float: right;
+    
     /* right: 25px; */
     font-size: 20px;
     margin-right: 50px;
@@ -41,11 +54,12 @@
     /* change this to right */
     float: right;
     /* right: 10%;  */
-    margin-top:50%;
+    margin-top: 100%;
+    z-index: var(--sidebarZindex);
 
     font-size: 25px;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: var(--transparentBackground);
     color: black;
     /* padding: 10px 15px; */
     border: none;
@@ -58,6 +72,7 @@
 #main2 {
     transition: margin-left .5s;
     padding: 16px;
+    z-index: var(--sidebarZindex);
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

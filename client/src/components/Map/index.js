@@ -91,6 +91,10 @@ class Map extends Component {
   containerStyle = {
     width: "100vw",
     height: "100vh",
+    zIndex: 1,
+
+    // this is critical for full screen
+    position: "absolute"
   };
 
   //Starting Position ** WILL CHANGE TO STATE TO BE UPDATED REALTIME BY GEOLOCATION **
@@ -110,19 +114,21 @@ class Map extends Component {
 
   render() {
     return (
-      <LoadScript googleMapsApiKey={API_KEY}>
-        <GoogleMap
-          mapContainerStyle={this.containerStyle}
-          center={this.state.currentLocation}
-          zoom={15}
-          options={this.options}
-          onClick={this.getLocalIssues}
-        >
-          <Marker position={this.state.currentLocation}></Marker>
-          {/* Child components, such as markers, info windows, etc. */}
-          <></>
-        </GoogleMap>
-      </LoadScript>
+      <div className="mapUnderlay">
+        <LoadScript googleMapsApiKey={API_KEY}>
+          <GoogleMap
+            mapContainerStyle={this.containerStyle}
+            center={this.state.currentLocation}
+            zoom={15}
+            options={this.options}
+            onClick={this.getLocalIssues}
+          >
+            <Marker position={this.state.currentLocation}></Marker>
+            {/* Child components, such as markers, info windows, etc. */}
+            <></>
+          </GoogleMap>
+        </LoadScript>
+      </div>
     );
   }
 }
