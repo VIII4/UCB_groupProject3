@@ -1,0 +1,25 @@
+.buttonPanel {
+  position: relative;
+  top: 1rem;
+  right: 50%;
+}
+
+.buttonPanel.hide {
+  visibility: hidden;
+}
+
+.confirmPanel {
+  position: relative;
+  bottom: 10rem;
+  right: 20%;
+}
+
+.confirmPanel.hide {
+  visibility: hidden;
+}
+
+button {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+  border-radius: 50%;
+}
