@@ -90,7 +90,7 @@ class Map extends Component {
   //Map Container Size
   containerStyle = {
     width: "100vw",
-    height: "100vh",
+    height: "105vh",
     zIndex: 1,
 
     // this is critical for full screen
