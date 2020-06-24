@@ -93,6 +93,11 @@
     margin-left: 50px;
 }
 
+#aTag {
+    /* background-color: white; */
+}
+
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}

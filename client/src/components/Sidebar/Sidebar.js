@@ -24,10 +24,10 @@ class Sidebar extends React.Component {
             <div>
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
+                    <a id="aTag" href="#">About</a>
+                    <a id="aTag" href="#">Services</a>
+                    <a id="aTag" href="#">Clients</a>
+                    <a id="aTag" ßhref="#">Contact</a>
                 </div>
 
                 <div id="main">
