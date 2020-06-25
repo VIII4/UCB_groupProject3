@@ -5,7 +5,7 @@ import './App.css';
 import Sidebar from "./components/Sidebar";
 
 
-class App extends Component {
+class App extends React.Component {
 
   // state controls the appearance of components on screen
   // rather than a new html being rendered every time...

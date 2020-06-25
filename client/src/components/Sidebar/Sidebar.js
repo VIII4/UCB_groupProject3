@@ -19,22 +19,35 @@ class Sidebar extends React.Component {
         document.getElementById("main").style.marginLeft = "0px";
     }
 
+    openContacts = () => {
+        document.getElementById("cardContainer").style.visibility = "visible";
+        this.closeNav()
+    }
+
+    //                     //
+    // program entry point //
+    //                     //
     render() {
         return (
+            // main sidebar div container
             <div>
+                {/* top row with open button and logo */}
+                <div id="main">
+
+                    {/* sidebar open button */}
+                    <button className="openbtn" onClick={this.openNav}>☰</button>
+
+                    {/* app logo */}
+                    <a className="logo" href="#">Care'n</a>
+                </div>
+
+                {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
                     <a id="aTag" href="#">About</a>
                     <a id="aTag" href="#">Services</a>
                     <a id="aTag" href="#">Clients</a>
-                    <a id="aTag" ßhref="#">Contact</a>
-                </div>
-
-                <div id="main">
-                    <button className="openbtn" onClick={this.openNav}>☰</button>
-
-                    {/* logo */}
-                    <a className="logo" href="#">Care'n</a>
+                    <a id="aTag" href="#" onClick={this.openContacts}>Contact</a>
                 </div>
             </div>
         )

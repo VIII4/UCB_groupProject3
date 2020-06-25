@@ -89,6 +89,9 @@ class Map extends Component {
 
   //Map Container Size
   containerStyle = {
+    // this will either be "visible" or "hidden"
+    visibility: "visible",
+
     width: "100vw",
     height: "105vh",
     zIndex: 1,

@@ -1,0 +1,51 @@
+/*               */
+/* css variables */
+/*               */
+* {
+    --cardZindex: 4;
+    
+    --transparentBackground: rgba(255, 255, 255, 0);
+    --translucentBackground: rgba(211, 211, 211, .25);
+
+    --boxShadowSettings: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* format card parent */
+.cardContainer {
+
+    /* overlay */
+    z-index: var(--cardZindex);
+    position: absolute; /* super important */
+
+    /* coordinate */
+    top: 20%; /* top of element x% down from top of screen! */
+    left: 15%;
+    margin-right: -50%;
+
+    /* size */
+    width: 70vw;
+    height: auto; /* auto-sized to sized of contents */
+
+    /* text formatting */
+    display: block;
+    text-align: left;
+    
+    padding: 20px;
+    background-color: white;
+    box-shadow: var(--boxShadowSettings);
+}
+
+/* format card children (contents) */
+.textBlock {
+    /* display controls whether each item
+       item is on the same line or stacked */
+    display: block;
+    color: black;
+}
+
+#closeBtn {
+    float: right;
+    width: auto;
+    position: absolute;
+    display: block;
+}
