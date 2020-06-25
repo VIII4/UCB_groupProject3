@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Test from "./pages/Test";
 import './App.css';
 import Sidebar from "./components/Sidebar";
+import ContextBtn from "./components/ContextBtn"
 
 
 class App extends React.Component {
@@ -26,7 +27,6 @@ class App extends React.Component {
           <Sidebar />
 
           <Switch>
-
             {/* these routes will specify which components are returned
              <Sidebar /> being outside of <Switch> ensures it will
              always be visible regardless of the route rendered */}
@@ -37,6 +37,8 @@ class App extends React.Component {
             <Route exact path="/" component={??} />
             <Route component={NoMatch} /> */}
           </Switch>
+
+          <ContextBtn />
         </div>
       </Router >
     );

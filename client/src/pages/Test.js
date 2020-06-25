@@ -6,6 +6,7 @@ import Card from "../components/Card";
 function Test() {
   return (
     <div>
+      {/* make 4 different cards here shows */}
       <Card />
       <Map />
     </div>
