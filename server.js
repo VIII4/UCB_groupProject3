@@ -18,6 +18,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 //mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true}, (err) => {
         if (err) throw err;
         console.log("Database error occurred")
