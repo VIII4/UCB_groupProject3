@@ -9,7 +9,9 @@ const userSchema = new Schema({
         minlength: 6
         },
   uservote: {type: Boolean}
-  timestamps: true
+  
+}, {timestamps: true
+
 });
 
 const User = mongoose.model("User", userSchema);

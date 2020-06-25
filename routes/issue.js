@@ -1,6 +1,6 @@
 const router = require('express').Router();
-let issue = require('./models/issue.model');
-const Issue = require('../models/issue.model');
+let issue = require('../models/issue');
+const Issue = require('../models/issue');
 
 
 ///////////////////////////////////////////////////////////////////////////////
