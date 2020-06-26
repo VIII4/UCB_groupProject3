@@ -24,26 +24,15 @@ class Map extends Component {
     };
   }
 
-  //Get Current Location
-  showCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState((prevState) => ({
-          currentLocation: {
-            ...prevState.currentLatLng,
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-        }));
-      });
-    } else {
-      //   (error) => console.log(error);
-    }
-  };
+  loadIssueSequenceID; //TO DO: add clear interval method
+  loadIssueIntervalTime = 10; //in Secs
+
+  //#region Location Methods
 
   //Track Location
   getUpdatedLocation = () => {
     if (navigator.geolocation) {
+      //Start Tracking Location and update state when changed
       navigator.geolocation.watchPosition(
         (position) => {
           this.setState((prevState) => ({
@@ -56,41 +45,27 @@ class Map extends Component {
         },
         (error) => console.log(error)
       );
+      //Check for Local issues
+      this.getLocalIssues(this.state.currentLocation);
+      //start interval sequence to check for local issues
+      this.loadIssueSequenceID = setInterval(() => {
+        this.getLocalIssues(this.state.currentLocation);
+      }, this.loadIssueIntervalTime * 1000);
     } else {
       //   (error) => console.log(error);
     }
   };
 
-  checkNearLocation = (checkPoint, distanceKm = 0.75) => {
+  checkNearLocation = (checkPoint, currentLocation, distanceKm = 8) => {
     var ky = 40000 / 360;
-    var kx = Math.cos((Math.PI * this.state.currentLocation.lat) / 180.0) * ky;
-    var dx = Math.abs(this.state.currentLocation.lng - checkPoint.lng) * kx;
-    var dy = Math.abs(this.state.currentLocation.lat - checkPoint.lat) * ky;
+    var kx = Math.cos((Math.PI * currentLocation.lat) / 180.0) * ky;
+    var dx = Math.abs(currentLocation.lng - checkPoint.lng) * kx;
+    var dy = Math.abs(currentLocation.lat - checkPoint.lat) * ky;
     return Math.sqrt(dx * dx + dy * dy) <= distanceKm;
   };
+  //#endregion
 
-  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
-  getLocalIssues = () => {
-    //TEST REMOVE
-    let _localIssues = API.getIssues().filter((loc) =>
-      this.checkNearLocation(loc, 5)
-    );
-    this.setState({ localIssues: _localIssues });
-    // API.getIssues()
-    //   .then((res) => {
-    //     /* Filter array and return location if within radius */
-    //     let _localIssues = res.filter((loc) => this.checkNearLocation(loc));
-    //     this.setState({ localIssues: _localIssues });
-    //   })
-    //   .catch((err) => console.log(err));
-  };
-
-  //Life Cycle Events
-
-  componentDidMount = () => {
-    this.getUpdatedLocation();
-  };
-
+  //#region Map Options and Styling
   //Load any additional libraries
   libraries = [];
 
@@ -101,13 +76,7 @@ class Map extends Component {
     zIndex: 1,
 
     // this is critical for full screen
-    position: "absolute"
-  };
-
-  //Starting Position ** WILL CHANGE TO STATE TO BE UPDATED REALTIME BY GEOLOCATION **
-  center = {
-    lat: 37.804363,
-    lng: -122.271111,
+    position: "absolute",
   };
 
   //Options
@@ -128,6 +97,30 @@ class Map extends Component {
       scaledSize: { width: 75, height: 75 },
     },
   };
+  //#endregion
+
+  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
+  getLocalIssues = (currentLocation) => {
+    API.getIssues()
+      .then((res) => {
+        /* Filter issues array and return array with issues within radius */
+        let _localIssues = res.data.filter((issue) => {
+          let issueLocation = { lat: issue.lat, lng: issue.lng };
+          return this.checkNearLocation(
+            issueLocation,
+            this.state.currentLocation
+          );
+        });
+        console.log(_localIssues);
+        this.setState({ localIssues: _localIssues });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //Life Cycle Events
+  componentDidMount = () => {
+    this.getUpdatedLocation();
+  };
 
   render() {
     return (
@@ -138,8 +131,8 @@ class Map extends Component {
           center={this.state.currentLocation}
           zoom={15}
           options={this.options}
-          onClick={this.getLocalIssues}
         >
+          {/* Map through local issues and create marker */}
           <OverlayView
             position={this.state.currentLocation}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
@@ -150,7 +143,6 @@ class Map extends Component {
             position={this.state.currentLocation}
             icon={this.icons.marker}
           ></Marker>
-          {/* Child components, such as markers, info windows, etc. */}
         </GoogleMap>
       </LoadScript>
     );
