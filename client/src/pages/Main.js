@@ -6,8 +6,8 @@ import Card from "../components/Card";
 function Main() {
   return (
     <div>
-      {/* visibility can be set in css,
-          but for clarity it is done here instead */}
+      {/* visibility can be set in css,but for 
+          clarity it is done here instead */}
       <Card visibility="hidden" />
       <Map />
     </div>

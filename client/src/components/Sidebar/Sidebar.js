@@ -19,8 +19,17 @@ class Sidebar extends React.Component {
         document.getElementById("main").style.marginLeft = "0px";
     }
 
-    openCard = () => {
+    openCard = (event, type) => {
         document.getElementById("cardContainer").style.visibility = "visible";
+
+        switch (type) {
+            case "contacts":
+                document.getElementById("contactsCardContent").style.visibility = "visible";
+                break;
+            case "about":
+                document.getElementById("aboutCardContent").style.visibility = "visible";
+                break;
+        }
         this.closeNav()
     }
 
@@ -45,9 +54,11 @@ class Sidebar extends React.Component {
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
                     <a id="aTag" href="#" onClick={this.openCard}>About</a>
-                    <a id="aTag" href="#" onClick={this.openCard}>Services</a>
+                    <a id="aTag" href="#" onClick={(event) => { this.openCard(event, "about") }}>Services</a>
                     <a id="aTag" href="#" onClick={this.openCard}>Clients</a>
-                    <a id="aTag" href="#" onClick={this.openCard}>Contact</a>
+                    <a id="aTag" href="#" onClick={(event) => {
+                        this.openCard(event, "contacts")
+                    }}>Contact</a>
                 </div>
             </div>
         )

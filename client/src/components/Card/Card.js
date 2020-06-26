@@ -1,23 +1,21 @@
 import React from "react";
+import ContactsCard from "./ContactsCard";
+// import AboutCard from "./AboutCard";
 import './Card.css';
 
 class Card extends React.Component {
-
-    // use super(props) to avoid an error
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            cardType: "contacts"
-        }
+    state = {
+        cardType: "contacts"
     }
-
 
     closeCard = () => {
         document.getElementById("cardContainer").style.visibility = "hidden";
     }
 
     render() {
+
+        // check state
+
         return (
 
             // this.props is coming from App.js --> Main.js --> Card.js
@@ -27,13 +25,8 @@ class Card extends React.Component {
                 <hr></hr>
 
                 <div className="textBlock">
-                    <a id="aTag" href="#">Local services: 555 555 5555</a>
-                    <br></br>
-                    <a id="aTag" href="#">Local services: 555 555 5555</a>
-                    <br></br>
-                    <a id="aTag" href="#">Local services: 555 555 5555</a>
-                    <br></br>
-                    <a id="aTag" href="#">Local services: 555 555 5555</a>
+                    <ContactsCard visibility="hidden" />
+                    {/* <AboutCard visibility="hidden" /> */}
                 </div>
 
                 {/* add buttons or stuff here */}
