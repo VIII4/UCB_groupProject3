@@ -3,14 +3,13 @@ import Map from "../components/Map";
 import Card from "../components/Card";
 
 
-function Test() {
+function Main() {
   return (
     <div>
-      {/* make 4 different cards here shows */}
-      <Card />
+      <Card visibility="hidden" />
       <Map />
     </div>
   );
 }
 
-export default Test;
+export default Main;
