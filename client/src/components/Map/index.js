@@ -24,7 +24,7 @@ class Map extends Component {
     };
   }
 
-  loadIssueSequenceID;
+  loadIssueSequenceID; //TO DO: add clear interval method
   loadIssueIntervalTime = 10; //in Secs
 
   //#region Location Methods
@@ -56,7 +56,7 @@ class Map extends Component {
     }
   };
 
-  checkNearLocation = (checkPoint, currentLocation, distanceKm = 0.75) => {
+  checkNearLocation = (checkPoint, currentLocation, distanceKm = 8) => {
     var ky = 40000 / 360;
     var kx = Math.cos((Math.PI * currentLocation.lat) / 180.0) * ky;
     var dx = Math.abs(currentLocation.lng - checkPoint.lng) * kx;
@@ -101,13 +101,17 @@ class Map extends Component {
 
   //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
   getLocalIssues = (currentLocation) => {
-    console.log("checking for local issues");
     API.getIssues()
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
-        let _localIssues = res.data.filter((loc) =>
-          this.checkNearLocation(loc)
-        );
+        let _localIssues = res.data.filter((issue) => {
+          let issueLocation = { lat: issue.lat, lng: issue.lng };
+          return this.checkNearLocation(
+            issueLocation,
+            this.state.currentLocation
+          );
+        });
+        console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
       })
       .catch((err) => console.log(err));
