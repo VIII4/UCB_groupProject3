@@ -5,10 +5,13 @@ import {
   LoadScript,
   Marker,
   OverlayView,
+  InfoBox,
+  InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
 import API from "../../utils/API";
 import IssuesPanel from "../IssuePanel";
+import IssuesPopUp from "../IssuePopUp";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -16,11 +19,16 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Location Info
       currentLocation: {
         lat: 37.804363,
         lng: -122.271111,
       },
+      //Local Issue to render to map
       localIssues: [],
+      selectedIssue: null,
+
+      showingInfoWindow: false,
     };
   }
 
@@ -47,6 +55,7 @@ class Map extends Component {
       );
       //Check for Local issues
       this.getLocalIssues(this.state.currentLocation);
+      // TO DO: EXTRACT so we can clear interval before starting new one, specifically for manual refresh
       //start interval sequence to check for local issues
       this.loadIssueSequenceID = setInterval(() => {
         this.getLocalIssues(this.state.currentLocation);
@@ -96,7 +105,33 @@ class Map extends Component {
       anchor: { x: 30, y: 50 },
       scaledSize: { width: 75, height: 75 },
     },
+    markerA: {
+      url: "/images/altMArkerA.png",
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 35, height: 35 },
+    },
+    markerB: {
+      url: "/images/altMArkerB.png",
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 45, height: 45 },
+    },
   };
+  //#endregion
+
+  //#region Handler Methods
+
+  onMarkerClick = (issue) => {
+    this.setState({ selectedIssue: issue });
+  };
+
+  closeInfoWindow = () => {
+    this.setState({ selectedIssue: null });
+  };
+
+  onVoteClick = () => {};
+
   //#endregion
 
   //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
@@ -131,18 +166,51 @@ class Map extends Component {
           center={this.state.currentLocation}
           zoom={15}
           options={this.options}
+          onClick={this.closeInfoWindow}
         >
-          {/* Map through local issues and create marker */}
+          {/* Set Home Marker for User Location */}
+          <Marker
+            position={this.state.currentLocation}
+            icon={this.icons.markerB}
+          ></Marker>
+          {/* Map through local issues and create marker for each*/}
+          {this.state.localIssues.map((issue, index) => {
+            if (issue.status === "Voting") {
+              return (
+                <Marker
+                  key={index}
+                  position={{ lat: issue.lat, lng: issue.lng }}
+                  icon={this.icons.markerA}
+                  clickable={true}
+                  onClick={() => {
+                    this.onMarkerClick(issue);
+                  }}
+                />
+              );
+            }
+          })}
+          {/* Enable Info pop up for issue marker */}
+          {this.state.selectedIssue && (
+            <InfoWindow
+              onCloseClick={this.closeInfoWindow}
+              position={{
+                lat: this.state.selectedIssue.lat,
+                lng: this.state.selectedIssue.lng,
+              }}
+            >
+              <IssuesPopUp
+                selectedIssue={this.state.selectedIssue}
+                handleVoteClick={this.handleVoteClick}
+              />
+            </InfoWindow>
+          )}
+
           <OverlayView
             position={this.state.currentLocation}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
             <IssuesPanel></IssuesPanel>
           </OverlayView>
-          <Marker
-            position={this.state.currentLocation}
-            icon={this.icons.marker}
-          ></Marker>
         </GoogleMap>
       </LoadScript>
     );
