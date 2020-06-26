@@ -19,6 +19,8 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Receive userdata info from props and store to state
+
       //Location Info
       currentLocation: {
         lat: 37.804363,
@@ -122,7 +124,7 @@ class Map extends Component {
 
   //#region Handler Methods
 
-  onMarkerClick = (issue) => {
+  onIssueMarkerClick = (issue) => {
     this.setState({ selectedIssue: issue });
   };
 
@@ -130,11 +132,26 @@ class Map extends Component {
     this.setState({ selectedIssue: null });
   };
 
-  onVoteClick = () => {};
+  onUserMarkerClick = () => {};
+
+  onVoteClick = () => {
+    //TO DO: Check user vote count first
+
+    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+      //TO DO: Check if user id exist in table
+      let newVoteCount = res.data.voteCount + 1;
+
+      API.updateIssue(res.data._id, { voteCount: newVoteCount })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  };
 
   //#endregion
 
-  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
+  //#region Helper Methods
+
+  //Get all Issues then filter local issues to state
   getLocalIssues = (currentLocation) => {
     API.getIssues()
       .then((res) => {
@@ -146,11 +163,13 @@ class Map extends Component {
             this.state.currentLocation
           );
         });
-        console.log(_localIssues);
+        //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
       })
       .catch((err) => console.log(err));
   };
+
+  //#endregion
 
   //Life Cycle Events
   componentDidMount = () => {
@@ -175,7 +194,7 @@ class Map extends Component {
           ></Marker>
           {/* Map through local issues and create marker for each*/}
           {this.state.localIssues.map((issue, index) => {
-            if (issue.status === "Voting") {
+            if (issue.status != "Closed") {
               return (
                 <Marker
                   key={index}
@@ -183,7 +202,7 @@ class Map extends Component {
                   icon={this.icons.markerA}
                   clickable={true}
                   onClick={() => {
-                    this.onMarkerClick(issue);
+                    this.onIssueMarkerClick(issue);
                   }}
                 />
               );
@@ -200,7 +219,7 @@ class Map extends Component {
             >
               <IssuesPopUp
                 selectedIssue={this.state.selectedIssue}
-                handleVoteClick={this.handleVoteClick}
+                onVoteClick={this.onVoteClick}
               />
             </InfoWindow>
           )}
