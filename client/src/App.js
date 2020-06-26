@@ -10,14 +10,14 @@ class App extends React.Component {
 
   // state controls the appearance of components on screen
   // rather than a new html being rendered every time...
-  constructor() {
-    // these contain common properties that can apply to 
-    // several components???
-    this.state = {
-      visible: true,
-      ghosted: false
-    }
-  }
+  // constructor() {
+  //   // these contain common properties that can apply to 
+  //   // several components???
+  //   this.state = {
+  //     visible: true,
+  //     ghosted: false
+  //   };
+  // }
 
 
   // events handled within class

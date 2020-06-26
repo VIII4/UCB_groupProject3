@@ -19,7 +19,7 @@ class Sidebar extends React.Component {
         document.getElementById("main").style.marginLeft = "0px";
     }
 
-    openContacts = () => {
+    openCard = () => {
         document.getElementById("cardContainer").style.visibility = "visible";
         this.closeNav()
     }
@@ -44,10 +44,10 @@ class Sidebar extends React.Component {
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
-                    <a id="aTag" href="#">About</a>
-                    <a id="aTag" href="#">Services</a>
-                    <a id="aTag" href="#">Clients</a>
-                    <a id="aTag" href="#" onClick={this.openContacts}>Contact</a>
+                    <a id="aTag" href="#" onClick={this.openCard}>About</a>
+                    <a id="aTag" href="#" onClick={this.openCard}>Services</a>
+                    <a id="aTag" href="#" onClick={this.openCard}>Clients</a>
+                    <a id="aTag" href="#" onClick={this.openCard}>Contact</a>
                 </div>
             </div>
         )

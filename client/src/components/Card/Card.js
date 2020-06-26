@@ -2,9 +2,16 @@ import React from "react";
 import './Card.css';
 
 class Card extends React.Component {
-    method0 = () => {
-        // do stuff
+
+    // use super(props) to avoid an error
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            cardType: "contacts"
+        }
     }
+
 
     closeCard = () => {
         document.getElementById("cardContainer").style.visibility = "hidden";
@@ -12,7 +19,10 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div id="cardContainer" className="cardContainer">
+
+            // this.props is coming from App.js --> Main.js --> Card.js
+            <div id="cardContainer" className="cardContainer" style={{ visibility: this.props.visibility }}>
+
                 <a id="closeBtn" href="#" className="closebtn" onClick={this.closeCard}>x</a>
                 <hr></hr>
 
