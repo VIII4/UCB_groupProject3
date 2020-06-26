@@ -99,7 +99,7 @@ class Map extends Component {
 
   //
 
-  //Icons **WILL ADD DIFF ICONS FOR ISSUES**
+  //Marker Icons
   icons = {
     marker: {
       url: "/images/marker.png",
@@ -110,7 +110,7 @@ class Map extends Component {
     markerA: {
       url: "/images/altMArkerA.png",
       origin: { x: 0, y: 0 },
-      anchor: { x: 30, y: 50 },
+      anchor: { x: 16, y: -1 },
       scaledSize: { width: 35, height: 35 },
     },
     markerB: {
