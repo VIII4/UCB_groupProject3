@@ -1,11 +1,9 @@
-/*global google*/
 import React, { Component } from "react";
 import {
   GoogleMap,
   LoadScript,
   Marker,
   OverlayView,
-  InfoBox,
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
@@ -30,7 +28,8 @@ class Map extends Component {
       localIssues: [],
       selectedIssue: null,
 
-      showingInfoWindow: false,
+      showingReportPanel: false,
+      reportingType: "",
     };
   }
 
@@ -126,13 +125,22 @@ class Map extends Component {
 
   onIssueMarkerClick = (issue) => {
     this.setState({ selectedIssue: issue });
+    this.setState({ showingReportPanel: false });
   };
 
   closeInfoWindow = () => {
     this.setState({ selectedIssue: null });
   };
 
-  onUserMarkerClick = () => {};
+  closePanelWindow = () => {
+    this.setState({ showingReportPanel: false });
+  };
+
+  onUserMarkerClick = (event) => {
+    let toogle = !this.state.showingReportPanel;
+    this.setState({ showingReportPanel: toogle });
+    this.setState({ selectedIssue: null });
+  };
 
   onVoteClick = () => {
     //TO DO: Check user vote count first
@@ -145,6 +153,22 @@ class Map extends Component {
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     });
+  };
+
+  onReportIssueClick = (type) => {
+    //TO DO: Open Confirm Panel with input, image upload,
+
+    let data = {
+      category: type,
+      descr: "New issue added",
+      voteCount: 1,
+      zipcode: 99999,
+      status: "Voting",
+    };
+
+    API.createIssue(data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   //#endregion
@@ -191,10 +215,11 @@ class Map extends Component {
           <Marker
             position={this.state.currentLocation}
             icon={this.icons.markerB}
+            onClick={this.onUserMarkerClick}
           ></Marker>
           {/* Map through local issues and create marker for each*/}
           {this.state.localIssues.map((issue, index) => {
-            if (issue.status != "Closed") {
+            if (issue.status !== "Closed") {
               return (
                 <Marker
                   key={index}
@@ -223,13 +248,17 @@ class Map extends Component {
               />
             </InfoWindow>
           )}
-
-          <OverlayView
-            position={this.state.currentLocation}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <IssuesPanel></IssuesPanel>
-          </OverlayView>
+          {/* Enable Report Issue pop up panel */}
+          {this.state.showingReportPanel && (
+            <OverlayView
+              position={this.state.currentLocation}
+              mapPaneName={OverlayView.FLOAT_PANE}
+            >
+              <IssuesPanel
+                onReportIssueClick={this.onReportIssueClick}
+              ></IssuesPanel>
+            </OverlayView>
+          )}
         </GoogleMap>
       </LoadScript>
     );

@@ -14,8 +14,8 @@ export default {
   },
 
   // Adds issue to data base
-  createIssue: function () {
-    return axios.post("/issue/add");
+  createIssue: function (data) {
+    return axios.post("/issue/add", data);
   },
 
   // Update issue with given id
