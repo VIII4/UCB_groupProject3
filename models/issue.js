@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+mongoose.set("useFindAndModify", false);
 
 const issueSchema = new Schema({
+
   createdby: {type: String, required: true },
   votecount: {type: Number, required: true },
   votedby:[{username: String}],   ///ask should this be username from user table??
@@ -15,6 +17,7 @@ const issueSchema = new Schema({
   latlng: {lat: Number, lng: Number  },
   date: { type: Date, default: Date.now,  required: true  },
   addtlcomments: [{username: String, comment: String}]
+
 });
 
 const Issue = mongoose.model("Issue", issueSchema);
