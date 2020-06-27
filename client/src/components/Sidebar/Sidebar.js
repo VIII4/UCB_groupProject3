@@ -20,14 +20,18 @@ class Sidebar extends React.Component {
     }
 
     openCard = (event, type) => {
+        // first close any open cards
+
         document.getElementById("cardContainer").style.visibility = "visible";
 
         switch (type) {
+            // set to visible by id since they are unique
+
             case "contacts":
-                document.getElementById("contactsCardContent").style.visibility = "visible";
+                document.getElementById("contactsCardContent").style.display = "block";
                 break;
             case "about":
-                document.getElementById("aboutCardContent").style.visibility = "visible";
+                document.getElementById("aboutCardContent").style.display = "block";
                 break;
         }
         this.closeNav()
@@ -53,10 +57,8 @@ class Sidebar extends React.Component {
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>x</a>
-                    <a id="aTag" href="#" onClick={this.openCard}>About</a>
-                    <a id="aTag" href="#" onClick={(event) => { this.openCard(event, "about") }}>Services</a>
-                    <a id="aTag" href="#" onClick={this.openCard}>Clients</a>
-                    <a id="aTag" href="#" onClick={(event) => {
+                    <a id="aTag" onClick={(event) => { this.openCard(event, "about") }}>About</a>
+                    <a id="aTag" onClick={(event) => {
                         this.openCard(event, "contacts")
                     }}>Contact</a>
                 </div>
