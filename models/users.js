@@ -8,7 +8,11 @@ const userSchema = new Schema({
         trim: true,
         minlength: 6
         },
-  uservote: {type: Boolean}
+  password: {type: String},      
+  remainingvotes: {type: Number},
+  submittedissues: [{type: String}],  /// i dont think we need this since this is covered in the issue table.
+  comments: {type: String}     /////i dont think we need this since comments is in the issue table.
+
   
 }, {timestamps: true
 
