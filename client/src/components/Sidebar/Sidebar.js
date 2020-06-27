@@ -32,21 +32,27 @@ class Sidebar extends React.Component {
         // first close any open cards
         this.CloseCardInnards();
 
+        // show card parent
         document.getElementById("cardContainer").style.visibility = "visible";
 
+        // using type input render the appropriate card innards
         switch (type) {
             // set to visible by id since they are unique
-
-            case "contacts":
-                document.getElementById("contactsCardContent").style.display = "block";
-                console.log("contacts");
-                break;
             case "about":
                 document.getElementById("aboutCardContent").style.display = "block";
-                console.log("contacts");
                 break;
-            case "Sign In"
+            case "contacts":
+                document.getElementById("contactsCardContent").style.display = "block";
+                break;
+            case "login":
+                document.getElementById("loginCardContent").style.display = "block";
+                break;
+            case "register":
+                document.getElementById("registerCardContent").style.display = "block";
+                break;
         }
+
+        // close sidebar after cards render
         this.CloseSidebar()
     }
 
@@ -68,11 +74,11 @@ class Sidebar extends React.Component {
 
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
-                    <a href="javascript:void(0)" className="closebtn" onClick={this.CloseSidebar}>x</a>
+                    <a className="closebtn" onClick={this.CloseSidebar}>x</a>
                     <a id="aTag" onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
-                    <a id="aTag" onClick={(event) => {
-                        this.OpenCard(event, "contacts")
-                    }}>Contact</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "register") }}>Register</a>
                 </div>
 
             </div>
