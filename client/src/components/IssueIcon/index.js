@@ -9,7 +9,6 @@ import {
   GiBrokenPottery,
 } from "react-icons/gi";
 import { FaBuilding } from "react-icons/fa";
-import "./style.css";
 
 export default function IssueIcon({ issueType }) {
   switch (issueType) {
