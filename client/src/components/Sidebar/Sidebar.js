@@ -45,6 +45,7 @@ class Sidebar extends React.Component {
                 document.getElementById("aboutCardContent").style.display = "block";
                 console.log("contacts");
                 break;
+            case "Sign In"
         }
         this.CloseSidebar()
     }
