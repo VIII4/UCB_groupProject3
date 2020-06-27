@@ -1,14 +1,15 @@
-/*global google*/
 import React, { Component } from "react";
 import {
   GoogleMap,
   LoadScript,
   Marker,
   OverlayView,
+  InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
 import API from "../../utils/API";
 import IssuesPanel from "../IssuePanel";
+import IssuesPopUp from "../IssuePopUp";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -16,11 +17,19 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Receive userdata info from props and store to state
+
+      //Location Info
       currentLocation: {
         lat: 37.804363,
         lng: -122.271111,
       },
+      //Local Issue to render to map
       localIssues: [],
+      selectedIssue: null,
+
+      showingReportPanel: false,
+      reportingType: "",
     };
   }
 
@@ -47,6 +56,7 @@ class Map extends Component {
       );
       //Check for Local issues
       this.getLocalIssues(this.state.currentLocation);
+      // TO DO: EXTRACT so we can clear interval before starting new one, specifically for manual refresh
       //start interval sequence to check for local issues
       this.loadIssueSequenceID = setInterval(() => {
         this.getLocalIssues(this.state.currentLocation);
@@ -91,7 +101,7 @@ class Map extends Component {
 
   //
 
-  //Icons **WILL ADD DIFF ICONS FOR ISSUES**
+  //Marker Icons
   icons = {
     marker: {
       url: "/images/marker.png",
@@ -99,10 +109,76 @@ class Map extends Component {
       anchor: { x: 30, y: 50 },
       scaledSize: { width: 75, height: 75 },
     },
+    markerA: {
+      url: "/images/altMArkerA.png",
+      origin: { x: 0, y: 0 },
+      anchor: { x: 16, y: -1 },
+      scaledSize: { width: 35, height: 35 },
+    },
+    markerB: {
+      url: "/images/altMArkerB.png",
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 45, height: 45 },
+    },
   };
   //#endregion
 
-  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
+  //#region Handler Methods
+
+  onIssueMarkerClick = (issue) => {
+    this.setState({ selectedIssue: issue });
+    this.setState({ showingReportPanel: false });
+  };
+
+  closeInfoWindow = () => {
+    this.setState({ selectedIssue: null });
+  };
+
+  closePanelWindow = () => {
+    this.setState({ showingReportPanel: false });
+  };
+
+  onUserMarkerClick = (event) => {
+    let toogle = !this.state.showingReportPanel;
+    this.setState({ showingReportPanel: toogle });
+    this.setState({ selectedIssue: null });
+  };
+
+  onVoteClick = () => {
+    //TO DO: Check user vote count first
+
+    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+      //TO DO: Check if user id exist in table
+      let newVoteCount = res.data.voteCount + 1;
+
+      API.updateIssue(res.data._id, { voteCount: newVoteCount })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  };
+
+  onReportIssueClick = (type) => {
+    //TO DO: Open Confirm Panel with input, image upload,
+
+    let data = {
+      category: type,
+      descr: "New issue added",
+      voteCount: 1,
+      zipcode: 99999,
+      status: "Voting",
+    };
+
+    API.createIssue(data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  //#endregion
+
+  //#region Helper Methods
+
+  //Get all Issues then filter local issues to state
   getLocalIssues = (currentLocation) => {
     API.getIssues()
       .then((res) => {
@@ -114,11 +190,13 @@ class Map extends Component {
             this.state.currentLocation
           );
         });
-        console.log(_localIssues);
+        //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
       })
       .catch((err) => console.log(err));
   };
+
+  //#endregion
 
   //Life Cycle Events
   componentDidMount = () => {
@@ -134,18 +212,56 @@ class Map extends Component {
           center={this.state.currentLocation}
           zoom={15}
           options={this.options}
+          onClick={this.closeInfoWindow}
         >
-          {/* Map through local issues and create marker */}
-          <OverlayView
-            position={this.state.currentLocation}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <IssuesPanel></IssuesPanel>
-          </OverlayView>
+          {/* Set Home Marker for User Location */}
           <Marker
             position={this.state.currentLocation}
-            icon={this.icons.marker}
+            icon={this.icons.markerB}
+            onClick={this.onUserMarkerClick}
           ></Marker>
+          {/* Map through local issues and create marker for each*/}
+          {this.state.localIssues.map((issue, index) => {
+            if (issue.status !== "Closed") {
+              return (
+                <Marker
+                  key={index}
+                  position={{ lat: issue.lat, lng: issue.lng }}
+                  icon={this.icons.markerA}
+                  clickable={true}
+                  onClick={() => {
+                    this.onIssueMarkerClick(issue);
+                  }}
+                />
+              );
+            }
+          })}
+          {/* Enable Info pop up for issue marker */}
+          {this.state.selectedIssue && (
+            <InfoWindow
+              onCloseClick={this.closeInfoWindow}
+              position={{
+                lat: this.state.selectedIssue.lat,
+                lng: this.state.selectedIssue.lng,
+              }}
+            >
+              <IssuesPopUp
+                selectedIssue={this.state.selectedIssue}
+                onVoteClick={this.onVoteClick}
+              />
+            </InfoWindow>
+          )}
+          {/* Enable Report Issue pop up panel */}
+          {this.state.showingReportPanel && (
+            <OverlayView
+              position={this.state.currentLocation}
+              mapPaneName={OverlayView.FLOAT_PANE}
+            >
+              <IssuesPanel
+                onReportIssueClick={this.onReportIssueClick}
+              ></IssuesPanel>
+            </OverlayView>
+          )}
         </GoogleMap>
       </LoadScript>
     );
