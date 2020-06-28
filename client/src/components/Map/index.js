@@ -104,19 +104,19 @@ class Map extends Component {
   //Marker Icons
   icons = {
     marker: {
-      url: "/images/marker.png",
+      url: "./images/marker.png",
       origin: { x: 0, y: 0 },
       anchor: { x: 30, y: 50 },
       scaledSize: { width: 75, height: 75 },
     },
     markerA: {
-      url: "/images/altMArkerA.png",
+      url: "./images/altMArkerA.png",
       origin: { x: 0, y: 0 },
       anchor: { x: 16, y: -1 },
       scaledSize: { width: 35, height: 35 },
     },
     markerB: {
-      url: "/images/altMArkerB.png",
+      url: "./images/altMArkerB.png",
       origin: { x: 0, y: 0 },
       anchor: { x: 30, y: 50 },
       scaledSize: { width: 45, height: 45 },
