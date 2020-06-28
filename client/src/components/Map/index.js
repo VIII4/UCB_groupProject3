@@ -184,7 +184,10 @@ class Map extends Component {
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
         let _localIssues = res.data.filter((issue) => {
-          let issueLocation = { lat: issue.lat, lng: issue.lng };
+          let issueLocation = {
+            lat: issue.latlng.lat,
+            lng: issue.latlng.lng,
+          };
           return this.checkNearLocation(
             issueLocation,
             this.state.currentLocation
@@ -226,7 +229,10 @@ class Map extends Component {
               return (
                 <Marker
                   key={index}
-                  position={{ lat: issue.lat, lng: issue.lng }}
+                  position={{
+                    lat: issue.latlng.lat,
+                    lng: issue.latlng.lng,
+                  }}
                   icon={this.icons.markerA}
                   clickable={true}
                   onClick={() => {
@@ -241,8 +247,8 @@ class Map extends Component {
             <InfoWindow
               onCloseClick={this.closeInfoWindow}
               position={{
-                lat: this.state.selectedIssue.lat,
-                lng: this.state.selectedIssue.lng,
+                lat: this.state.selectedIssue.latlng.lat,
+                lng: this.state.selectedIssue.latlng.lng,
               }}
             >
               <IssuesPopUp

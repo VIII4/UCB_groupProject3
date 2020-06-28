@@ -4,7 +4,7 @@ mongoose.set("useFindAndModify", false);
 
 const issueSchema = new Schema({
 
-  createdby: {type: String, required: true },
+  createdby: {type: String, required: true }, 
   votecount: {type: Number, required: true },
   votedby:[{username: String}],   ///ask should this be username from user table??
   status: {type: String, required: true },
