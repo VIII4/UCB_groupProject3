@@ -1,7 +1,11 @@
 import React from "react";
 import "./style.css";
 
-export default function IssuesPopUp({ selectedIssue, onVoteClick }) {
+export default function IssuesPopUp({
+  selectedIssue,
+  onVoteClick,
+  onResolveClick,
+}) {
   return (
     <>
       <div>
@@ -10,7 +14,9 @@ export default function IssuesPopUp({ selectedIssue, onVoteClick }) {
         <button type="button" onClick={onVoteClick}>
           A
         </button>
-        <button type="button">B</button>
+        <button type="button" onClick={onResolveClick}>
+          B
+        </button>
       </div>
     </>
   );

@@ -178,6 +178,25 @@ class Map extends Component {
     this.getLocalIssues();
   };
 
+  onResolveClick = () => {
+    /* 
+      To DO: Resolve Issue button logic
+      when resolve clicked: 
+          -> check if status is pending resolve? ! -> update status to pending resolve
+          -> increment resolve counter (NEED TO ADD TO SCHEMA)
+          -> check if resolve count meets resolved criteria? 
+              -> update status to closed    
+    */
+    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+      let issue = res.data;
+      console.log(issue);
+      if (issue.status !== "Pending") issue.status = "Pending";
+      //increment resolve counter (NEED TO ADD TO SCHEMA)
+      //if(issue.resolveCounter === 5) > update status to closed
+  
+    });
+  };
+
   //#endregion
 
   //#region Helper Methods
@@ -258,6 +277,7 @@ class Map extends Component {
               <IssuesPopUp
                 selectedIssue={this.state.selectedIssue}
                 onVoteClick={this.onVoteClick}
+                onResolveClick={this.onResolveClick}
               />
             </InfoWindow>
           )}
