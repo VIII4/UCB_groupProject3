@@ -174,12 +174,16 @@ class Map extends Component {
       .catch((err) => console.log(err));
   };
 
+  onManualRefreshClick = () => {
+    this.getLocalIssues();
+  };
+
   //#endregion
 
   //#region Helper Methods
 
   //Get all Issues then filter local issues to state
-  getLocalIssues = (currentLocation) => {
+  getLocalIssues = () => {
     API.getIssues()
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
