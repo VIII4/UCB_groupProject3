@@ -217,14 +217,16 @@ class Map extends Component {
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
         let _localIssues = res.data.filter((issue) => {
-          let issueLocation = {
-            lat: issue.latlng.lat,
-            lng: issue.latlng.lng,
-          };
-          return this.checkNearLocation(
-            issueLocation,
-            this.state.currentLocation
-          );
+          if (issue.status !== "Closed") {
+            let issueLocation = {
+              lat: issue.latlng.lat,
+              lng: issue.latlng.lng,
+            };
+            return this.checkNearLocation(
+              issueLocation,
+              this.state.currentLocation
+            );
+          }
         });
         //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
