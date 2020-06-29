@@ -16,7 +16,7 @@ router
 ///////////////////////////////////////////////////////////////////////////////
 
 // TESTING
-router.route("/updatevote/:id").post((req, res) => {
+router.route("/updatecount/:id").post((req, res) => {
   Issue.findByIdAndUpdate(req.params.id, req.body)
     .then((dbModel) => {
       res.json(dbModel);

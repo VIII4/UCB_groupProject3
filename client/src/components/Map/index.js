@@ -174,24 +174,59 @@ class Map extends Component {
       .catch((err) => console.log(err));
   };
 
+  onManualRefreshClick = () => {
+    this.getLocalIssues();
+  };
+
+  onResolveClick = () => {
+    /* 
+      To DO: Resolve Issue button logic
+      when resolve clicked: 
+          -> check if status is pending resolve? ! -> update status to pending resolve
+          -> increment resolve counter (NEED TO ADD TO SCHEMA)
+          -> check if resolve count meets resolved criteria? 
+              -> update status to closed    
+    */
+    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+      let issue = res.data;
+      let data = {
+        resolvecount: issue.resolvecount ? issue.resolvecount + 1 : 1,
+        //increment resolve counter
+        status: issue.status,
+      };
+      if (
+        issue.status === "Pending" &&
+        data.resolvecount >= 5 /* TO DO: define what the max count should be */
+      )
+        data.status = "Closed";
+      else data.status = "Pending";
+
+      API.updateIssue(issue._id, data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  };
+
   //#endregion
 
   //#region Helper Methods
 
   //Get all Issues then filter local issues to state
-  getLocalIssues = (currentLocation) => {
+  getLocalIssues = () => {
     API.getIssues()
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
         let _localIssues = res.data.filter((issue) => {
-          let issueLocation = {
-            lat: issue.latlng.lat,
-            lng: issue.latlng.lng,
-          };
-          return this.checkNearLocation(
-            issueLocation,
-            this.state.currentLocation
-          );
+          if (issue.status !== "Closed") {
+            let issueLocation = {
+              lat: issue.latlng.lat,
+              lng: issue.latlng.lng,
+            };
+            return this.checkNearLocation(
+              issueLocation,
+              this.state.currentLocation
+            );
+          }
         });
         //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
@@ -254,6 +289,7 @@ class Map extends Component {
               <IssuesPopUp
                 selectedIssue={this.state.selectedIssue}
                 onVoteClick={this.onVoteClick}
+                onResolveClick={this.onResolveClick}
               />
             </InfoWindow>
           )}

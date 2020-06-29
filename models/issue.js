@@ -6,6 +6,7 @@ const issueSchema = new Schema({
 
   createdby: {type: String, required: true }, 
   votecount: {type: Number, required: true },
+  resolvecount: {type: Number },
   votedby:[{username: String}],   ///ask should this be username from user table??
   status: {type: String, required: true },
   category: { type: String, required: true }, 

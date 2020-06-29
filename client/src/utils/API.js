@@ -25,7 +25,7 @@ export default {
 
   //TESTING
   updateIssue: function (id, data) {
-    return axios.post("/issue/updatevote/" + id, data);
+    return axios.post("/issue/updatecount/" + id, data);
   },
 
   // Deletes issue with given id
