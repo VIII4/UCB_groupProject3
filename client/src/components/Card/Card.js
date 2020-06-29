@@ -10,22 +10,6 @@ import './Card.css';
 // display:"none" removes element from DOM
 
 class Card extends React.Component {
-    // card closing methods
-    closeCardInnards = () => {
-        // collect html collection --> convert to array
-        var cardInnardsList = Array.prototype.slice.call(document.getElementsByClassName("cardInnards"));
-
-        // hide all card innards with common className
-        cardInnardsList.forEach(element => {
-            element.style.display = "none";
-        });
-    }
-    closeCard = () => {
-        // hide card containter
-        document.getElementById("cardContainer").style.visibility = "hidden";
-        this.closeCardInnards();
-    };
-
     //                     //
     // program entry point //
     //                     //
@@ -33,11 +17,6 @@ class Card extends React.Component {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
             <div className="cardContainer" id="cardContainer" style={{ visibility: this.props.visibility }}>
-
-                <div className="closebtn">
-                    <a id="closeBtn" onClick={this.closeCard}>x</a>
-                </div>
-                <br></br>
 
                 <div id="cardInnards" className="textBlock">
                     <ContactsCard header="Local Government Contacts" display="none" />

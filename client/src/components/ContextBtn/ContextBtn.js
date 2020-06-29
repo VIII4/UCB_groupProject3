@@ -7,14 +7,12 @@ import './ContextBtn.css';
 // I like this method better...
 
 class ContextBtn extends React.Component {
-
-
-    CloseSidebar = () => {
-        document.getElementById("carenSidebar").style.width = "0px";
-        document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
-        document.getElementById("main").style.marginLeft = "0px";
+    constructor(props) {
+        super(props);
+        this.state = { bool: false };
     }
 
+    // card closing methods
     CloseCardInnards = () => {
         // collect html collection --> convert to array
         var cardInnardsList = Array.prototype.slice.call(document.getElementsByClassName("cardInnards"));
@@ -24,6 +22,11 @@ class ContextBtn extends React.Component {
             element.style.display = "none";
         });
     }
+    CloseCard = () => {
+        // hide card containter
+        document.getElementById("cardContainer").style.visibility = "hidden";
+        this.CloseCardInnards();
+    };
 
     OpenCard = (event, type) => {
         // first close any open cards
@@ -39,6 +42,18 @@ class ContextBtn extends React.Component {
         // this.CloseSidebar();
     }
 
+    OpenToggle = () => {
+        // toggle boolean value to either close or open card
+        this.state.bool = !this.state.bool
+
+        if (this.state.bool) {
+            this.OpenCard();
+        }
+        else {
+            this.CloseCard();
+        }
+    }
+
     //                     //
     // program entry point //
     //                     //
@@ -47,7 +62,7 @@ class ContextBtn extends React.Component {
             // main sidebar div container
             <div id="contextBtnContainer">
                 {/* sidebar open button */}
-                <button className="contextBtn" onClick={this.OpenCard}>...</button>
+                <button className="contextBtn" onClick={this.OpenToggle}>...</button>
             </div>
         )
     }

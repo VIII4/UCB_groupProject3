@@ -7,6 +7,11 @@ import './Sidebar.css';
 // I like this method better...
 
 class Sidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { bool: false };
+    }
+
     OpenSidebar = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
@@ -56,6 +61,18 @@ class Sidebar extends React.Component {
         this.CloseSidebar()
     }
 
+    OpenSidebarToggle = () => {
+        // toggle boolean value to either close or open card
+        this.state.bool = !this.state.bool
+
+        if (this.state.bool) {
+            this.OpenSidebar();
+        }
+        else {
+            this.CloseSidebar();
+        }
+    }
+
     //                     //
     // program entry point //
     //                     //
@@ -66,15 +83,14 @@ class Sidebar extends React.Component {
                 {/* top row with open button and logo */}
                 <div id="main">
                     {/* sidebar open button */}
-                    <button className="openbtn" onClick={this.OpenSidebar}>☰</button>
+                    <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 
                     {/* app logo */}
-                    {/* <a className="logo" href="#">Care'n</a> */}
+                    <a className="logo" href="#">Care'n</a>
                 </div>
 
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
-                    <a className="closebtn" onClick={this.CloseSidebar}>x</a>
                     <a id="aTag" onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
                     <a id="aTag" onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
                     <a id="aTag" onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
