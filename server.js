@@ -24,7 +24,6 @@ if (process.env.NODE_ENV === "production") {
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true}, (err) => {
         if (err) throw err;
-        console.log("Database error occurred")
         })
     .then(() => console.log("Database Connected Successfully!"))
     .catch(err => console.log(err));
