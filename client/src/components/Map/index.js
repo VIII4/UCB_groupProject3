@@ -189,11 +189,21 @@ class Map extends Component {
     */
     API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
       let issue = res.data;
-      console.log(issue);
-      if (issue.status !== "Pending") issue.status = "Pending";
-      //increment resolve counter (NEED TO ADD TO SCHEMA)
-      //if(issue.resolveCounter === 5) > update status to closed
-  
+      let data = {
+        resolvecount: issue.resolvecount ? issue.resolvecount + 1 : 1,
+        //increment resolve counter
+        status: issue.status,
+      };
+      if (
+        issue.status === "Pending" &&
+        data.resolvecount >= 5 /* TO DO: define what the max count should be */
+      )
+        data.status = "Closed";
+      else data.status = "Pending";
+
+      API.updateIssue(issue._id, data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     });
   };
 
