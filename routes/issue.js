@@ -13,4 +13,15 @@ router
   .put(issueController.update)
   .delete(issueController.remove);
 
+///////////////////////////////////////////////////////////////////////////////
+
+// TESTING
+router.route("/updatevote/:id").post((req, res) => {
+  Issue.findByIdAndUpdate(req.params.id, req.body)
+    .then((dbModel) => {
+      res.json(dbModel);
+    })
+    .catch((err) => res.status(422).json(err));
+});
+
 module.exports = router;
