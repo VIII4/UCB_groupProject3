@@ -34,7 +34,9 @@ class Card extends React.Component {
             // this.props is coming from App.js --> Main.js --> Card.js
             <div className="cardContainer" id="cardContainer" style={{ visibility: this.props.visibility }}>
 
-                <a id="closeBtn" className="closebtn" onClick={this.closeCard}>x</a>
+                <div className="closebtn">
+                    <a id="closeBtn" onClick={this.closeCard}>x</a>
+                </div>
                 <br></br>
 
                 <div id="cardInnards" className="textBlock">

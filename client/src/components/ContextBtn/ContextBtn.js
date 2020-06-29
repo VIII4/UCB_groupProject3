@@ -7,6 +7,8 @@ import './ContextBtn.css';
 // I like this method better...
 
 class ContextBtn extends React.Component {
+
+
     CloseSidebar = () => {
         document.getElementById("carenSidebar").style.width = "0px";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"

@@ -69,7 +69,7 @@ class Sidebar extends React.Component {
                     <button className="openbtn" onClick={this.OpenSidebar}>☰</button>
 
                     {/* app logo */}
-                    <a className="logo" href="#">Care'n</a>
+                    {/* <a className="logo" href="#">Care'n</a> */}
                 </div>
 
                 {/* sidebar contents */}
