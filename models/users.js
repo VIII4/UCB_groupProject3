@@ -10,10 +10,7 @@ const userSchema = new Schema({
         },
   password: {type: String},      
   remainingvotes: {type: Number},
-  submittedissues: [{type: String}],  /// i dont think we need this since this is covered in the issue table.
-  comments: {type: String}     /////i dont think we need this since comments is in the issue table.
-
-  
+    
 }, {timestamps: true
 
 });

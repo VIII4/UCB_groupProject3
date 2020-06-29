@@ -1,20 +1,16 @@
-const router = require('express').Router();
-let User = require('../models/users');
+const router = require("express").Router();
+const userController = require("../controllers/userController");
 
-router.route('/').get((req, res) => {
-  User.find()                             ///in mongoose find method this is like select * in sql
-    .then(user => res.json(user))       //get all users, and return all users in db
-    .catch(err => res.status(400).json('Error: ' + err));  ///if there is an error
-});
+// Process  with "/user" in userController file
+router.route("/")
+  .get(userController.findAll)
+  .post(userController.create);
 
-router.route('/add').post((req, res) => {               ///app incoming post request.usersname is part of request body
-  const username = req.body.username;
-
-  const newUser = new User({username});
-
-  newUser.save()             ////save method.
-    .then(() => res.json('User added!'))  //after user is saved, send msg 'user'added'
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+//process with  "/user/:id"  in userController file
+router
+  .route("/:id")
+  .get(userController.findById)
+  .put(userController.update)
+  .delete(userController.remove);
 
 module.exports = router;
