@@ -17,22 +17,19 @@
     z-index: var(--cardZindex);
     position: absolute; /* super important */
 
-    /* coordinate */
-    top: 20%; /* top of element x% down from top of screen! */
-    left: 15%;
-    margin-right: -50%;
-
     /* size */
-    width: 70vw;
-    height: auto; /* auto-sized to sized of contents */
+    width: 100vw;
+    height: 100vh;
 
     /* text formatting */
     display: block;
     text-align: right;
     
     padding: 20px;
-    background-color: white;
-    border-radius: 1rem;
+    background-color: rgba(0, 255, 170, 0.15);  
+    backdrop-filter: blur(3px);
+    /* background-color: white; */
+    border-radius: 0.5rem;
     box-shadow: var(--boxShadowSettings);
 }
 
@@ -44,9 +41,15 @@
     color: black;
 }
 
-#closeBtn {
+.closeBtn {
+    top: 20%;
+    width: 50%;
     float: right;
     width: auto;
     position: absolute;
+    display: block;
+}
+
+.cardInnards {
     display: block;
 }

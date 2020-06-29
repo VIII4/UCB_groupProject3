@@ -7,6 +7,11 @@ import './Sidebar.css';
 // I like this method better...
 
 class Sidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { bool: false };
+    }
+
     OpenSidebar = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
@@ -32,21 +37,40 @@ class Sidebar extends React.Component {
         // first close any open cards
         this.CloseCardInnards();
 
+        // show card parent
         document.getElementById("cardContainer").style.visibility = "visible";
 
+        // using type input render the appropriate card innards
         switch (type) {
             // set to visible by id since they are unique
-
-            case "contacts":
-                document.getElementById("contactsCardContent").style.display = "block";
-                console.log("contacts");
-                break;
             case "about":
                 document.getElementById("aboutCardContent").style.display = "block";
-                console.log("contacts");
+                break;
+            case "contacts":
+                document.getElementById("contactsCardContent").style.display = "block";
+                break;
+            case "login":
+                document.getElementById("loginCardContent").style.display = "block";
+                break;
+            case "register":
+                document.getElementById("registerCardContent").style.display = "block";
                 break;
         }
+
+        // close sidebar after cards render
         this.CloseSidebar()
+    }
+
+    OpenSidebarToggle = () => {
+        // toggle boolean value to either close or open card
+        this.state.bool = !this.state.bool
+
+        if (this.state.bool) {
+            this.OpenSidebar();
+        }
+        else {
+            this.CloseSidebar();
+        }
     }
 
     //                     //
@@ -59,7 +83,7 @@ class Sidebar extends React.Component {
                 {/* top row with open button and logo */}
                 <div id="main">
                     {/* sidebar open button */}
-                    <button className="openbtn" onClick={this.OpenSidebar}>☰</button>
+                    <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 
                     {/* app logo */}
                     <a className="logo" href="#">Care'n</a>
@@ -67,11 +91,10 @@ class Sidebar extends React.Component {
 
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
-                    <a href="javascript:void(0)" className="closebtn" onClick={this.CloseSidebar}>x</a>
                     <a id="aTag" onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
-                    <a id="aTag" onClick={(event) => {
-                        this.OpenCard(event, "contacts")
-                    }}>Contact</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
+                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "register") }}>Register</a>
                 </div>
 
             </div>

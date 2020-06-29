@@ -24,7 +24,7 @@
     /* size */
     width: 100vw;
     height: auto; /* auto-sized to sized of contents */
-    padding: 16px;
+    /* padding: 16px; */
 
     /* text formatting */
     display: block;

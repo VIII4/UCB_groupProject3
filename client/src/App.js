@@ -15,13 +15,7 @@ class App extends React.Component {
           <Sidebar />
 
           <Switch>
-            {/* these routes will specify which components are returned
-             <Sidebar /> being outside of <Switch> ensures it will
-             always be visible regardless of the route rendered */}
-
-            {/* Main is a prop being passed... */}
             <Route exact path="/" component={Main} />
-            {/* <Route exact path="/" component={??} /> */}
           </Switch>
 
           <ContextBtn />

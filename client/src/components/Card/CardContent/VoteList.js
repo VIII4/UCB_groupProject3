@@ -2,14 +2,16 @@ import React from "react";
 import '../Card.css';
 
 class VoteList extends React.Component {
-
-    // https://stackoverflow.com/questions/41667346/react-create-nested-components-with-loops
-    // renderSquare(i) {
-    //     return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
-    // }
-
     DoSomething = () => {
         console.log("Event Triggered");
+    }
+
+    GetDBIssues = () => {
+        var tagList = [];
+        for (var i = 0; i < 5; i++) {
+            tagList.push(<a>Issue A</a>, <button onClick={this.DoSomething, <br></br>}>Vote</button>)
+        }
+        return tagList;
     }
 
     render() {
@@ -19,22 +21,11 @@ class VoteList extends React.Component {
             <div id="voteCardContent" className="textBlock cardInnards">
                 <h4>{this.props.header}</h4>
                 <hr></hr>
-                <div className="voteRowCardInnard">
-                    <a>Issue A</a>
-                    <button onClick={this.DoSomething}>Vote</button>
-                </div>
-                <div className="voteRowCardInnard">
-                    <a>Issue A</a>
-                    <button onClick={this.DoSomething}>Vote</button>
-                </div>
-                <div className="voteRowCardInnard">
-                    <a>Issue A</a>
-                    <button onClick={this.DoSomething}>Vote</button>
-                </div>
-            </div >
+                {this.GetDBIssues()}
+            </div>
         )
-    }
-}
+    };
+};
 
 export default VoteList;
 
