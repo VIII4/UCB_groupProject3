@@ -12,17 +12,19 @@ class Sidebar extends React.Component {
         this.state = { bool: false };
     }
 
+    // sidebar methods
     OpenSidebar = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
         document.getElementById("main").style.marginLeft = "30vw";
-    }
+    };
     CloseSidebar = () => {
         document.getElementById("carenSidebar").style.width = "0px";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
         document.getElementById("main").style.marginLeft = "0px";
-    }
+    };
 
+    // card methods
     CloseCardInnards = () => {
         // collect html collection --> convert to array
         var cardInnardsList = Array.prototype.slice.call(document.getElementsByClassName("cardInnards"));
@@ -32,7 +34,11 @@ class Sidebar extends React.Component {
             element.style.display = "none";
         });
     }
-
+    CloseCard = () => {
+        // hide card containter
+        document.getElementById("cardContainer").style.visibility = "hidden";
+        this.CloseCardInnards();
+    };
     OpenCard = (event, type) => {
         // first close any open cards
         this.CloseCardInnards();
@@ -59,8 +65,9 @@ class Sidebar extends React.Component {
 
         // close sidebar after cards render
         this.CloseSidebar()
-    }
+    };
 
+    // toggle sidebar methods
     OpenSidebarToggle = () => {
         // toggle boolean value to either close or open card
         this.state.bool = !this.state.bool
@@ -86,7 +93,7 @@ class Sidebar extends React.Component {
                     <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 
                     {/* app logo */}
-                    <a className="logo" href="#">Care'n</a>
+                    <a className="logo" onClick={this.CloseCard}>Care'n</a>
                 </div>
 
                 {/* sidebar contents */}

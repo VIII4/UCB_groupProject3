@@ -26,7 +26,8 @@
     text-align: right;
     
     padding: 20px;
-    background-color: rgba(0, 255, 170, 0.15);  
+    /* background-color: rgba(0, 255, 170, 0.15); */
+    background-image: linear-gradient(rgba(0, 172, 252, 0.15), rgba(0, 255, 179, 0.15));
     backdrop-filter: blur(3px);
     /* background-color: white; */
     border-radius: 0.5rem;
