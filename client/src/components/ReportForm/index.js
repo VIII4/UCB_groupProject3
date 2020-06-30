@@ -7,9 +7,10 @@ export default class ReportForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      issueType: props.issueType,
+      // issueType: props.issueType,
+      issueType: "Structural",
       descValue: "",
-      imageFiles: [],
+      imageFiles: null,
     };
   }
 
@@ -28,13 +29,40 @@ export default class ReportForm extends Component {
 
     this.setState({ imageFiles: files });
   };
+
+  handleSubmitClick = (event) => {
+    event.preventDefault();
+    const { issueType, descValue, imageFiles } = this.state;
+
+    // Validate all files submitted
+    if (!issueType || !descValue || !imageFiles) {
+      alert("1-3 images and Description is Required");
+      return;
+    }
+
+    //add all items to data object
+    const formData = new FormData();
+    formData.append("category", issueType);
+    formData.append("descr", descValue);
+    imageFiles.forEach((file, index) => {
+      formData.append(`file[${index}]`, file);
+    });
+
+    //execute submitIssue from props, then set state to null
+    this.props.submitIssueReport(formData);
+    this.setState({
+      issueType: "Structural",
+      descValue: "",
+      imageFiles: null,
+    });
+  };
   render() {
     return (
       <div>
         <form className="form">
           <input
             value={this.state.descValue}
-            name="description"
+            name="descValue"
             onChange={this.handleInputChange}
             type="text"
             placeholder="Description"
@@ -51,10 +79,9 @@ export default class ReportForm extends Component {
               multiple
             />
           </div>
-          {/* <input type="file" id="myfile" name="imageB"></input>
-          <input type="file" id="myfile" name="imageC"></input> */}
+
           {/* TO DO: Submit button logic to be passed from main */}
-          <button>Submit</button>
+          <button onClick={this.handleSubmitClick}> Submit</button>
         </form>
       </div>
     );

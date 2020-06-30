@@ -148,6 +148,10 @@ class Main extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  submitIssueReport = (formdata) => {
+    alert("GOt eeeeemmmmm");
+  };
+
   onResolveClick = () => {
     API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
       let issue = res.data;
@@ -168,6 +172,7 @@ class Main extends React.Component {
         .catch((err) => console.log(err));
     });
   };
+
   //#endregion
 
   //Life Cycle Events
@@ -197,6 +202,7 @@ class Main extends React.Component {
           onVoteClick={this.onVoteClick}
           onReportIssueClick={this.onReportIssueClick}
           onResolveClick={this.onReportIssueClick}
+          submitIssueReport={this.submitIssueReport}
         />
       </div>
     );
