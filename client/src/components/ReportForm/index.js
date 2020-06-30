@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import { set } from "mongoose";
+import { FaImages } from "react-icons/fa";
 
 export default class ReportForm extends Component {
   constructor(props) {
@@ -8,9 +9,7 @@ export default class ReportForm extends Component {
     this.state = {
       issueType: props.issueType,
       descValue: "",
-      imageA: null,
-      imageB: null,
-      imageC: null,
+      imageFiles: [],
     };
   }
 
@@ -23,9 +22,11 @@ export default class ReportForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleImageValue = (event) => {
-    let value = event.target.value;
-    this.setState({ imageA: value });
+  handleImageLoad = (event) => {
+    const files = Array.from(event.target.files);
+    // console.log(files);
+
+    this.setState({ imageFiles: files });
   };
   render() {
     return (
@@ -38,14 +39,20 @@ export default class ReportForm extends Component {
             type="text"
             placeholder="Description"
           />
-          <input
-            type="file"
-            id="myfile"
-            name="imageA"
-            onChange={this.handleInputChange}
-          ></input>
-          <input type="file" id="myfile" name="imageB"></input>
-          <input type="file" id="myfile" name="imageC"></input>
+          <div className="upload-button">
+            <label htmlFor="multi">
+              <FaImages className="upload-icon" />
+            </label>
+            <input
+              className="image-input"
+              type="file"
+              id="multi"
+              onChange={this.handleImageLoad}
+              multiple
+            />
+          </div>
+          {/* <input type="file" id="myfile" name="imageB"></input>
+          <input type="file" id="myfile" name="imageC"></input> */}
           {/* TO DO: Submit button logic to be passed from main */}
           <button>Submit</button>
         </form>
