@@ -44,16 +44,19 @@ export default class ReportForm extends Component {
       return;
     }
 
-    //add all items to data object
+    //add all database items to data object, then files to form data
+    //when passed above main will add more info to data then append to form data
+    let data = {
+      category: issueType,
+      descr: descValue,
+    };
     const formData = new FormData();
-    formData.append("category", issueType);
-    formData.append("descr", descValue);
     imageFiles.forEach((file, index) => {
       formData.append(`file[${index}]`, file);
     });
 
     //execute submitIssue from props, then set state to null
-    this.props.submitIssueReport(formData);
+    this.props.submitIssueReport(data, formData);
     this.setState({
       issueType: "Structural",
       descValue: "",

@@ -148,8 +148,21 @@ class Main extends React.Component {
       .catch((err) => console.log(err));
   };
 
-  submitIssueReport = (formdata) => {
-    alert("GOt eeeeemmmmm");
+  submitIssueReport = (data, formdata) => {
+    // Add additional required information to new issue
+    data.createdby = "testUser";
+    data.voteCount = 1;
+    data.status = "Voting";
+    data.zipcode = 94602;
+    data.date = Date();
+
+    //Append to form data along with files
+    formdata.append("dbData", data);
+
+    //Send Api request
+    API.createIssue(formdata)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   onResolveClick = () => {
