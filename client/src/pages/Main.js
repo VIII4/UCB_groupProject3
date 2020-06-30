@@ -182,7 +182,13 @@ class Main extends React.Component {
       <div>
         {/* visibility can be set in css,but for 
             clarity it is done here instead */}
-        <Card localIssues={localIssues} visibility="hidden" />
+        <Card
+          localIssues={localIssues}
+          selectedIssue={selectedIssue}
+          setSelectedIssue={this.setSelectedIssue}
+          onVoteClick={this.onVoteClick}
+          visibility="hidden"
+        />
         <Map
           currentLocation={currentLocation}
           localIssues={localIssues}
