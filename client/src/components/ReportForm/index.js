@@ -24,9 +24,12 @@ export default class ReportForm extends Component {
   };
 
   handleImageLoad = (event) => {
+    // Validate files are images...
+    if (event.target.files.length > 3 || event.target.files.length <= 0) {
+      alert("Please submit max of 3 images");
+      return;
+    }
     const files = Array.from(event.target.files);
-    // console.log(files);
-
     this.setState({ imageFiles: files });
   };
 
@@ -34,6 +37,7 @@ export default class ReportForm extends Component {
     event.preventDefault();
     const { issueType, descValue, imageFiles } = this.state;
 
+    // Need a Validation for
     // Validate all files submitted
     if (!issueType || !descValue || !imageFiles) {
       alert("1-3 images and Description is Required");
