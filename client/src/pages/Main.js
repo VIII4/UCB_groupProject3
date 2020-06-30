@@ -13,6 +13,8 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
+      //TO DO: Receive userdata info from props and store to state
+
       //Current Location
       currentLocation: {
         lat: 37.804363,
@@ -125,6 +127,47 @@ class Main extends React.Component {
       });
     });
   };
+
+  onReportIssueClick = (type) => {
+    //TO DO: Open Confirm Panel with input, image upload,
+
+    let data = {
+      category: type,
+      descr: "New issue added",
+      voteCount: 1,
+      zipcode: 99999,
+      status: "Voting",
+      latlng: {
+        lat: this.state.currentLocation.lat,
+        lng: this.state.currentLocation.lng,
+      },
+    };
+
+    API.createIssue(data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  onResolveClick = () => {
+    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+      let issue = res.data;
+      let data = {
+        resolvecount: issue.resolvecount ? issue.resolvecount + 1 : 1,
+        //increment resolve counter
+        status: issue.status,
+      };
+      if (
+        issue.status === "Pending" &&
+        data.resolvecount >= 5 /* TO DO: define what the max count should be */
+      )
+        data.status = "Closed";
+      else data.status = "Pending";
+
+      API.updateIssue(issue._id, data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    });
+  };
   //#endregion
 
   //Life Cycle Events
@@ -133,18 +176,21 @@ class Main extends React.Component {
   };
 
   render() {
-    const { localIssue, setSelectedIssue, selectedIssue } = this.state;
+    const { currentLocation, localIssues, selectedIssue } = this.state;
 
     return (
       <div>
         {/* visibility can be set in css,but for 
             clarity it is done here instead */}
-        <Card localIssues={this.state.localIssues} visibility="hidden" />
+        <Card localIssues={localIssues} visibility="hidden" />
         <Map
+          currentLocation={currentLocation}
           localIssues={localIssues}
-          setSelectedIssue={selectedIssue}
           selectedIssue={selectedIssue}
-          onVoteClick={onVoteClick}
+          setSelectedIssue={this.setSelectedIssue}
+          onVoteClick={this.onVoteClick}
+          onReportIssueClick={this.onReportIssueClick}
+          onResolveClick={this.onReportIssueClick}
         />
       </div>
     );
