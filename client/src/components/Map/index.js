@@ -145,16 +145,68 @@ class Map extends Component {
     this.setState({ selectedIssue: null });
   };
 
+  // onVoteClick = () => {
+  //   // TESTING - with manual user id entrance, will need to get this from cookies
+  //   let userId = "5efa889fd5ac5361e0bbd371";
+  //   API.getUser(userId).then((res) => {
+  //     let userData = res.data;
+  //     if (userData.remainingvotes <= 0) {
+  //       alert("No Votes Remaining");
+  //       return;
+  //     } else {
+  //       alert("User Has Votes");
+  //       API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+  //         let issueData = res.data;
+  //         console.log("issue data", issueData);
+  //         if (issueData.votedby.includes(userId)) {
+  //           alert("user already voted");
+  //           return;
+  //         } else {
+  //           alert("user has not voted");
+  //           let updateVotedBy = issueData.votedby;
+  //           updateVotedBy.push(userId);
+  //           console.log("to update", updateVotedBy);
+
+  //           let newVoteCount = res.data.voteCount + 1;
+  //           API.updateIssue(res.data._id, {
+  //             voteCount: newVoteCount,
+  //             votedby: updateVotedBy,
+  //           })
+  //             .then((res) => console.log(res))
+  //             .catch((err) => console.log(err));
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+
   onVoteClick = () => {
-    //TO DO: Check user vote count first
+    // TESTING - with manual user id entrance, will need to get this from cookies
+    let userId = "5efa889fd5ac5361e0bbd371";
+    API.getUser(userId).then((res) => {
+      let userData = res.data;
+      API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
+        let issueData = res.data;
+        if (
+          issueData.votedby.includes(userId) ||
+          userData.remainingvotes <= 0
+        ) {
+          alert("Already voted or no vote balance");
+          return;
+        } else {
+          let updateVotedBy = issueData.votedby;
+          let newVoteCount = res.data.voteCount + 1;
 
-    API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
-      //TO DO: Check if user id exist in table
-      let newVoteCount = res.data.voteCount + 1;
+          updateVotedBy.push(userId);
 
-      API.updateIssue(res.data._id, { voteCount: newVoteCount })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+          API.updateIssue(res.data._id, {
+            voteCount: newVoteCount,
+            votedby: updateVotedBy,
+          })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        }
+      });
     });
   };
 
@@ -167,6 +219,10 @@ class Map extends Component {
       voteCount: 1,
       zipcode: 99999,
       status: "Voting",
+      latlng: {
+        lat: this.state.currentLocation.lat,
+        lng: this.state.currentLocation.lng,
+      },
     };
 
     API.createIssue(data)

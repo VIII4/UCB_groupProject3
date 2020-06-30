@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Issue = require("../models/issue");
+const User = require("../models/users");
 
 // This file empties the Books collection and inserts the books below
 
@@ -16,6 +17,7 @@ const issueSeed = [
     category: "Structural",
     descr: "Building is moldy",
     voteCount: 0,
+    votedby: [],
     latlng: {
       lat: 37.805105,
       lng: -122.218504,
@@ -34,6 +36,7 @@ const issueSeed = [
     category: "Wild Life",
     descr: "Deer crossing, needs sign!",
     voteCount: 0,
+    votedby: [],
     zipcode: 94602,
     status: "Closed",
   },
@@ -47,6 +50,7 @@ const issueSeed = [
     category: "Utility",
     descr: "Power line down",
     voteCount: 0,
+    votedby: [],
     zipcode: 94602,
     status: "Voting",
   },
@@ -60,6 +64,7 @@ const issueSeed = [
     category: "Roads",
     descr: "Big ASS pothole",
     voteCount: 0,
+    votedby: [],
     zipcode: 94602,
     status: "Voting",
   },
@@ -72,6 +77,7 @@ const issueSeed = [
     }, //
     category: "Vandalism",
     voteCount: 0,
+    votedby: [],
     descr: "graffiti on elementary school",
     zipcode: 94602,
     status: "Voting",
@@ -86,6 +92,7 @@ const issueSeed = [
     category: "Trash",
     descr: "park litter",
     voteCount: 0,
+    votedby: [],
     zipcode: 94602,
     status: "Voting",
   },
@@ -100,6 +107,7 @@ const issueSeed = [
     category: "Trash",
     descr: "its diiirty AF",
     voteCount: 0,
+    votedby: [],
     zipcode: 94102,
     status: "Voting",
   },
@@ -113,6 +121,7 @@ const issueSeed = [
     category: "Roads",
     descr: "traffic light is out",
     voteCount: 0,
+    votedby: [],
     zipcode: 94102,
     status: "Voting",
   },
@@ -126,6 +135,7 @@ const issueSeed = [
     category: "Other",
     descr: "Fire hydrant is leaking",
     voteCount: 0,
+    votedby: [],
     zipcode: 94102,
     status: "Voting",
   },
@@ -139,6 +149,7 @@ const issueSeed = [
     category: "Vandalism",
     descr: "see title",
     voteCount: 0,
+    votedby: [],
     zipcode: 94102,
     status: "Voting",
   },
@@ -150,6 +161,7 @@ const issueSeed = [
     category: "Wildlife",
     descr: "Seaworld Escapeees",
     voteCount: 0,
+    votedby: [],
     zipcode: 92122,
     status: "Voting",
   },
@@ -163,6 +175,7 @@ const issueSeed = [
     category: "Utility",
     descr: "Gasline exposed",
     voteCount: 0,
+    votedby: [],
     zipcode: 92122,
     status: "Voting",
   },
@@ -176,6 +189,7 @@ const issueSeed = [
     category: "Structural",
     descr: "asbestos exposed on wall",
     voteCount: 0,
+    votedby: [],
     zipcode: 92122,
     status: "Voting",
   },
@@ -189,8 +203,22 @@ const issueSeed = [
     category: "Road",
     descr: "Need stop sign here",
     voteCount: 0,
+    votedby: [],
     zipcode: 92122,
     status: "Voting",
+  },
+];
+
+const userSeed = [
+  {
+    username: "TestUser",
+    password: "password",
+    remainingvotes: 3,
+  },
+  {
+    username: "SamIam",
+    password: "IamSam",
+    remainingvotes: 3,
   },
 ];
 
@@ -210,7 +238,10 @@ function seed() {
     .insertMany(issueSeed)
     .then((data) => {
       console.log(data.result.n + " records inserted!");
-      process.exit(0);
+      User.collection.insertMany(userSeed).then((data) => {
+        console.log(data.result.n + " records inserted!");
+        process.exit(0);
+      });
     })
     .catch((err) => {
       console.error(err);
@@ -220,7 +251,6 @@ function seed() {
 
 Issue.remove()
   .then((res) => {
-    console.log(res);
-    seed();
+    User.remove().then((res) => seed());
   })
   .catch((err) => console.log(err));
