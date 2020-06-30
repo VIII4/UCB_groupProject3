@@ -24,9 +24,12 @@ class Map extends Component {
         lat: 37.804363,
         lng: -122.271111,
       },
+
       //Local Issue to render to map
       localIssues: [],
       selectedIssue: null,
+
+      isLoading: false,
 
       showingReportPanel: false,
       reportingType: "",
@@ -127,12 +130,12 @@ class Map extends Component {
   //#region Handler Methods
 
   onIssueMarkerClick = (issue) => {
-    this.setState({ selectedIssue: issue });
+    this.props.setSelectedIssue(issue);
     this.setState({ showingReportPanel: false });
   };
 
   closeInfoWindow = () => {
-    this.setState({ selectedIssue: null });
+    this.props.setSelectedIssue(null);
   };
 
   closePanelWindow = () => {
@@ -142,43 +145,8 @@ class Map extends Component {
   onUserMarkerClick = (event) => {
     let toogle = !this.state.showingReportPanel;
     this.setState({ showingReportPanel: toogle });
-    this.setState({ selectedIssue: null });
+    this.props.setSelectedIssue(null);
   };
-
-  // onVoteClick = () => {
-  //   // TESTING - with manual user id entrance, will need to get this from cookies
-  //   let userId = "5efa889fd5ac5361e0bbd371";
-  //   API.getUser(userId).then((res) => {
-  //     let userData = res.data;
-  //     if (userData.remainingvotes <= 0) {
-  //       alert("No Votes Remaining");
-  //       return;
-  //     } else {
-  //       alert("User Has Votes");
-  //       API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
-  //         let issueData = res.data;
-  //         console.log("issue data", issueData);
-  //         if (issueData.votedby.includes(userId)) {
-  //           alert("user already voted");
-  //           return;
-  //         } else {
-  //           alert("user has not voted");
-  //           let updateVotedBy = issueData.votedby;
-  //           updateVotedBy.push(userId);
-  //           console.log("to update", updateVotedBy);
-
-  //           let newVoteCount = res.data.voteCount + 1;
-  //           API.updateIssue(res.data._id, {
-  //             voteCount: newVoteCount,
-  //             votedby: updateVotedBy,
-  //           })
-  //             .then((res) => console.log(res))
-  //             .catch((err) => console.log(err));
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
 
   onVoteClick = () => {
     // TESTING - with manual user id entrance, will need to get this from cookies
