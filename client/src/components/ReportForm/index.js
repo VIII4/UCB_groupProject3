@@ -44,8 +44,8 @@ export default class ReportForm extends Component {
       return;
     }
 
-    //add all database items to data object, then files to form data
-    //when passed above main will add more info to data then append to form data
+    //add all database items to data object, then image files to form data
+    //when passed above main will add more info to data and send two seperate request
     let data = {
       category: issueType,
       descr: descValue,
@@ -57,6 +57,7 @@ export default class ReportForm extends Component {
 
     //execute submitIssue from props, then set state to null
     this.props.submitIssueReport(data, formData);
+    // reset state
     this.setState({
       issueType: "Structural",
       descValue: "",
@@ -86,8 +87,6 @@ export default class ReportForm extends Component {
               multiple
             />
           </div>
-
-          {/* TO DO: Submit button logic to be passed from main */}
           <button onClick={this.handleSubmitClick}> Submit</button>
         </form>
       </div>

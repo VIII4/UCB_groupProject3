@@ -162,7 +162,7 @@ class Main extends React.Component {
     API.createIssue(data)
       .then((res) => {
         console.log(res);
-        // Run image upload api request here
+        // TO DO: Run image upload fetch request here
       })
       .catch((err) => console.log(err));
 

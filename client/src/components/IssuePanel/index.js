@@ -7,8 +7,8 @@ export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
     <div className="overViewPanel">
       <div className="buttonPanel">
-        <ReportForm submitIssueReport={submitIssueReport} />{" "}
         {/* Will need to create hook with issue type state and to report form from button click */}
+        {/* <ReportForm submitIssueReport={submitIssueReport} /> */}
         <ReportIssueButton
           issueType="Wildlife"
           onReportIssueClick={onReportIssueClick}
