@@ -1,42 +1,33 @@
-/*               */
-/* css variables */
-/*               */
-* {
-    --sidebarZindex: 5;
-    
-    --transparentBackground: rgba(255, 255, 255, 0);
-    --translucentBackground: rgba(211, 211, 211, .25);
-
-    --boxShadowSettings: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-/* format card parent must be absolute*/
+/* container position must be absolute */
 #refreshBtnContainer {
-
-    /* overlay */
+    /* container coordinate */
     z-index: 3;
     position: absolute;
+    top: 10%;
 
-    /* coordinate */
-    top: 5%;
-
-    /* size */
+    /* container size */
     width: 100vw;
-    height: auto; /* auto-sized to sized of contents */
-    /* padding: 16px; */
+    height: auto;
 
-    /* text formatting */
+    /* container inside offset */
+    padding: 16px;
+
+    /* container text formatting */
     display: block;
     text-align: left;
 }
 
-/* child is relative to parent */
+/* child is relative to parent container */
 .refreshBtn {
+    /* button coordinate */
     float: right;
-    /* position: absolute; */
+    position: relative;
+
+    /* button size */
     height: 1.5rem;
     width: 1.5rem;
 
+    /* button text formatting */
     text-align: center;
     justify-content: center;
 

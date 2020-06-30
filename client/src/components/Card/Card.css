@@ -12,8 +12,7 @@
 
 /* format card parent */
 .cardContainer {
-
-    /* overlay */
+    /* coordinate */
     z-index: var(--cardZindex);
     position: absolute; /* super important */
 
@@ -21,17 +20,16 @@
     width: 100vw;
     height: 100vh;
 
+    /* offset */
+    padding: 32px;
+
     /* text formatting */
     display: block;
-    text-align: right;
+    text-align: left;
     
-    padding: 20px;
-    /* background-color: rgba(0, 255, 170, 0.15); */
+    /* color/styling */
     background-image: linear-gradient(rgba(0, 172, 252, 0.15), rgba(0, 255, 179, 0.15));
     backdrop-filter: blur(3px);
-    /* background-color: white; */
-    border-radius: 0.5rem;
-    box-shadow: var(--boxShadowSettings);
 }
 
 /* format card children (contents) */
@@ -40,15 +38,6 @@
        item is on the same line or stacked */
     display: block;
     color: black;
-}
-
-.closeBtn {
-    top: 20%;
-    width: 50%;
-    float: right;
-    width: auto;
-    position: absolute;
-    display: block;
 }
 
 .cardInnards {

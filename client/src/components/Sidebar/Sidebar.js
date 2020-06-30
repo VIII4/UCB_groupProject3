@@ -16,12 +16,12 @@ class Sidebar extends React.Component {
     OpenSidebar = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
-        document.getElementById("main").style.marginLeft = "30vw";
+        document.getElementById("openBtnLogoContainer").style.marginLeft = "30vw";
     };
     CloseSidebar = () => {
         document.getElementById("carenSidebar").style.width = "0px";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
-        document.getElementById("main").style.marginLeft = "0px";
+        document.getElementById("openBtnLogoContainer").style.marginLeft = "0px";
     };
 
     // card methods
@@ -88,7 +88,7 @@ class Sidebar extends React.Component {
             <div>
 
                 {/* top row with open button and logo */}
-                <div id="main">
+                <div id="openBtnLogoContainer">
                     {/* sidebar open button */}
                     <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 

@@ -25,12 +25,6 @@
   visibility: hidden;
 }
 
-button {
-  font-size: 2rem;
-  margin-left: 0.5rem;
-  border-radius: 50%;
-}
-
 .center {
   margin: auto;
   width: 75%;

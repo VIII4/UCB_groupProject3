@@ -12,19 +12,17 @@
 
 /* format card parent */
 #contextBtnContainer {
-
-    /* overlay */
+    /* coordinate */
     z-index: var(--sidebarZindex);
     position: absolute; /* super important */
-    float: left;
-
-    /* coordinate */
     bottom: 5%;
 
     /* size */
     width: 100vw;
-    height: auto; /* auto-sized to sized of contents */
-    /* padding: 16px; */
+    height: auto;
+
+    /* offset */
+    padding: 16px;
 
     /* text formatting */
     display: block;
@@ -32,7 +30,9 @@
 }
 
 .contextBtn {
-    position: absolute;
+    /* coordinate */
+    float: left;
+    position: relative;
     height: 1.5rem;
     width: 1.5rem;
 

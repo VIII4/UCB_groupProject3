@@ -8,37 +8,49 @@
     --translucentBackground: rgba(211, 211, 211, .25);
 }
 
-/*                                     */
-/* main container + open button + logo */
-/*                                     */
-
-/* parent tag */
-#main {
-    position: absolute;
-    width: 100vw;
+/* container position must be absolute */
+#openBtnLogoContainer {
+    /* container coordinate */
     z-index: var(--sidebarZindex);
-
-    transition: margin-left .5s;
+    position: absolute;
+    
+    /* container size */
+    width: 100vw;
+    height: auto;
     padding: 16px;
+
+    /* container animation */
+    transition: margin-left .5s;
 }
 
+/* child is relative to parent container */
 .openbtn {
-    position: absolute;
+    /* button coordinate */
+    float: left;
+    position: relative;
 
+    /* ??? */
+    cursor: default;
+
+    /* button text formatting */
     font-size: 25px;
-    cursor: pointer;
-    background-color: var(--transparentBackground);
     color: black;
+
+    /* button size */
+
+    /* button color/styling */
     border: none;
     border-radius: 2rem;
-    
+    background-color: var(--transparentBackground);
 }
 .openbtn:hover {
-    background-color: var(--translucentBackground);
     border-radius: 2rem;
+    background-color: var(--translucentBackground);
 }
 
+/* child is relative to parent container */
 .logo{
+    /* overlay */
     position: relative;
     float: right;
 
@@ -49,7 +61,6 @@
     font-weight: bolder;
     color: black;
 }
-
 .logo:hover {
     color: lightgray;
     text-decoration: none;
