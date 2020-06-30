@@ -1,7 +1,7 @@
 import React from "react";
 import '../Card.css';
 
-class VoteList extends React.Component {
+class IssueCard extends React.Component {
     DoSomething = (event, id = 0) => {
         console.log("Event Triggered");
     }
@@ -33,6 +33,6 @@ class VoteList extends React.Component {
     };
 };
 
-export default VoteList;
+export default IssueCard;
 
 
