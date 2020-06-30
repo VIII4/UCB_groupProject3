@@ -31,7 +31,12 @@ export default function Card({
       <div id="cardInnards" className="textBlock">
         <ContactsCard header="Local Government Contacts" display="none" />
         <AboutCard header="About" display="none" />
-        <VoteList header="Issues In Your Area" display="none" />
+        <VoteList
+          localIssues={localIssues}
+          onVoteClick={onVoteClick}
+          header="Issues In Your Area"
+          display="none"
+        />
         <LoginCard header="Log In To Care'n" display="none" />
         <RegisterCard header="Register for Care'n" display="none" />
       </div>
