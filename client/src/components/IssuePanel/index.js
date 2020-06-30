@@ -1,11 +1,13 @@
 import React from "react";
 import ReportIssueButton from "../ReportIssueButton";
+import ReportForm from "../ReportForm";
 import "./style.css";
 
 export default function IssuesPanel({ onReportIssueClick }) {
   return (
     <div className="overViewPanel">
       <div className="buttonPanel">
+        <ReportForm /> {/* Will Need to send prop for reported type */}
         <ReportIssueButton
           issueType="Wildlife"
           onReportIssueClick={onReportIssueClick}
