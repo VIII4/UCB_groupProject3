@@ -6,19 +6,26 @@ export default class ReportForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      issueType: props.issueType,
       descValue: "",
       imageA: null,
       imageB: null,
-      imageC: null
+      imageC: null,
     };
   }
 
   handleInputChange = (event) => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
+    let name = event.target.name;
 
     // Updating the input's state
-    this.setState({ descValue: value });
+    this.setState({ [name]: value });
+  };
+
+  handleImageValue = (event) => {
+    let value = event.target.value;
+    this.setState({ imageA: value });
   };
   render() {
     return (
@@ -31,7 +38,15 @@ export default class ReportForm extends Component {
             type="text"
             placeholder="Description"
           />
-          <input type="file" id="myfile" name="myfile"></input>
+          <input
+            type="file"
+            id="myfile"
+            name="imageA"
+            onChange={this.handleInputChange}
+          ></input>
+          <input type="file" id="myfile" name="imageB"></input>
+          <input type="file" id="myfile" name="imageC"></input>
+          {/* TO DO: Submit button logic to be passed from main */}
           <button>Submit</button>
         </form>
       </div>
