@@ -15,7 +15,7 @@
     /* coordinate */
     z-index: var(--sidebarZindex);
     position: absolute; /* super important */
-    bottom: 5%;
+    bottom: 0%;
 
     /* size */
     width: 100vw;

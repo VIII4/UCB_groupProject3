@@ -20,6 +20,8 @@
     max-width:100%;
     padding: 16px;
 
+    background-color: rgba(255, 255, 255, 1.0);
+
     /* container animation */
     transition: margin-left .5s;
 }
@@ -82,7 +84,7 @@
     z-index: 7;
     
     /* color/styling */
-    background-image: linear-gradient(rgba(0, 255, 179, 0.15), rgba(0, 172, 252, 0.15));
+    background-image: linear-gradient(rgba(0, 255, 179, 0.15), rgba(255, 255, 255, 0.15));
     backdrop-filter: blur(3px);
     
     overflow-x: hidden;

@@ -24,14 +24,15 @@
     padding-top: 64px;
     padding-left: 32px;
     padding-right: 32px;
-    padding-bottom: 32px;
+    padding-bottom: 64px;
 
     /* text formatting */
     display: block;
     text-align: left;
     
     /* color/styling */
-    background-image: linear-gradient(rgba(0, 172, 252, 0.15), rgba(0, 255, 179, 0.15));
+    background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15));
+    /* background-image: linear-gradient(rgba(0, 255, 179, 0.15), rgba(255, 255, 255, 0.15)); */
     backdrop-filter: blur(3px);
 }
 
