@@ -98,11 +98,17 @@ class Sidebar extends React.Component {
 
                 {/* sidebar contents */}
                 <div id="carenSidebar" className="sidebar">
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "register") }}>Register</a>
+                    <a onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
+                    <a onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
+                    <a onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
+                    <a onClick={(event) => { this.OpenCard(event, "register") }}>Register</a>
+
+                    <div id="sidebarLogo">
+                        <a className="logo" onClick={this.CloseCard}>Care'n</a>
+                    </div>
                 </div>
+
+
 
             </div>
         )

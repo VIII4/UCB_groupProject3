@@ -20,7 +20,9 @@
     max-width:100%;
     padding: 16px;
 
-    background-color: rgba(255, 255, 255, 1.0);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.15));
+    /* background-color: rgba(255, 255, 255, 0.55); */
+    /* filter: blur(3px); */
 
     /* container animation */
     transition: margin-left .5s;
@@ -84,9 +86,13 @@
     z-index: 7;
     
     /* color/styling */
-    background-image: linear-gradient(rgba(0, 255, 179, 0.15), rgba(255, 255, 255, 0.15));
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.15)); */
+    background-color: rgba(11, 3, 45, 0.95);
+    /* background-color: lightgrey; */
     backdrop-filter: blur(3px);
-    
+
+    box-shadow: -9px 0px 18px black inset;
+
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -96,7 +102,7 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 15px;
-    color: black;
+    color: white;
     display: block;
     transition: 0.3s;
 }
@@ -112,10 +118,13 @@
     margin-left: 50px;
 }
 
-#aTag {
-    /* background-color: white; */
+#sidebarLogo {
+    position: absolute;
+    float: left;
+    bottom: 0%;
+    width: auto;
+    color: white;
 }
-
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
