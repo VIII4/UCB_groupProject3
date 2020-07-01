@@ -1,3 +1,24 @@
-body {
+/* FIXING CSS ISSUES AFTER RESET */
+
+
+/* super important for screen properties to work properly */
+*{margin:0; padding:0;}
+html, body {
+    width: 100vw;
+    height:100vh;
     font-family: "Roboto", sans-serif;
 }
+
+/* super important for padding to work properly */
+* { box-sizing: border-box; }
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-style: normal;
+}
+
+  button {
+    font-size: 2rem;
+    /* margin-left: 0.5rem; */
+    /* border-radius: 0%; */
+  }

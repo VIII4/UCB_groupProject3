@@ -21,7 +21,10 @@
     height: 100vh;
 
     /* offset */
-    padding: 32px;
+    padding-top: 64px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
 
     /* text formatting */
     display: block;
@@ -42,4 +45,9 @@
 
 .cardInnards {
     display: block;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-style: normal;
 }
