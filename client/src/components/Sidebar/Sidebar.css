@@ -107,7 +107,7 @@
     transition: 0.3s;
 }
 .sidebar a:hover {
-    color: lightgray;
+    color: orange;
 }
 
 .sidebar .closebtn {
