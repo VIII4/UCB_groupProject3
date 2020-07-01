@@ -24,7 +24,6 @@ class Map extends Component {
     };
   }
 
-  
   //#region Map Options and Styling
   //Load any additional libraries
   libraries = [];
@@ -97,9 +96,6 @@ class Map extends Component {
 
   //#endregion
 
-
-
-
   render() {
     const {
       currentLocation,
@@ -109,6 +105,7 @@ class Map extends Component {
       onVoteClick,
       onReportIssueClick,
       onResolveClick,
+      submitIssueReport,
     } = this.props;
 
     return (
@@ -170,6 +167,8 @@ class Map extends Component {
             >
               <IssuesPanel
                 onReportIssueClick={onReportIssueClick}
+                // Testing
+                submitIssueReport={submitIssueReport}
               ></IssuesPanel>
             </OverlayView>
           )}

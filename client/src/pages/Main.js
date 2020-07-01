@@ -148,6 +148,27 @@ class Main extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  submitIssueReport = (data, formdata) => {
+    // Add additional required information to new issue
+    data.createdby = "testUser";
+    data.votecount = 1;
+    data.status = "Voting";
+    data.zipcode = 94602;
+    data.date = Date();
+    data.votedby = ["testUserID"];
+    data.latlng = this.state.currentLocation;
+
+    //Send Api request for database info then send request to upload images
+    API.createIssue(data)
+      .then((res) => {
+        console.log(res);
+        // TO DO: Run image upload fetch request here
+      })
+      .catch((err) => console.log(err));
+
+    alert("Issue has been submitted");
+  };
+
   onResolveClick = () => {
     API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
       let issue = res.data;
@@ -168,6 +189,7 @@ class Main extends React.Component {
         .catch((err) => console.log(err));
     });
   };
+
   //#endregion
 
   //Life Cycle Events
@@ -197,6 +219,7 @@ class Main extends React.Component {
           onVoteClick={this.onVoteClick}
           onReportIssueClick={this.onReportIssueClick}
           onResolveClick={this.onReportIssueClick}
+          submitIssueReport={this.submitIssueReport}
         />
       </div>
     );
