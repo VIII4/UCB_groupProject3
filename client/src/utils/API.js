@@ -3,12 +3,10 @@ import axios from "axios";
 export default {
   /////// Gov Contact API Calls
 
-  
   // Gets single issue by id
   getGovContact: function (zipCode) {
     return axios.get("/gov/" + zipCode);
   },
-
 
   /////// Issue API Calls
 
@@ -35,6 +33,16 @@ export default {
   // Deletes issue with given id
   deleteIssue: function (id) {
     return axios.delete("/issue/" + id);
+  },
+
+  // Image Upload request
+  uploadImages: function (formData) {
+    return axios({
+      method: "POST",
+      url: "/image-upload",
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
   },
 
   // //TESTING

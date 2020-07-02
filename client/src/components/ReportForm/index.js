@@ -52,7 +52,7 @@ export default class ReportForm extends Component {
     };
     const formData = new FormData();
     imageFiles.forEach((file, index) => {
-      formData.append(`file[${index}]`, file);
+      formData.append(index, file);
     });
 
     //execute submitIssue from props, then set state to null

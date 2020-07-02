@@ -149,24 +149,30 @@ class Main extends React.Component {
   };
 
   submitIssueReport = (data, formdata) => {
-    // Add additional required information to new issue
-    data.createdby = "testUser";
-    data.votecount = 1;
-    data.status = "Voting";
-    data.zipcode = 94602;
-    data.date = Date();
-    data.votedby = ["testUserID"];
-    data.latlng = this.state.currentLocation;
-
-    //Send Api request for database info then send request to upload images
-    API.createIssue(data)
+    // Upload images first, recieve urls then add to data base, need a loading screen
+    API.uploadImages(formdata)
       .then((res) => {
         console.log(res);
-        // TO DO: Run image upload fetch request here
+        // Compile data with images then add to DB
+        data.createdby = "testUser";
+        data.votecount = 1;
+        data.status = "Voting";
+        data.zipcode = 94602;
+        data.date = Date();
+        data.votedby = ["testUserID"];
+        data.latlng = this.state.currentLocation;
+        data.images = res.data;
+
+        //Send Api request to create issue in database
+        API.createIssue(data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
+
+        alert("Issue has been submitted");
       })
       .catch((err) => console.log(err));
-
-    alert("Issue has been submitted");
   };
 
   onResolveClick = () => {
