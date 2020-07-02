@@ -32,7 +32,7 @@ class VoteList extends React.Component {
                     <h3>{this.props.header}</h3>
                 </div>
 
-                <div id="logInFieldsContainer">
+                <div id="voteListFieldsContainer">
                     {this.GetDBIssues()}
                 </div>
             </div>
