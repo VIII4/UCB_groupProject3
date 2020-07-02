@@ -1,0 +1,12 @@
+.image-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.upload-button {
+  display: inline-block;
+}
+
+.upload-icon {
+  font-size: xx-large;
+}

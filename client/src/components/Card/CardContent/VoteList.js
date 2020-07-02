@@ -42,5 +42,3 @@ class VoteList extends React.Component {
 };
 
 export default VoteList;
-
-
