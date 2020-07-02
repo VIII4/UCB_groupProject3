@@ -45,7 +45,7 @@ class LogInCard extends React.Component {
         document.getElementById("cardContainer").style.visibility = "visible";
 
         // using type input render the appropriate card innards
-        if (type == "register") {
+        if (type == "signUp") {
             document.getElementById("signUpCardContent").style.display = "block";
         };
 
@@ -94,7 +94,7 @@ class LogInCard extends React.Component {
 
                 <br></br>
                 <br></br>
-                <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "register") }}>Sign Up</a> for Care'n!</p>
+                <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
             </div >
         )
     }
