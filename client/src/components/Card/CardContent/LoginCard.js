@@ -1,5 +1,6 @@
 import React from "react";
-import '../Card.css';
+import "../Card.css";
+import "./LogInCard.css";
 
 class LogInCard extends React.Component {
     constructor(props) {
@@ -80,21 +81,24 @@ class LogInCard extends React.Component {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
             <div id="logInCardContent" className="textBlock cardInnards">
-                <h4>{this.props.header}</h4>
-                <hr></hr>
-                <p>Enter names in the fields, then click "Submit" to submit the form:</p>
 
-                <label>Email/Username:
+                <div className="headerContainer">
+                    <h4>{this.props.header}</h4>
+                </div>
+
+                <div id="logInFieldsContainer">
+                    <label className="labelContainer">Email/Username:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <label>Password:
+                    </label>
+                    <label className="labelContainer">Password:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
+                    </label>
+                </div>
 
+                <div id="switchToSignUp">
+                    <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
+                </div>
 
-                <br></br>
-                <br></br>
-                <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
             </div >
         )
     }
