@@ -10,3 +10,9 @@
     padding-top: 8px;
     padding-bottom: 16px;
 }
+
+.labelContainer {
+    position: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}

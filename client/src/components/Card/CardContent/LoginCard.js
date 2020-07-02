@@ -87,12 +87,16 @@ class LogInCard extends React.Component {
                 </div>
 
                 <div id="logInFieldsContainer">
-                    <label className="labelContainer">Email/Username:
+                    <div className="labelContainer">
+                        <label>Email/Username:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label className="labelContainer">Password:
+                        </label>
+                    </div>
+                    <div className="labelContainer">
+                        <label>Password:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
+                        </label>
+                    </div>
                 </div>
 
                 <div id="switchToSignUp">

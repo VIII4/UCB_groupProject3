@@ -47,9 +47,12 @@
 .cardInnards {
     display: block;
 }
+.cardInnards input {
+    float: right;
+}
+
 .headerContainer {
     position: relative;
-    padding-top: 16px;
     padding-bottom: 16px;
 
     line-height: 1px;
@@ -59,9 +62,4 @@
     position: static;
     padding-top: 8px;
     padding-bottom: 8px;
-}
-
-h1,h2,h3,h4,h5,h6 {
-    font-weight: normal;
-    font-style: normal;
 }

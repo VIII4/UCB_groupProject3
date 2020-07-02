@@ -25,9 +25,13 @@ class IssueCard extends React.Component {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
             <div id="voteCardContent" className="textBlock cardInnards">
-                <h4>{this.props.header}</h4>
-                <hr></hr>
+
+                <div className="headerContainer">
+                    <h4>{this.props.header}</h4>
+                </div>
+
                 {this.GetDBIssues()}
+
             </div>
         )
     };

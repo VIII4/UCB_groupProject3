@@ -83,25 +83,37 @@ class SignUpCard extends React.Component {
                     <h4>{this.props.header}</h4>
                 </div>
 
-                <form onSubmit={this.handleSubmit}>
-                    <label>First Name:
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div id="logInFieldsContainer">
+                            <label>First Name:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>Last Name:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>Email/Username:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>Password:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
+                            </label>
+                        </div>
 
-                    <br></br>
-                    <br></br>
-                    <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
-                </form>
+                        <div id="logInFieldsContainer">
+                            <label>Last Name:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                        </div>
+                        <div id="logInFieldsContainer">
+                            <label>Email/Username:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                        </div>
+
+                        <div id="logInFieldsContainer">
+                            <label>Password:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                        </div>
+                        <input type="submit" value="Submit" />
+
+                        <br></br>
+                        <br></br>
+                        <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                    </form>
+                </div>
             </div>
         );
     }

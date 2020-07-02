@@ -11,11 +11,13 @@ class VoteList extends React.Component {
         var tagList = [];
 
         // loop through response
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 30; i++) {
             tagList.push(
-                <a onClick={(event) => { this.DoSomething(event, 1) }}> Issue A</a >,
-                <button onClick={this.DoSomething}>Vote</button>,
-                <br></br>);
+                <div className="labelContainer">
+                    <a onClick={(event) => { this.DoSomething(event, 1) }}>Issue A</a >
+                    <button id="voteListBtn" onClick={this.DoSomething}>Vote</button>
+                </div>
+            );
         }
         return tagList;
     }
@@ -25,9 +27,14 @@ class VoteList extends React.Component {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
             <div id="voteCardContent" className="textBlock cardInnards">
-                <h4>{this.props.header}</h4>
-                <hr></hr>
-                {this.GetDBIssues()}
+
+                <div className="headerContainer">
+                    <h3>{this.props.header}</h3>
+                </div>
+
+                <div id="logInFieldsContainer">
+                    {this.GetDBIssues()}
+                </div>
             </div>
         )
     };

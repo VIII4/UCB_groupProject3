@@ -20,8 +20,11 @@ class AboutCard extends React.Component {
 
             // this.props is coming from App.js --> Main.js --> Card.js
             <div id="aboutCardContent" className="textBlock cardInnards">
-                <h1>{this.props.header}</h1>
-                <hr></hr>
+
+                <div className="headerContainer">
+                    <h4>{this.props.header}</h4>
+                </div>
+
                 <div>
                     <br></br>
                     <p>Care'n is a location based kickstarter for change. It allows residents to submit complaints to the city by placing a pin of the issue on a map. Each resident must include a photo and description of the issue in order for it to be accepted into the app’s database.</p>
