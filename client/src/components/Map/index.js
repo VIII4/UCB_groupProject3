@@ -45,8 +45,8 @@ class Map extends Component {
   //Options
   options = {
     disableDefaultUI: true,
-    styles: mapStyles.wy,
-    zoomControl: true,
+    styles: mapStyles.mostlyGrayScale,
+    clickableIcons: false,
   };
 
   //

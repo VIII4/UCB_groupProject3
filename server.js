@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
 var MONGODB_URI =
   process.env.MONGODB_URI ||
   "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2";
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/caren";
+//var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/caren";
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true }, (err) => {

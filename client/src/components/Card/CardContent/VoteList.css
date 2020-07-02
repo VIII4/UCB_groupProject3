@@ -1,9 +1,9 @@
 #voteListFieldsContainer {
-    height: 100px;
-    overflow: scroll;
+  height: 100px;
+  overflow: scroll;
 }
 
 #voteListBtn {
-    position: relative;
-    float: right;
+  position: relative;
+  float: right;
 }
