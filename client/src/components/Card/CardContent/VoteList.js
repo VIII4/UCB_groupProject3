@@ -1,6 +1,7 @@
 import React from "react";
 import '../Card.css';
 
+// messed this up
 class VoteList extends React.Component {
     DoSomething = (event, id = 0) => {
         console.log("Event Triggered");
