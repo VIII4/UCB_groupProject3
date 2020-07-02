@@ -76,7 +76,7 @@ class LogInCard extends React.Component {
         event.preventDefault();
     }
 
-
+    // rando change
     render() {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
