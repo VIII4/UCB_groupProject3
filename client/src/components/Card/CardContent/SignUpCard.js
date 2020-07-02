@@ -1,7 +1,7 @@
 import React from "react";
 import '../Card.css';
 
-class RegisterCard extends React.Component {
+class SignUpCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };
@@ -21,7 +21,7 @@ class RegisterCard extends React.Component {
 
     render() {
         return (
-            <div id="registerCardContent" className="cardInnards">
+            <div id="signUpCardContent" className="cardInnards">
                 <h4>{this.props.header}</h4>
                 <hr></hr>
                 <form onSubmit={this.handleSubmit}>
@@ -45,4 +45,4 @@ class RegisterCard extends React.Component {
     }
 }
 
-export default RegisterCard;
+export default SignUpCard;

@@ -2,8 +2,8 @@ import React from "react";
 import ContactsCard from "./CardContent/ContactsCard";
 import AboutCard from "./CardContent/AboutCard";
 import VoteList from "./CardContent/VoteList";
-import LoginCard from "./CardContent/LoginCard";
-import RegisterCard from "./CardContent/RegisterCard";
+import LogInCard from "./CardContent/LogInCard";
+import SignUpCard from "./CardContent/SignUpCard";
 import './Card.css';
 
 // visibility:"hidden" hides element but still in DOM
@@ -21,8 +21,8 @@ class Card extends React.Component {
                     <ContactsCard header="Local Government Contacts" display="none" />
                     <AboutCard header="About" display="none" />
                     <VoteList header="Issues In Your Area" display="none" />
-                    <LoginCard header="Log In To Care'n" display="none" />
-                    <RegisterCard header="Register for Care'n" display="none" />
+                    <LogInCard header="Log In" display="none" />
+                    <SignUpCard header="Sign Up" display="none" />
                 </div>
 
                 {/* add buttons and stuff here */}

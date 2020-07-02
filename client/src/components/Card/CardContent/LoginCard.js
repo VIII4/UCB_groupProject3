@@ -1,7 +1,7 @@
 import React from "react";
 import '../Card.css';
 
-class LoginCard extends React.Component {
+class LogInCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };
@@ -46,7 +46,7 @@ class LoginCard extends React.Component {
 
         // using type input render the appropriate card innards
         if (type == "register") {
-            document.getElementById("registerCardContent").style.display = "block";
+            document.getElementById("signUpCardContent").style.display = "block";
         };
 
         // close sidebar after cards render
@@ -79,7 +79,7 @@ class LoginCard extends React.Component {
     render() {
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
-            <div id="loginCardContent" className="textBlock cardInnards">
+            <div id="logInCardContent" className="textBlock cardInnards">
                 <h4>{this.props.header}</h4>
                 <hr></hr>
                 <p>Enter names in the fields, then click "Submit" to submit the form:</p>
@@ -92,13 +92,12 @@ class LoginCard extends React.Component {
                 </label>
 
 
-                {/* not a member, sign up for Care'n */}
-                <a onClick={(event) => { this.OpenCard(event, "register") }}>Sign Up</a>
-
-
+                <br></br>
+                <br></br>
+                <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "register") }}>Sign Up</a> for Care'n!</p>
             </div >
         )
     }
 }
 
-export default LoginCard;
+export default LogInCard;
