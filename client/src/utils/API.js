@@ -1,6 +1,15 @@
 import axios from "axios";
 
 export default {
+  /////// Gov Contact API Calls
+
+  
+  // Gets single issue by id
+  getGovContact: function (zipCode) {
+    return axios.get("/gov/" + zipCode);
+  },
+
+
   /////// Issue API Calls
 
   // Gets all issues
@@ -15,23 +24,23 @@ export default {
 
   // Adds issue to data base
   createIssue: function (data) {
-    return axios.post("/issue/add", data);
+    return axios.post("/issue/", data);
   },
 
-  // Update issue with given id
-  // updateIssue: function (id, data) {
-  //   return axios.post("/issue/update/" + id, data);
-  // },
-
-  //TESTING
+  //Update issue with given id
   updateIssue: function (id, data) {
-    return axios.post("/issue/updatecount/" + id, data);
+    return axios.put("/issue/" + id, data);
   },
 
   // Deletes issue with given id
   deleteIssue: function (id) {
     return axios.delete("/issue/" + id);
   },
+
+  // //TESTING
+  // updateIssue: function (id, data) {
+  //   return axios.post("/issue/" + id, data);
+  // },
 
   ////// User API Calls
 

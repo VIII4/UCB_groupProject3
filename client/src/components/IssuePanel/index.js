@@ -1,11 +1,14 @@
 import React from "react";
 import ReportIssueButton from "../ReportIssueButton";
+import ReportForm from "../ReportForm";
 import "./style.css";
 
-export default function IssuesPanel({ onReportIssueClick }) {
+export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
     <div className="overViewPanel">
       <div className="buttonPanel">
+        {/* Will need to create hook with issue type state and to report form from button click */}
+        {/* <ReportForm submitIssueReport={submitIssueReport} /> */}
         <ReportIssueButton
           issueType="Wildlife"
           onReportIssueClick={onReportIssueClick}

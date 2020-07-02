@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const userController = require("../controllers/userController");
 
-// Process  with "/user" in userController file
+// Process  with "/user/" in userController file
 router.route("/")
   .get(userController.findAll)
   .post(userController.create);
