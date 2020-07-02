@@ -34,7 +34,8 @@ class Map extends Component {
     visibility: "visible",
 
     width: "100vw",
-    height: "105vh",
+    height: "100vh",
+    maxWidth: "100%",
     zIndex: 1,
 
     // this is critical for full screen

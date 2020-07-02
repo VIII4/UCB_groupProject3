@@ -1,8 +1,7 @@
 import React from "react";
-import "../Card.css";
-import "./LogInCard.css";
+import '../Card.css';
 
-class LogInCard extends React.Component {
+class SignUpCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { value: '' };
@@ -46,8 +45,8 @@ class LogInCard extends React.Component {
         document.getElementById("cardContainer").style.visibility = "visible";
 
         // using type input render the appropriate card innards
-        if (type == "signUp") {
-            document.getElementById("signUpCardContent").style.display = "block";
+        if (type == "logIn") {
+            document.getElementById("logInCardContent").style.display = "block";
         };
 
         // close sidebar after cards render
@@ -76,36 +75,48 @@ class LogInCard extends React.Component {
         event.preventDefault();
     }
 
-
     render() {
         return (
-            // this.props is coming from App.js --> Main.js --> Card.js
-            <div id="logInCardContent" className="textBlock cardInnards">
+            <div id="signUpCardContent" className="cardInnards">
 
                 <div className="headerContainer">
                     <h4>{this.props.header}</h4>
                 </div>
 
-                <div id="logInFieldsContainer">
-                    <div className="labelContainer">
-                        <label>Email/Username:
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div id="logInFieldsContainer">
+                            <label>First Name:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                    </div>
-                    <div className="labelContainer">
-                        <label>Password:
+                            </label>
+                        </div>
+
+                        <div id="logInFieldsContainer">
+                            <label>Last Name:
                         <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                    </div>
-                </div>
+                            </label>
+                        </div>
+                        <div id="logInFieldsContainer">
+                            <label>Email/Username:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                        </div>
 
-                <div id="switchToSignUp">
-                    <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
-                </div>
+                        <div id="logInFieldsContainer">
+                            <label>Password:
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                        </div>
+                        <input type="submit" value="Submit" />
 
-            </div >
-        )
+                        <br></br>
+                        <br></br>
+                        <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                    </form>
+                </div>
+            </div>
+        );
     }
 }
 
-export default LogInCard;
+export default SignUpCard;

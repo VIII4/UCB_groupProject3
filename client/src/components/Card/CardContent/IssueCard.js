@@ -1,8 +1,7 @@
 import React from "react";
 import '../Card.css';
 
-// messed this up
-class VoteList extends React.Component {
+class IssueCard extends React.Component {
     DoSomething = (event, id = 0) => {
         console.log("Event Triggered");
     }
@@ -12,13 +11,11 @@ class VoteList extends React.Component {
         var tagList = [];
 
         // loop through response
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 5; i++) {
             tagList.push(
-                <div className="labelContainer">
-                    <a onClick={(event) => { this.DoSomething(event, 1) }}>Issue A</a >
-                    <button id="voteListBtn" onClick={this.DoSomething}>Vote</button>
-                </div>
-            );
+                <a onClick={(event) => { this.DoSomething(event, 1) }}> Issue A</a >,
+                <button onClick={this.DoSomething}>Vote</button>,
+                <br></br>);
         }
         return tagList;
     }
@@ -30,15 +27,16 @@ class VoteList extends React.Component {
             <div id="voteCardContent" className="textBlock cardInnards">
 
                 <div className="headerContainer">
-                    <h3>{this.props.header}</h3>
+                    <h4>{this.props.header}</h4>
                 </div>
 
-                <div id="voteListFieldsContainer">
-                    {this.GetDBIssues()}
-                </div>
+                {this.GetDBIssues()}
+
             </div>
         )
     };
 };
 
-export default VoteList;
+export default IssueCard;
+
+
