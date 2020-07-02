@@ -1,7 +1,6 @@
 {
-  "name": "googlebooks",
+  "name": "caren",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -28,5 +27,14 @@
     "if-env": "^1.0.4",
     "mongodb": "^3.5.9",
     "mongoose": "^5.3.16"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VIII4/UCB_groupProject3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VIII4/UCB_groupProject3/issues"
+  },
+  "homepage": "https://github.com/VIII4/UCB_groupProject3#readme",
+  "description": ""
 }

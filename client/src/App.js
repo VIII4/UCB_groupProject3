@@ -1,28 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Test from "./pages/Test";
+import Main from "./pages/Main";
 import './App.css';
 import Sidebar from "./components/Sidebar";
-import ContactsSidebar from "./components/ContactsSidebar";
+import ContextBtn from "./components/ContextBtn"
 
-function App() {
-  return (
-    <Router>
-      <div>
-        {/* Put Nav Bar here Above Switch */}
-        <Sidebar />
 
-        <Switch>
-          <Route exact path="/" component={Test} />
-          {/* <Route exact path="/" component={??} />
-          <Route exact path="/" component={??} />
-          <Route exact path="/" component={??} />
-          <Route component={NoMatch} /> */}
-        </Switch>
-        <ContactsSidebar />
-      </div>
-    </Router >
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <Sidebar />
+
+          <Switch>
+            <Route exact path="/" component={Main} />
+          </Switch>
+
+          <ContextBtn />
+        </div>
+      </Router >
+    );
+  }
 }
+
+
 
 export default App;

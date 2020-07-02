@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  OverlayView,
+  InfoWindow,
+} from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
 import API from "../../utils/API";
+import IssuesPanel from "../IssuePanel";
+import IssuesPopUp from "../IssuePopUp";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -9,118 +17,161 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: {
-        lat: 37.804363,
-        lng: -122.271111,
-      },
-      localIssues: [],
+      isLoading: false,
+
+      showingReportPanel: false,
+      reportingType: "",
     };
   }
 
-  //Get Current Location
-  showCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState((prevState) => ({
-          currentLocation: {
-            ...prevState.currentLatLng,
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          },
-        }));
-      });
-    } else {
-      //   (error) => console.log(error);
-    }
-  };
-
-  //Track Location
-  getUpdatedLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          this.setState((prevState) => ({
-            currentLocation: {
-              ...prevState.currentLatLng,
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-          }));
-        },
-        (error) => console.log(error)
-      );
-    } else {
-      //   (error) => console.log(error);
-    }
-  };
-
-  checkNearLocation = (checkPoint, distanceKm = 0.75) => {
-    var ky = 40000 / 360;
-    var kx = Math.cos((Math.PI * this.state.currentLocation.lat) / 180.0) * ky;
-    var dx = Math.abs(this.state.currentLocation.lng - checkPoint.lng) * kx;
-    var dy = Math.abs(this.state.currentLocation.lat - checkPoint.lat) * ky;
-    return Math.sqrt(dx * dx + dy * dy) <= distanceKm;
-  };
-
-  //Get Local Issues .... Get All Issues from API -> Check if issue location is within radius -> Add issue to local issues
-  getLocalIssues = () => {
-    //TEST REMOVE
-    let _localIssues = API.getIssues().filter((loc) =>
-      this.checkNearLocation(loc, 5)
-    );
-    this.setState({ localIssues: _localIssues });
-    // API.getIssues()
-    //   .then((res) => {
-    //     /* Filter array and return location if within radius */
-    //     let _localIssues = res.filter((loc) => this.checkNearLocation(loc));
-    //     this.setState({ localIssues: _localIssues });
-    //   })
-    //   .catch((err) => console.log(err));
-  };
-
-  //Life Cycle Events
-
-  componentDidMount = () => {
-    this.getUpdatedLocation();
-  };
-
+  //#region Map Options and Styling
   //Load any additional libraries
   libraries = [];
 
   //Map Container Size
   containerStyle = {
-    width: "100vw",
-    height: "100vh",
-  };
+    // this will either be "visible" or "hidden"
+    visibility: "visible",
 
-  //Starting Position ** WILL CHANGE TO STATE TO BE UPDATED REALTIME BY GEOLOCATION **
-  center = {
-    lat: 37.804363,
-    lng: -122.271111,
+    width: "100vw",
+    height: "105vh",
+    zIndex: 1,
+
+    // this is critical for full screen
+    position: "absolute",
   };
 
   //Options
   options = {
     disableDefaultUI: true,
     styles: mapStyles.wy,
+    zoomControl: true,
   };
 
-  //Icons **WILL ADD DIFF ICONS FOR ISSUES**
-  icons = {};
+  //
+
+  //Marker Icons
+  icons = {
+    marker: {
+      url: `${process.env.PUBLIC_URL}/assets/images/markerA.png`,
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 75, height: 75 },
+    },
+    markerA: {
+      url: `${process.env.PUBLIC_URL}/assets/images/markerB.png`,
+      origin: { x: 0, y: 0 },
+      anchor: { x: 16, y: -1 },
+      scaledSize: { width: 35, height: 35 },
+    },
+    markerB: {
+      url: `${process.env.PUBLIC_URL}/assets/images/markerC.png`,
+      origin: { x: 0, y: 0 },
+      anchor: { x: 30, y: 50 },
+      scaledSize: { width: 45, height: 45 },
+    },
+  };
+  //#endregion
+
+  //#region Handler Methods
+
+  onIssueMarkerClick = (issue) => {
+    this.props.setSelectedIssue(issue);
+    this.setState({ showingReportPanel: false });
+  };
+
+  closeInfoWindow = () => {
+    this.props.setSelectedIssue(null);
+  };
+
+  closePanelWindow = () => {
+    this.setState({ showingReportPanel: false });
+  };
+
+  onUserMarkerClick = (event) => {
+    let toogle = !this.state.showingReportPanel;
+    this.setState({ showingReportPanel: toogle });
+    this.props.setSelectedIssue(null);
+  };
+
+  //#endregion
 
   render() {
+    const {
+      currentLocation,
+      localIssues,
+      selectedIssue,
+      setSelectedIssue,
+      onVoteClick,
+      onReportIssueClick,
+      onResolveClick,
+      submitIssueReport,
+    } = this.props;
+
     return (
       <LoadScript googleMapsApiKey={API_KEY}>
         <GoogleMap
+          google={this.props.google}
           mapContainerStyle={this.containerStyle}
-          center={this.state.currentLocation}
+          center={currentLocation}
           zoom={15}
           options={this.options}
-          onClick={this.getLocalIssues}
+          onClick={this.closeInfoWindow}
         >
-          <Marker position={this.state.currentLocation}></Marker>
-          {/* Child components, such as markers, info windows, etc. */}
-          <></>
+          {/* Set Home Marker for User Location */}
+          <Marker
+            position={currentLocation}
+            icon={this.icons.markerB}
+            onClick={this.onUserMarkerClick}
+          ></Marker>
+          {/* Map through local issues and create marker for each*/}
+          {localIssues.map((issue, index) => {
+            if (issue.status !== "Closed") {
+              return (
+                <Marker
+                  key={index}
+                  position={{
+                    lat: issue.latlng.lat,
+                    lng: issue.latlng.lng,
+                  }}
+                  icon={this.icons.markerA}
+                  clickable={true}
+                  onClick={() => {
+                    this.onIssueMarkerClick(issue);
+                  }}
+                />
+              );
+            }
+          })}
+          {/* Enable Info pop up for issue marker */}
+          {selectedIssue && (
+            <InfoWindow
+              onCloseClick={this.closeInfoWindow}
+              position={{
+                lat: selectedIssue.latlng.lat,
+                lng: selectedIssue.latlng.lng,
+              }}
+            >
+              <IssuesPopUp
+                selectedIssue={selectedIssue}
+                onVoteClick={onVoteClick}
+                onResolveClick={onResolveClick}
+              />
+            </InfoWindow>
+          )}
+          {/* Enable Report Issue pop up panel */}
+          {this.state.showingReportPanel && (
+            <OverlayView
+              position={currentLocation}
+              mapPaneName={OverlayView.FLOAT_PANE}
+            >
+              <IssuesPanel
+                onReportIssueClick={onReportIssueClick}
+                // Testing
+                submitIssueReport={submitIssueReport}
+              ></IssuesPanel>
+            </OverlayView>
+          )}
         </GoogleMap>
       </LoadScript>
     );

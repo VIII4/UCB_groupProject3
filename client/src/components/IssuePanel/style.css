@@ -1,0 +1,37 @@
+.overViewPanel {
+  padding: 1.5rem;
+  background-color: rgba(167, 167, 167, 0.836);
+  position: relative;
+  top: 1rem;
+  right: 50%;
+  border-radius: 15px;
+}
+
+.buttonPanel {
+  padding: 0rem;
+}
+
+.buttonPanel.hide {
+  visibility: hidden;
+}
+
+.confirmPanel {
+  position: relative;
+  bottom: 10rem;
+  right: 20%;
+}
+
+.confirmPanel.hide {
+  visibility: hidden;
+}
+
+.custom-button {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+  border-radius: 50%;
+}
+
+.center {
+  margin: auto;
+  width: 75%;
+}
