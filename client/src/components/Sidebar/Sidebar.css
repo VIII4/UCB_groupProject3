@@ -20,9 +20,7 @@
     max-width:100%;
     padding: 16px;
 
-    background-image: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.15));
-    /* background-color: rgba(255, 255, 255, 0.55); */
-    /* filter: blur(3px); */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.15));
 
     /* container animation */
     transition: margin-left .5s;
@@ -86,9 +84,7 @@
     z-index: 7;
     
     /* color/styling */
-    /* background-image: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.15)); */
     background-color: rgba(11, 3, 45, 0.95);
-    /* background-color: lightgrey; */
     backdrop-filter: blur(3px);
 
     box-shadow: -9px 0px 18px black inset;

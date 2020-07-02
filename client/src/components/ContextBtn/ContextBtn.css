@@ -24,6 +24,9 @@
     /* offset */
     padding: 16px;
 
+    /* color */
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 1.0)); */
+
     /* text formatting */
     display: block;
     text-align: left;

@@ -24,7 +24,9 @@ class RefreshBtn extends React.Component {
             // main sidebar div container
             <div id="refreshBtnContainer">
                 {/* sidebar open button */}
-                <button className="refreshBtn" onClick={this.DoSomething}>R</button>
+                <button className="refreshBtn" onClick={this.DoSomething}>
+                    <i className="fa fa-refresh"></i>
+                </button>
             </div>
         )
     }
