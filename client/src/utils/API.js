@@ -1,6 +1,15 @@
 import axios from "axios";
 
 export default {
+  /////// Gov Contact API Calls
+
+  
+  // Gets single issue by id
+  getGovContact: function (zipCode) {
+    return axios.get("/gov/" + zipCode);
+  },
+
+
   /////// Issue API Calls
 
   // Gets all issues
