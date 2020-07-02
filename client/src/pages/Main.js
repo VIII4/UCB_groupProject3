@@ -149,6 +149,14 @@ class Main extends React.Component {
   };
 
   submitIssueReport = (data, formdata) => {
+    // Upload images first, recieve urls then add to data base, need a loading screen
+    API.uploadImages(formdata)
+      .then((res) => res.json())
+      .then((images) => {
+        console.log(images);
+      })
+      .catch((err) => console.log(err));
+
     // Add additional required information to new issue
     data.createdby = "testUser";
     data.votecount = 1;
@@ -162,11 +170,6 @@ class Main extends React.Component {
     API.createIssue(data)
       .then((res) => {
         console.log(res);
-
-        // Image upload request
-        API.uploadImages(formdata)
-          .then((res) => res.json())
-          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
 

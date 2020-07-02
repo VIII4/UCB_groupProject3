@@ -47,13 +47,16 @@ app.use("/users", usersRouter);
 app.use("/issue", issueRouter);
 app.post("/image-upload", (req, res) => {
   const values = Object.values(req.files);
-  console.log(values);
   const promises = values.map((image) =>
     cloudinary.uploader.upload(image.path)
   );
 
   Promise.all(promises)
-    .then((results) => console.log(results) /* res.json(results)  send to database*/)
+    .then((results) => {
+      let images = [];
+      results.map((data) => images.push(data.secure_url));
+      res.json(images);
+    })
     .catch((err) => console.log(err));
 });
 
