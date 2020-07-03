@@ -18,9 +18,12 @@
     width: 100vw;
     height: auto;
     max-width:100%;
-    padding: 16px;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 32px;
 
-    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.15));
+    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.0));
 
     /* container animation */
     transition: margin-left .5s;
