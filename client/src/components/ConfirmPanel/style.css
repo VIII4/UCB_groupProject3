@@ -15,6 +15,19 @@
   visibility: hidden;
 }
 
+.confirmPanel {
+  background-color: rgba(167, 167, 167, 0.836);
+  padding: 1.5rem;
+  border-radius: 15px;
+  position: relative;
+  right: 50%;
+  bottom: 10rem;
+}
+
+.confirmPanel.hide {
+  visibility: hidden;
+}
+
 .center {
   margin: auto;
   width: 75%;
