@@ -104,8 +104,9 @@ class Sidebar extends React.Component {
                     <a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a>
 
                     <div id="sidebarLogo">
-                        <a className="logo" onClick={this.CloseCard}>Care'n</a>
+                        <a onClick={this.CloseCard}>Care'n</a>
                     </div>
+
                 </div>
 
 

@@ -94,7 +94,10 @@
 
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 32px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 32px;
 }
 
 .sidebar a {
@@ -119,6 +122,7 @@
 
 #sidebarLogo {
     position: absolute;
+    padding-bottom: 32px;
     float: left;
     bottom: 0%;
     width: auto;
