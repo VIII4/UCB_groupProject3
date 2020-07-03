@@ -3,14 +3,17 @@
     /* container coordinate */
     z-index: 3;
     position: absolute;
-    top: 10%;
+    bottom: 0%;
 
     /* container size */
     width: 100vw;
     height: auto;
 
     /* container inside offset */
-    padding: 16px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
 
     /* container text formatting */
     display: block;

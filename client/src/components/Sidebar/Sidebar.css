@@ -18,9 +18,9 @@
     width: 100vw;
     height: auto;
     max-width:100%;
-    padding-top: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
     padding-bottom: 32px;
 
     background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.0));

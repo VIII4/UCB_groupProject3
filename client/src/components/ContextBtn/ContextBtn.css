@@ -22,7 +22,10 @@
     height: auto;
 
     /* offset */
-    padding: 16px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
 
     /* color */
     /* background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 1.0)); */
