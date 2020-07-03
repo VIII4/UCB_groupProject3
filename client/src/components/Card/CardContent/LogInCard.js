@@ -86,21 +86,31 @@ class LogInCard extends React.Component {
                     <h4>{this.props.header}</h4>
                 </div>
 
-                <div id="logInFieldsContainer">
-                    <div className="labelContainer">
-                        <label>Email/Username:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                    </div>
-                    <div className="labelContainer">
-                        <label>Password:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                    </div>
-                </div>
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div id="logInFieldsContainer">
 
-                <div id="switchToSignUp">
-                    <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
+                            <div className="labelContainer">
+                                <label>Email/Username:
+                                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                            </div>
+
+                            <div className="labelContainer">
+                                <label>Password:
+                                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="logInFieldsContainer">
+                            <input type="submit" value="Submit" />
+                        </div>
+
+                        <div id="switchToSignUp">
+                            <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
+                        </div>
+                    </form>
                 </div>
 
             </div >
