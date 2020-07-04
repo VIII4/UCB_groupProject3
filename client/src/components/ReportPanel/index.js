@@ -8,9 +8,15 @@ export default class ReportPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      issueSelected: null,
+      typeSelected: null,
+      showingConfirmPanel: false,
     };
   }
+
+  onReportTypeClick = (type) => {
+    //TO DO: Open Confirm Panel with input, image upload,
+    this.setState({ typeSelected: type, showingConfirmPanel: true });
+  };
 
   render() {
     const {
@@ -24,11 +30,16 @@ export default class ReportPanel extends Component {
         mapPaneName={OverlayView.FLOAT_PANE}
       >
         <>
-          <IssuesPanel
-            onReportIssueClick={onReportIssueClick}
-            submitIssueReport={submitIssueReport}
-          />
-          <ConfirmPanel submitIssueReport={submitIssueReport} />
+          {!this.state.showingConfirmPanel && (
+            <IssuesPanel
+              onReportIssueClick={this.onReportTypeClick}
+              submitIssueReport={submitIssueReport}
+            />
+          )}
+
+          {this.state.showingConfirmPanel && (
+            <ConfirmPanel submitIssueReport={submitIssueReport} />
+          )}
         </>
       </OverlayView>
     );
