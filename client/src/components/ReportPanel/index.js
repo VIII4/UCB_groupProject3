@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useState, Component } from "react";
 import { OverlayView } from "@react-google-maps/api";
 import IssuesPanel from "../IssuePanel";
 import ConfirmPanel from "../ConfirmPanel";
 import "./style.css";
 
-export default function ReportPanel({
-  currentLocation,
-  onReportIssueClick,
-  submitIssueReport,
-}) {
-  return (
-    <OverlayView
-      position={currentLocation}
-      mapPaneName={OverlayView.FLOAT_PANE}
-    >
-      <>
-        <IssuesPanel
-          onReportIssueClick={onReportIssueClick}
-          submitIssueReport={submitIssueReport}
-        />
-        <ConfirmPanel submitIssueReport={submitIssueReport} />
-      </>
-    </OverlayView>
-  );
+export default class ReportPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      issueSelected: null,
+    };
+  }
+
+  render() {
+    const {
+      currentLocation,
+      onReportIssueClick,
+      submitIssueReport,
+    } = this.props;
+    return (
+      <OverlayView
+        position={currentLocation}
+        mapPaneName={OverlayView.FLOAT_PANE}
+      >
+        <>
+          <IssuesPanel
+            onReportIssueClick={onReportIssueClick}
+            submitIssueReport={submitIssueReport}
+          />
+          <ConfirmPanel submitIssueReport={submitIssueReport} />
+        </>
+      </OverlayView>
+    );
+  }
 }
 
 // {this.state.showingReportPanel && (
