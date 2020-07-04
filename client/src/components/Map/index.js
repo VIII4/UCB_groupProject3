@@ -7,9 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
-import API from "../../utils/API";
-import IssuesPanel from "../IssuePanel";
-import ConfirmPanel from "../ConfirmPanel";
+import ReportPanel from "../ReportPanel";
 import IssuesPopUp from "../IssuePopUp";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
@@ -162,28 +160,13 @@ class Map extends Component {
               />
             </InfoWindow>
           )}
-          {/* Enable report issue pop up panel */}
+          {/* Enable report issue pop up panel and additional details panel*/}
           {this.state.showingReportPanel && (
-            <OverlayView
-              position={currentLocation}
-              mapPaneName={OverlayView.FLOAT_PANE}
-            >
-              {/* Use a function to return element from switch */}
-              <IssuesPanel
-                onReportIssueClick={onReportIssueClick}
-                // Testing
-                submitIssueReport={submitIssueReport}
-              />
-            </OverlayView>
-          )}
-          {/* Enable reporting additional details/confirm panel, need to add type as prop*/}
-          {this.state.showingReportPanel && this.state.showingConfirmPanel && (
-            <OverlayView
-              position={currentLocation}
-              mapPaneName={OverlayView.FLOAT_PANE}
-            >
-              <ConfirmPanel submitIssueReport={submitIssueReport} />
-            </OverlayView>
+            <ReportPanel
+              currentLocation={currentLocation}
+              onReportIssueClick={onReportIssueClick}
+              submitIssueReport={submitIssueReport}
+            />
           )}
         </GoogleMap>
       </LoadScript>
