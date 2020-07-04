@@ -19,11 +19,7 @@ export default class ReportPanel extends Component {
   };
 
   render() {
-    const {
-      currentLocation,
-      onReportIssueClick,
-      submitIssueReport,
-    } = this.props;
+    const { currentLocation, submitIssueReport } = this.props;
     return (
       <OverlayView
         position={currentLocation}
@@ -38,7 +34,10 @@ export default class ReportPanel extends Component {
           )}
 
           {this.state.showingConfirmPanel && (
-            <ConfirmPanel submitIssueReport={submitIssueReport} />
+            <ConfirmPanel
+              submitIssueReport={submitIssueReport}
+              typeSelected={this.state.typeSelected}
+            />
           )}
         </>
       </OverlayView>

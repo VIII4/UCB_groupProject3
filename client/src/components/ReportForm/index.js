@@ -8,7 +8,7 @@ export default class ReportForm extends Component {
     super(props);
     this.state = {
       // issueType: props.issueType,
-      issueType: "Structural",
+      issueType: this.props.typeSelected,
       descValue: "",
       imageFiles: null,
     };
