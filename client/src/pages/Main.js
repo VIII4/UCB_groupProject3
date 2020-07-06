@@ -8,8 +8,8 @@ class Main extends React.Component {
   //Local refresh interval method ref
   loadIssueSequenceID; //TO DO: add clear interval method
   // Interval Timer
-  loadIssueIntervalTime = 10; //in secs
-
+  loadIssueIntervalTime = 25; //in secs
+  loading = this.props.loading;
   constructor(props) {
     super(props);
 
@@ -68,6 +68,7 @@ class Main extends React.Component {
   };
 
   getLocalIssues = () => {
+    this.loading(true);
     API.getIssues()
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
@@ -85,6 +86,7 @@ class Main extends React.Component {
         });
         //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
+        this.props.loading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -151,6 +153,7 @@ class Main extends React.Component {
   };
 
   submitIssueReport = (data, formdata) => {
+    this.loading(true);
     // Upload images first, recieve urls then add to data base, need a loading screen
     API.uploadImages(formdata)
       .then((res) => {
@@ -169,6 +172,7 @@ class Main extends React.Component {
         API.createIssue(data)
           .then((res) => {
             console.log(res);
+            this.loading(false);
           })
           .catch((err) => console.log(err));
 
