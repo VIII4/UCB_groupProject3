@@ -1,14 +1,20 @@
 import axios from "axios";
 
 export default {
-  /////// Gov Contact API Calls
+  // ===================== //
+  // Gov Contact API Calls //
+  // ===================== //
 
-  // Gets single issue by id
+  // Gets single issue by id  - THESE ARE CREATING ROUTES...BUT HOW
   getGovContact: function (zipCode) {
     return axios.get("/gov/" + zipCode);
   },
 
-  /////// Issue API Calls
+  // =============== //
+  // Issue API Calls //
+  // =============== //
+
+  // WHY DON'T OUR API CALLS REQUIRE '?' SYMBOL?
 
   // Gets all issues
   getIssues: function () {
@@ -50,7 +56,9 @@ export default {
   //   return axios.post("/issue/" + id, data);
   // },
 
-  ////// User API Calls
+  // ============== //
+  // User API Calls //
+  // ============== //
 
   // Gets single issue by id
   getUser: function (id) {

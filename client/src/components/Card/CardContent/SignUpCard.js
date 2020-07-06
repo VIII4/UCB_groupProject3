@@ -87,34 +87,38 @@ class SignUpCard extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <div id="logInFieldsContainer">
                             <label>First Name:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
 
                         <div id="logInFieldsContainer">
                             <label>Last Name:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
                         <div id="logInFieldsContainer">
                             <label>Email/Username:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
 
                         <div id="logInFieldsContainer">
                             <label>Password:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
-                        <input type="submit" value="Submit" />
 
-                        <br></br>
-                        <br></br>
-                        <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                        <div id="logInFieldsContainer">
+                            <input type="submit" value="Submit" />
+                        </div>
+
+                        <div id="logInFieldsContainer">
+                            <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                        </div>
+
                     </form>
                 </div>
-            </div>
+            </div >
         );
     }
 }
