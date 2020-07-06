@@ -103,12 +103,12 @@ class LogInCard extends React.Component {
                             </div>
                         </div>
 
-                        <div id="logInFieldsContainer">
-                            <input type="submit" value="Submit" />
-                        </div>
-
                         <div id="switchToSignUp">
                             <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
+                        </div>
+
+                        <div id="logInBtn">
+                            <input type="submit" value="Submit" />
                         </div>
                     </form>
                 </div>

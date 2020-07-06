@@ -16,3 +16,14 @@
     padding-top: 8px;
     padding-bottom: 8px;
 }
+
+#logInBtn {
+    /* position: absolute; */
+    position: sticky;
+    bottom: 10%;
+
+    width: 100vw;
+    height: auto;
+
+    padding: 32px;
+}

@@ -203,6 +203,9 @@ class Main extends React.Component {
     this.getUpdatedLocation();
   };
 
+  // =================== //
+  // PROGRAM ENTRY POINT //
+  // =================== //
   render() {
     const { currentLocation, localIssues, selectedIssue } = this.state;
 
