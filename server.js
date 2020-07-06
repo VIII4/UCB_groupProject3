@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Connect to the Mongo DB
+//Connect to the Mongo DB
 var MONGODB_URI =
   process.env.MONGODB_URI ||
   "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2";

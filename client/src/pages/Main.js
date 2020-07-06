@@ -1,6 +1,7 @@
 import React from "react";
 import Map from "../components/Map";
 import Card from "../components/Card";
+import RefreshBtn from "../components/RefreshBtn";
 import API from "../utils/API";
 
 class Main extends React.Component {
@@ -92,6 +93,7 @@ class Main extends React.Component {
   //#region Handler Methods
   onManualRefreshClick = () => {
     this.getLocalIssues();
+    console.log("manual refresh");
   };
 
   setSelectedIssue = (issue) => {
@@ -210,6 +212,7 @@ class Main extends React.Component {
       <div>
         {/* visibility can be set in css,but for 
             clarity it is done here instead */}
+        <RefreshBtn onManualRefreshClick={this.onManualRefreshClick} />
         <Card
           localIssues={localIssues}
           selectedIssue={selectedIssue}
