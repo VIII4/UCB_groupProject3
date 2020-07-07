@@ -14,7 +14,7 @@ class VoteList extends React.Component {
                 <div>
                     {this.props.localIssues.map((issue) => {
                         return (
-                            <li>
+                            <li className="labelContainer">
                                 <a>{issue.category}</a>
                                 <button onClick={this.props.onVoteClick}>Vote</button>
                             </li>
