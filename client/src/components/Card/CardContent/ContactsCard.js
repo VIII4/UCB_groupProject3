@@ -6,15 +6,10 @@ import API from "../../../utils/API";
 class ContactsCard extends React.Component {
     state = {
         govList: [],
-        newGovObj: [],
-        offices: [],
-        officialNames: [],
-        channels: [],
-        phones: [],
-        urls: []
+        newGovObj: []
     }
 
-    GetGovData = (zipCode = 94523) => {
+    GetGovData = (zipCode = 94102) => {
         // set api url
         const govUrl = `https://www.googleapis.com/civicinfo/v2/representatives?includeOffices=true&levels=administrativeArea1&key=AIzaSyAjJP4OylQOMoWdiaIOZoTkfm_WwLeeR7g&address=${zipCode}`;
 
@@ -25,23 +20,27 @@ class ContactsCard extends React.Component {
             .then(res => {
                 this.setState({ govList: res.data });
 
+                // array of objects will be set to state
                 var arrayList = []
-                for (var i = 0; i < 2; i++) {
+                for (var i = 0; i < 4; i++) {
+                    // create an empty object and populate with data
                     var newGovObj = {};
-
                     newGovObj.office = res.data.offices[i].name;
                     newGovObj.name = res.data.officials[i].name;
                     newGovObj.phones = res.data.officials[i].phones;
+                    newGovObj.twitter = res.data.officials[i].channels[0].id;
                     newGovObj.urls = res.data.officials[i].urls;
 
+                    // append newGovObj to arrayList
                     arrayList.push(newGovObj)
                 }
+                // set current state
                 this.setState({ newGovObj: arrayList });
 
             }).catch((err) => console.log(err));
     }
 
-    // this will run on component/load first time...only first
+    // componentDidMount() instantiates GetGovData on load
     componentDidMount() {
         this.GetGovData();
     }
@@ -55,15 +54,30 @@ class ContactsCard extends React.Component {
                     <h4>{this.props.header}</h4>
                 </div>
 
-                <ul>
+                <div>
+                    {/* use map to loop through each entry | {obj} data */}
                     {this.state.newGovObj.map((element) => {
                         return (
-                            <li>
-                                {element.office}
-                            </li>
+                            <ul className="labelContainer">
+                                <li>
+                                    {element.name}
+                                </li>
+                                <li>
+                                    {element.office}
+                                </li>
+                                <li>
+                                    <a href={"tel:" + element.phones}>{element.phones}</a>
+                                </li>
+                                <li>
+                                    <a href={"https://twitter.com/" + element.twitter}>@{element.twitter}</a>
+                                </li>
+                                <li>
+                                    <a href={element.urls}>website</a>
+                                </li>
+                            </ul>
                         )
                     })}
-                </ul>
+                </div>
 
             </div >
         )
