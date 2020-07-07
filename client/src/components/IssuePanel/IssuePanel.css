@@ -2,16 +2,15 @@
    these are found in ReportIssueButton.css */
 
 .overViewPanel {
-  padding: 1.5rem;
-  /* background-color: white; */
   position: relative;
   top: 1rem;
   right: 50%;
-  /* border-radius: 15px; */
 }
 
 .buttonPanelContainer {
-  padding: 2rem;
+  display: inline-flex;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .buttonPanel.hide {

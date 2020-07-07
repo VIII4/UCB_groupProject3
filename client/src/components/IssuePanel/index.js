@@ -5,7 +5,7 @@ import "./IssuePanel.css";
 
 export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
-    <div className="overViewPanel">
+    <div className="overViewPanel center">
 
       {/* first row */}
       <div className="buttonPanelContainer">

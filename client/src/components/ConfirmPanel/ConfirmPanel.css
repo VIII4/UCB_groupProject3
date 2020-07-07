@@ -1,12 +1,3 @@
-.overViewPanel {
-  padding: 1.5rem;
-  background-color: rgba(167, 167, 167, 0.836);
-  position: relative;
-  top: 1rem;
-  right: 50%;
-  border-radius: 15px;
-}
-
 .buttonPanel {
   padding: 0rem;
 }
@@ -16,7 +7,10 @@
 }
 
 .confirmPanel {
-  background-color: rgba(167, 167, 167, 0.836);
+  /* color/styling */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(3px);
+
   padding: 1.5rem;
   border-radius: 15px;
   position: relative;

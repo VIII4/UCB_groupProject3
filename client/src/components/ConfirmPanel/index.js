@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReportForm from "../ReportForm";
-import "./style.css";
+import "./ConfirmPanel.css";
 
 export default function ConfirmPanel({ submitIssueReport, typeSelected }) {
   // Image upload, description and Confirm/Cancel Button
