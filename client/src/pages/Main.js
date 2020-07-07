@@ -120,10 +120,10 @@ class Main extends React.Component {
           : "Info not available";
         newGovObj.phones = res.data.officials[i].phones
           ? res.data.officials[i].phones
-          : "Info not available";
+          : "Phone number not available";
         newGovObj.twitter = res.data.officials[i].channels
           ? res.data.officials[i].channels[0].id
-          : "Info not available";
+          : "Twitter not available";
         newGovObj.urls = res.data.officials[i].urls
           ? res.data.officials[i].urls
           : "Info not available";
