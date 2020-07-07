@@ -1,4 +1,5 @@
 import axios from "axios";
+const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
 export default {
   // ===================== //
@@ -8,6 +9,17 @@ export default {
   // Gets single issue by id  - THESE ARE CREATING ROUTES...BUT HOW
   getGovContact: function (zipCode) {
     return axios.get("/gov/" + zipCode);
+  },
+
+  // ===================== //
+  // Lat/Lng -> Zipcode API Calls //
+  // ===================== //
+
+  // Gets single issue by id  - THESE ARE CREATING ROUTES...BUT HOW
+  getZipcode: function (location) {
+    return axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&result_type=postal_code&key=${API_KEY}`
+    );
   },
 
   // =============== //

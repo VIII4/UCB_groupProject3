@@ -17,6 +17,7 @@ class Main extends React.Component {
       //TO DO: Receive userdata info from props and store to state
 
       //Current Location
+      zipCode: "",
       currentLocation: {
         lat: 37.804363,
         lng: -122.271111,
@@ -44,12 +45,20 @@ class Main extends React.Component {
               lng: position.coords.longitude,
             },
           }));
+          API.getZipcode(this.state.currentLocation).then((res) => {
+            let zipCode = res.data.results[0].address_components.find(
+              (component) => {
+                if (component.types.includes("postal_code")) return component;
+              }
+            ).long_name;
+            this.setState({ zipCode: zipCode });
+          });
         },
         (error) => console.log(error)
       );
       //Check for Local issues
       this.getLocalIssues(this.state.currentLocation);
-      // TO DO: EXTRACT so we can clear interval before starting new one, specifically for manual refresh
+
       //start interval sequence to check for local issues
       this.loadIssueSequenceID = setInterval(() => {
         this.getLocalIssues(this.state.currentLocation);
@@ -213,7 +222,7 @@ class Main extends React.Component {
   // PROGRAM ENTRY POINT //
   // =================== //
   render() {
-    const { currentLocation, localIssues, selectedIssue } = this.state;
+    const { currentLocation, localIssues, selectedIssue, zipCode } = this.state;
 
     return (
       <div>
@@ -221,6 +230,7 @@ class Main extends React.Component {
             clarity it is done here instead */}
         <RefreshBtn onManualRefreshClick={this.onManualRefreshClick} />
         <Card
+          zipCode={zipCode}
           localIssues={localIssues}
           selectedIssue={selectedIssue}
           setSelectedIssue={this.setSelectedIssue}
