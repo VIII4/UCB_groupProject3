@@ -3,10 +3,33 @@
   position: absolute;
 }
 
-.upload-button {
-  display: inline-block;
+.upload-icon {
+  color: white;
+  font-size: large;
 }
 
-.upload-icon {
-  font-size: xx-large;
+.uploadBtnContainer {
+  display: inline-block;
+  width: 2rem;
+  height: 1rem;
+  padding: .5rem;
+}
+
+.reportFormBtnContainer {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+
+}
+.reportFormBtn {
+  width: 4rem;
+  height: 1rem;
+  background-color: white;
+}
+
+.headerReportFormContainer {
+  border-bottom: 2px solid white;
+}
+.headerReportFormContainer h3{
+  color: white;
+  
 }

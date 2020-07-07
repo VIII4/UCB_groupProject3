@@ -7,6 +7,10 @@ export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
     <div className="overViewPanel center">
 
+      <div className="overViewPanelInnerContainer">
+        <h3 className="bold">Report</h3>
+      </div>
+
       {/* first row */}
       <div className="buttonPanelContainer">
         {/* Will need to create hook with issue type state and to report form from button click */}

@@ -8,19 +8,22 @@
 
 .confirmPanel {
   /* color/styling */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15));
+  background-color: rgba(11, 3, 45, 0.95);
   backdrop-filter: blur(3px);
 
   padding: 1.5rem;
   border-radius: 15px;
   position: relative;
   right: 50%;
-  bottom: 10rem;
+  bottom: 12rem;
 }
-
 .confirmPanel.hide {
   visibility: hidden;
 }
+.confirmPanel input {
+  border-radius: 0rem;
+}
+
 
 .center {
   margin: auto;

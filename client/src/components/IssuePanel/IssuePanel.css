@@ -6,6 +6,10 @@
   top: 1rem;
   right: 50%;
 }
+.center {
+  margin: auto;
+  width: 75%;
+}
 
 .buttonPanelContainer {
   display: inline-flex;
@@ -17,7 +21,10 @@
   visibility: hidden;
 }
 
-.center {
-  margin: auto;
-  width: 75%;
+.overViewPanelInnerContainer {
+  border-bottom: 2px solid black;
+}
+.overViewPanelInnerContainer h3{
+  color: black;
+  
 }

@@ -70,6 +70,10 @@ export default class ReportForm extends Component {
         <form className="form">
           <ul>
 
+            <li className="headerReportFormContainer">
+              <h3 className="bold">Report</h3>
+            </li>
+
             <li>
               <input
                 value={this.state.descValue}
@@ -79,14 +83,6 @@ export default class ReportForm extends Component {
                 placeholder="Description"
               />
 
-              <div className="upload-button">
-                <label htmlFor="multi">
-                  <FaImages className="upload-icon" />
-                </label>
-              </div>
-            </li>
-
-            <li>
               <input
                 className="image-input"
                 type="file"
@@ -94,10 +90,16 @@ export default class ReportForm extends Component {
                 onChange={this.handleImageLoad}
                 multiple
               />
+
+              <div className="uploadBtnContainer">
+                <label htmlFor="multi">
+                  <FaImages className="upload-icon" />
+                </label>
+              </div>
             </li>
 
-            <li>
-              <button onClick={this.handleSubmitClick}> Submit</button>
+            <li className="reportFormBtnContainer">
+              <button className="reportFormBtn" onClick={this.handleSubmitClick}> Submit</button>
             </li>
           </ul>
         </form>
