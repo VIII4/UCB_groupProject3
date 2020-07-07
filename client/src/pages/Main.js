@@ -187,7 +187,11 @@ class Main extends React.Component {
 
         alert("Issue has been submitted");
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        err.json().then((e) => {
+          console.log(e.message);
+        })
+      );
   };
 
   onResolveClick = () => {

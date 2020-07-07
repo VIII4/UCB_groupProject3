@@ -6,16 +6,15 @@ const User = require("../models/users");
 // local mongoose //
 // ============== //
 // npm run seed ...
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/caren");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/caren");
 
 // =============== //
 // heroku mongoose //
 // =============== //
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2"
-);
-
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//   "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2"
+// );
 
 const issueSeed = [
   //Oakland

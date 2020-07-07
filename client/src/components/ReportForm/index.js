@@ -36,6 +36,9 @@ export default class ReportForm extends Component {
   handleSubmitClick = (event) => {
     event.preventDefault();
     const { issueType, descValue, imageFiles } = this.state;
+    const types = ["image/png", "image/jpeg", "image/gif"];
+    let error = false;
+    const errorMsg = [];
 
     // Need a Validation for
     // Validate all files submitted
@@ -52,11 +55,29 @@ export default class ReportForm extends Component {
     };
     const formData = new FormData();
     imageFiles.forEach((file, index) => {
+      if (types.every((type) => file.type !== type)) {
+        errorMsg.push(`'${file.type}' is not a supported format`);
+        error = true;
+        return;
+      }
+
+      // #3 Catching files that are too large on the client
+      if (file.size > 150000) {
+        errorMsg.push(
+          `'${file.name}' is too large, please pick a smaller file`
+        );
+        error = true;
+        return;
+      }
+
       formData.append(index, file);
     });
 
-    //execute submitIssue from props, then set state to null
-    this.props.submitIssueReport(data, formData);
+    //if no errors execute submitIssue from props, then set state to null
+    if (!error) this.props.submitIssueReport(data, formData);
+    else {
+      errorMsg.map((msg) => alert(msg));
+    }
     // reset state
     this.setState({
       issueType: "Structural",
