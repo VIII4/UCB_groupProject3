@@ -15,7 +15,7 @@ class ContactsCard extends React.Component {
 
   GetGovData = (zipCode = 10029) => {
     // set api url
-    const govUrl = `https://www.googleapis.com/civicinfo/v2/representatives?includeOffices=true&levels=administrativeArea1&key=AIzaSyAjJP4OylQOMoWdiaIOZoTkfm_WwLeeR7g&address=${zipCode}`;
+    const govUrl = `https://www.googleapis.com/civicinfo/v2/representatives?includeOffices=true&levels=locality&key=AIzaSyAjJP4OylQOMoWdiaIOZoTkfm_WwLeeR7g&address=${zipCode}`;
 
     var tags = [];
 
@@ -30,14 +30,25 @@ class ContactsCard extends React.Component {
         for (var i = 0; i < 4; i++) {
           // create an empty object and populate with data
           var newGovObj = {};
-          newGovObj.office = res.data.offices[i].name;
-          newGovObj.name = res.data.officials[i].name;
-          newGovObj.phones = res.data.officials[i].phones;
-          newGovObj.twitter = res.data.officials[i].channels[0].id;
-          newGovObj.urls = res.data.officials[i].urls;
+          newGovObj.office = res.data.offices[i].name
+            ? res.data.offices[i].name
+            : "Info not available";
+          newGovObj.name = res.data.officials[i].name
+            ? res.data.officials[i].name
+            : "Info not available";
+          newGovObj.phones = res.data.officials[i].phones
+            ? res.data.officials[i].phones
+            : "Info not available";
+          newGovObj.twitter = res.data.officials[i].channels
+            ? res.data.officials[i].channels[0].id
+            : "Info not available";
+          newGovObj.urls = res.data.officials[i].urls
+            ? res.data.officials[i].urls
+            : "Info not available";
 
           // append newGovObj to arrayList
           arrayList.push(newGovObj);
+          console.log(newGovObj);
         }
         // set current state
         this.setState({ newGovObj: arrayList });
