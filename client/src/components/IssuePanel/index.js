@@ -6,7 +6,9 @@ import "./IssuePanel.css";
 export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
     <div className="overViewPanel">
-      <div className="buttonPanel">
+
+      {/* first row */}
+      <div className="buttonPanelContainer">
         {/* Will need to create hook with issue type state and to report form from button click */}
         {/* <ReportForm submitIssueReport={submitIssueReport} /> */}
         <ReportIssueButton
@@ -26,7 +28,9 @@ export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
           onReportIssueClick={onReportIssueClick}
         />
       </div>
-      <div className="buttonPanel center">
+
+      {/* second row */}
+      <div className="buttonPanelContainer center">
         <ReportIssueButton
           issueType="Vandalism"
           onReportIssueClick={onReportIssueClick}

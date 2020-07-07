@@ -1,15 +1,17 @@
+/* this same screen also has the issue icons
+   these are found in ReportIssueButton.css */
+
 .overViewPanel {
   padding: 1.5rem;
   /* background-color: white; */
   position: relative;
   top: 1rem;
   right: 50%;
-  border-radius: 15px;
+  /* border-radius: 15px; */
 }
 
-.buttonPanel {
-  padding: 0rem;
-  /* background-color: white; */
+.buttonPanelContainer {
+  padding: 2rem;
 }
 
 .buttonPanel.hide {
