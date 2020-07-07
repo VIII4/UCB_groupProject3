@@ -30,7 +30,8 @@ export default function Card({
                 <AboutCard header="About" display="none" />
                 <ContactsCard header="Local Government Contacts" display="none" />
                 <VoteList
-
+                    selectedIssue={selectedIssue}
+                    setSelectedIssue={setSelectedIssue}
                     localIssues={localIssues}
                     onVoteClick={onVoteClick}
                     header="Issues In Your Area"

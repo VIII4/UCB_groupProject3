@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./ReportForm.css";
 import { set } from "mongoose";
 import { FaImages } from "react-icons/fa";
 
@@ -68,28 +68,41 @@ export default class ReportForm extends Component {
     return (
       <div>
         <form className="form">
-          <input
-            value={this.state.descValue}
-            name="descValue"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Description"
-          />
-          <div className="upload-button">
-            <label htmlFor="multi">
-              <FaImages className="upload-icon" />
-            </label>
-            <input
-              className="image-input"
-              type="file"
-              id="multi"
-              onChange={this.handleImageLoad}
-              multiple
-            />
-          </div>
-          <button onClick={this.handleSubmitClick}> Submit</button>
+          <ul>
+
+            <li>
+              <input
+                value={this.state.descValue}
+                name="descValue"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Description"
+              />
+
+              <div className="upload-button">
+                <label htmlFor="multi">
+                  <FaImages className="upload-icon" />
+                </label>
+              </div>
+            </li>
+
+            <li>
+              <input
+                className="image-input"
+                type="file"
+                id="multi"
+                onChange={this.handleImageLoad}
+                multiple
+              />
+            </li>
+
+            <li>
+              <button onClick={this.handleSubmitClick}> Submit</button>
+            </li>
+          </ul>
         </form>
-      </div>
+      </div >
+
     );
   }
 }

@@ -1,6 +1,6 @@
 .overViewPanel {
   padding: 1.5rem;
-  background-color: rgba(167, 167, 167, 0.836);
+  /* background-color: white; */
   position: relative;
   top: 1rem;
   right: 50%;
@@ -9,6 +9,7 @@
 
 .buttonPanel {
   padding: 0rem;
+  /* background-color: white; */
 }
 
 .buttonPanel.hide {

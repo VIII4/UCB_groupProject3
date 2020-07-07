@@ -83,7 +83,7 @@ class LogInCard extends React.Component {
             <div id="logInCardContent" className="textBlock cardInnards">
 
                 <div className="headerContainer">
-                    <h4>{this.props.header}</h4>
+                    <h3 className="bold">{this.props.header}</h3>
                 </div>
 
                 <div>

@@ -70,3 +70,7 @@
 .labelContainer button {
     float: right;
 }
+
+.bold {
+    font-weight: bolder;
+}

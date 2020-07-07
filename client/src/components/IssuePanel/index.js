@@ -1,7 +1,7 @@
 import React from "react";
 import ReportIssueButton from "../ReportIssueButton";
 import ReportForm from "../ReportForm";
-import "./style.css";
+import "./IssuePanel.css";
 
 export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (

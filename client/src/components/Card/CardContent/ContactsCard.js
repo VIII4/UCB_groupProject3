@@ -50,8 +50,8 @@ class ContactsCard extends React.Component {
             // this.props is coming from App.js --> Main.js --> Card.js
             <div id="contactsCardContent" className="textBlock cardInnards">
 
-                <div className="headerContainer">
-                    <h4>{this.props.header}</h4>
+                <div className="headerContainer bold">
+                    <h3 className="bold">{this.props.header}</h3>
                 </div>
 
                 <div>
@@ -59,7 +59,7 @@ class ContactsCard extends React.Component {
                     {this.state.newGovObj.map((element) => {
                         return (
                             <ul className="labelContainer">
-                                <li>
+                                <li className="bold">
                                     {element.name}
                                 </li>
                                 <li>
