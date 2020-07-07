@@ -11,6 +11,7 @@ export default class ReportForm extends Component {
       issueType: this.props.typeSelected,
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     };
   }
 
@@ -31,6 +32,11 @@ export default class ReportForm extends Component {
     }
     const files = Array.from(event.target.files);
     this.setState({ imageFiles: files });
+    let _imagePreviewLinks = [];
+    files.forEach((file) =>
+      _imagePreviewLinks.push(window.URL.createObjectURL(file))
+    );
+    this.setState({ imagePreviewLinks: _imagePreviewLinks });
   };
 
   handleSubmitClick = (event) => {
