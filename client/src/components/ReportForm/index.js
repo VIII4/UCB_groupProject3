@@ -89,12 +89,21 @@ export default class ReportForm extends Component {
       issueType: "Structural",
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     });
   };
   render() {
+    const { imagePreviewLinks } = this.state;
     return (
       <div>
         <form className="form">
+          {imagePreviewLinks && (
+            <>
+              {imagePreviewLinks.map((imgSrc) => (
+                <img className="img-thumb" src={imgSrc} alt="Test"></img>
+              ))}
+            </>
+          )}
           <input
             value={this.state.descValue}
             name="descValue"
