@@ -48,11 +48,9 @@ class ContactsCard extends React.Component {
 
           // append newGovObj to arrayList
           arrayList.push(newGovObj);
-          console.log(newGovObj);
         }
         // set current state
         this.setState({ newGovObj: arrayList });
-        console.log("new gov list generated");
       })
       .catch((err) => console.log(err));
   };

@@ -23,6 +23,8 @@ class Main extends React.Component {
         lng: -122.271111,
       },
 
+      //Local Govt Contacts Info
+      localGovt: [],
       //Local Issue to render to map
       localIssues: [],
       // Current Issue Selected
@@ -45,14 +47,18 @@ class Main extends React.Component {
               lng: position.coords.longitude,
             },
           }));
-          API.getZipcode(this.state.currentLocation).then((res) => {
-            let zipCode = res.data.results[0].address_components.find(
-              (component) => {
-                if (component.types.includes("postal_code")) return component;
-              }
-            ).long_name;
-            this.setState({ zipCode: zipCode });
-          });
+          API.getZipcode(this.state.currentLocation)
+            .then((res) => {
+              let zipCode = res.data.results[0].address_components.find(
+                (component) => {
+                  if (component.types.includes("postal_code")) return component;
+                }
+              ).long_name;
+              this.setState({ zipCode: zipCode });
+            })
+            .then(() => {
+              this.getLocalGovt();
+            });
         },
         (error) => console.log(error)
       );
@@ -98,6 +104,36 @@ class Main extends React.Component {
         this.props.loading(false);
       })
       .catch((err) => console.log(err));
+  };
+
+  getLocalGovt = () => {
+    API.getGovContacts(this.state.zipCode).then((res) => {
+      let localGovt = [];
+      for (var i = 0; i < res.data.officials.length; i++) {
+        // create an empty object and populate with data
+        let newGovObj = {};
+        newGovObj.office = res.data.offices[i].name
+          ? res.data.offices[i].name
+          : "Info not available";
+        newGovObj.name = res.data.officials[i].name
+          ? res.data.officials[i].name
+          : "Info not available";
+        newGovObj.phones = res.data.officials[i].phones
+          ? res.data.officials[i].phones
+          : "Info not available";
+        newGovObj.twitter = res.data.officials[i].channels
+          ? res.data.officials[i].channels[0].id
+          : "Info not available";
+        newGovObj.urls = res.data.officials[i].urls
+          ? res.data.officials[i].urls
+          : "Info not available";
+
+        // append newGovObj to arrayList
+        localGovt.push(newGovObj);
+      }
+      // set current state
+      this.setState({ localGovt: localGovt });
+    });
   };
   //#endregion
 

@@ -6,9 +6,12 @@ export default {
   // Gov Contact API Calls //
   // ===================== //
 
-  // Gets single issue by id  - THESE ARE CREATING ROUTES...BUT HOW
-  getGovContact: function (zipCode) {
-    return axios.get("/gov/" + zipCode);
+  // Get Local Government Contacts
+  getGovContacts: function (zipCode) {
+    return axios.get(
+      `https://www.googleapis.com/civicinfo/v2/representatives?includeOffices=true&levels=locality&key=${API_KEY}&address=` +
+        zipCode
+    );
   },
 
   // ===================== //
