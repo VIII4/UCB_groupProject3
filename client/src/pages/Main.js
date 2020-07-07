@@ -262,7 +262,13 @@ class Main extends React.Component {
   // PROGRAM ENTRY POINT //
   // =================== //
   render() {
-    const { currentLocation, localIssues, selectedIssue, zipCode } = this.state;
+    const {
+      currentLocation,
+      localIssues,
+      selectedIssue,
+      zipCode,
+      localGovt,
+    } = this.state;
 
     return (
       <div>
@@ -271,6 +277,7 @@ class Main extends React.Component {
         <RefreshBtn onManualRefreshClick={this.onManualRefreshClick} />
         <Card
           zipCode={zipCode}
+          localGovt={localGovt}
           localIssues={localIssues}
           selectedIssue={selectedIssue}
           setSelectedIssue={this.setSelectedIssue}
@@ -278,6 +285,7 @@ class Main extends React.Component {
           visibility="hidden"
         />
         <Map
+          localGovt={localGovt}
           currentLocation={currentLocation}
           localIssues={localIssues}
           selectedIssue={selectedIssue}
