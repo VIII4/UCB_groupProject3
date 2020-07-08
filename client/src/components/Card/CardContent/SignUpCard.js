@@ -85,36 +85,36 @@ class SignUpCard extends React.Component {
 
                 <div>
                     <ul>
-                        <li id="logInFieldsContainer">
+                        <li className="labelContainer">
                             <label>First Name:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
 
-                        <li id="logInFieldsContainer">
+                        <li className="labelContainer">
                             <label>Last Name:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
-                        <li id="logInFieldsContainer">
+                        <li className="labelContainer">
                             <label>Email/Username:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
 
-                        <li id="logInFieldsContainer">
+                        <li className="labelContainer">
                             <label>Password:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
 
-                        <li id="logInBtn" className="labelContainer">
+                        <li className="logInBtn" className="labelContainer">
                             <button onClick={this.handleSubmit}>Submit</button>
                         </li>
 
                     </ul>
 
-                    <div id="labelContainer">
+                    <div className="labelContainer">
                         <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
                     </div>
 
