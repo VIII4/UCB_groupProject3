@@ -87,32 +87,31 @@ class LogInCard extends React.Component {
                 </div>
 
                 <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <div id="logInFieldsContainer">
+                    <ul id="logInFieldsContainer">
 
-                            <div className="labelContainer">
-                                <label>Email/Username:
+                        <li className="labelContainer">
+                            <label>Email/Username:
                                 <input type="text" value={this.state.value} onChange={this.handleChange} />
-                                </label>
-                            </div>
+                            </label>
+                        </li>
 
-                            <div className="labelContainer">
-                                <label>Password:
+                        <li className="labelContainer">
+                            <label>Password:
                                 <input type="text" value={this.state.value} onChange={this.handleChange} />
-                                </label>
-                            </div>
-                        </div>
+                            </label>
+                        </li>
 
-                        <div id="switchToSignUp">
-                            <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a> for Care'n!</p>
-                        </div>
+                        <li id="logInBtn" className="labelContainer">
+                            <button onClick={this.handleSubmit}>Submit</button>
+                        </li>
 
-                        <div id="logInBtn">
-                            <input type="submit" value="Submit" />
-                        </div>
-                    </form>
+                    </ul>
+
+                    <div id="switchToSignUp" className="labelContainer">
+                        <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a></p>
+                    </div>
+
                 </div>
-
             </div >
         )
     }

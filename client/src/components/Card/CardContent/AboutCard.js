@@ -14,13 +14,13 @@ class AboutCard extends React.Component {
 
                 <div>
                     <br></br>
-                    <p>Care'n is a location based kickstarter for change. It allows residents to submit complaints to the city by placing a pin of the issue on a map. Each resident must include a photo and description of the issue in order for it to be accepted into the app’s database.</p>
+                    <p>Report Issues: Care'n is a location based kickstarter for change. It allows residents to submit complaints to the city by physically going to the location of the issue and placing a pin on the dynamic map. Each submmision must include a photo and description of the issue in order for it to be accepted into the app’s database. Once accepted (an automated process), users have the ability to vote on the issue.</p>
                     <br></br>
-                    <p>Once it is accepted (an automated process), users of the app have the ability to vote on the issue. To submit a vote, they must physically go to the location of the complaint, at which point the app would recognize their location and allow them to cast a vote. At the end of the month, the city or local government is obligated to address the top voted issue that month.</p>
+                    <p>Engaged Voting: Care'n tracks users location realtime and presents local reported issues for the community to vote on. At the end of the month, the city or local government is obligated to address the top voted issue that month.</p>
                     <br></br>
-                    <p>By forcing the voter to physically go to the location of the issue, it validates the problem because a resident has taken the time out of their schedule to participate in the act of voting. Moreover, it encourages residents to walk through their neighborhood and engage in a civic dialogue with their neighbors.</p>
+                    <p>Community Prioritization: Care'n provides users with limited vote tokens thus creating a system where the issues that matter most to the community are magnified.</p>
                     <br></br>
-                    <p>Our app is provided to cities for a fee and it affords them a more direct, technology-based conduit to their constituents. We can further augment the cost and maintenance of the app by allowing local businesses to advertise on the platform and offer discounts to residents who submit complaints around their business.</p>
+                    <p>Civic Duty: Care'n is a direct, real-time conduit between city officials and their constituents. Each Issue can be tweeted to local officials social media platform, along with vote count, creating a level of awareness to be leveraged by the community.</p>
                 </div>
             </div >
         )
