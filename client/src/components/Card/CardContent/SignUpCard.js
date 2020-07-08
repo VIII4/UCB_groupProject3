@@ -1,5 +1,7 @@
-import React from "react";
-import '../Card.css';
+import React, {useContext} from "react";
+import { useHistory } from "react-router-dom";
+import UserContext from "../../../context"
+import Axios from "axios";
 
 class SignUpCard extends React.Component {
     constructor(props) {
@@ -71,10 +73,32 @@ class SignUpCard extends React.Component {
         this.setState({ value: event.target.value });
     }
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        
         event.preventDefault();
+        alert('A name was submitted: ' + this.state.value);
+        const newUser = this.state.value
+        const registerRes = await Axios.post(
+            "/users/add" , 
+            newUser
+        )
+        const loginRes = await Axios.post(
+
+            "/users/login",
+            email,
+            password,
+        )
+        setUserData({
+            token: loginRes.data.token , 
+            user: loginRes.data.user
+        })
+        localStorage.setItem("auth-token" , loginRes.data.token) ;
+        history.pushState("/")
+    
     }
 
+
+    
+        
     render() {
         return (
             <div id="signUpCardContent" className="cardInnards">
@@ -97,14 +121,14 @@ class SignUpCard extends React.Component {
                             </label>
                         </div>
                         <div id="logInFieldsContainer">
-                            <label>Email/Username:
-                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <label htmlFor="register-email">Email/Username:
+                            <input type="email" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
 
                         <div id="logInFieldsContainer">
-                            <label>Password:
-                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <label htmlFor="register-password">Password:
+                            <input type="password" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </div>
 
