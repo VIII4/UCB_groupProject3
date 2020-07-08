@@ -37,9 +37,6 @@ class ContextBtn extends React.Component {
 
         // insert voting card innards
         document.getElementById("voteCardContent").style.display = "block";
-        console.log("contacts");
-
-        // this.CloseSidebar();
     }
 
     OpenToggle = () => {
