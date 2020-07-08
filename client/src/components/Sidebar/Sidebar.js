@@ -65,6 +65,8 @@ class Sidebar extends React.Component {
 
         // close sidebar after cards render
         this.CloseSidebar()
+
+        return "hello world";
     };
 
     // toggle sidebar methods

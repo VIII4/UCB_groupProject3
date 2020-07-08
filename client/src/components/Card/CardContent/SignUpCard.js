@@ -97,7 +97,7 @@ class SignUpCard extends React.Component {
                             </label>
                         </li>
                         <li className="labelContainer">
-                            <label>Email/Username:
+                            <label>Email:
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
@@ -115,7 +115,7 @@ class SignUpCard extends React.Component {
                     </ul>
 
                     <div className="labelContainer">
-                        <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                        <p>Already a member?<br></br><a className="bold" onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
                     </div>
 
                 </div>

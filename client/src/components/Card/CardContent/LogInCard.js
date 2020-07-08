@@ -90,7 +90,7 @@ class LogInCard extends React.Component {
                     <ul id="logInFieldsContainer">
 
                         <li className="labelContainer">
-                            <label>Email/Username:
+                            <label>Email:
                                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                             </label>
                         </li>
@@ -108,7 +108,7 @@ class LogInCard extends React.Component {
                     </ul>
 
                     <div id="switchToSignUp" className="labelContainer">
-                        <p>Not a member?<br></br><a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a></p>
+                        <p>Not a member?<br></br><a className="bold" onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a></p>
                     </div>
 
                 </div>
@@ -118,3 +118,9 @@ class LogInCard extends React.Component {
 }
 
 export default LogInCard;
+
+
+
+
+
+
