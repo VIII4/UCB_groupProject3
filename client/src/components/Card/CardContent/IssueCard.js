@@ -53,7 +53,7 @@ class IssueCard extends React.Component {
         // <h4> should be in main card not innards
         return (
             // this.props is coming from App.js --> Main.js --> Card.js
-            <div id="voteCardContent" className="textBlock cardInnards">
+            <div id="issueCardContent" className="textBlock cardInnards">
 
                 <div className="headerContainer">
                     <h3 classButton="bold">{this.props.header}</h3>
