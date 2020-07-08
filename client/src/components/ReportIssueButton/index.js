@@ -4,14 +4,17 @@ import "./ReportIssueButton.css";
 
 export default function ReportIssueButton({ issueType, onReportIssueClick }) {
   return (
-    <button className="reportBtn"
-      name={issueType}
-      type="button"
-      onClick={() => {
-        onReportIssueClick(issueType);
-      }}
-    >
-      <IssueIcon className="reportBtn" issueType={issueType} />
-    </button>
+    <div className="reportBtnInnerContainer">
+      <button className="reportBtn"
+        name={issueType}
+        type="button"
+        onClick={() => {
+          onReportIssueClick(issueType);
+        }}
+      >
+        {/* all IssueIcon components get the reportBtn class */}
+        <IssueIcon className="reportBtn" issueType={issueType} />
+      </button>
+    </div>
   );
 }
