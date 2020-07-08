@@ -1,4 +1,8 @@
 import React from "react";
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 import "./IssueCard.css";
 import "../Card.css";
 
@@ -42,16 +46,20 @@ class IssueCard extends React.Component {
                 {selectedIssue && (
                     <div>
                         <div className="headerContainer">
-                            <h3 classButton="bold">{selectedIssue.category}</h3>
+                            <h3 className="bold">{selectedIssue.category}</h3>
                         </div>
                         <ul className="labelContainer">
                             <li>
                                 <div>
                                     {selectedIssue.images.map((imageURL) => {
                                         return (
-                                            <div className="carasel">
-
-                                            </div>
+                                            <Carousel>
+                                                console.log(imageURL)
+                                                <div>
+                                                    <img src={imageURL} />
+                                                    <p className="legend">Legend 1</p>
+                                                </div>
+                                            </Carousel>
                                         );
                                     })}
                                 </div>
@@ -69,6 +77,9 @@ class IssueCard extends React.Component {
                             <li className="labelContainer">
                             </li>
 
+                            <li>
+                                <a onClick={this.OpenCard}>Back</a>
+                            </li>
 
 
                         </ul>

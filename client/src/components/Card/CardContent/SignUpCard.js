@@ -115,7 +115,7 @@ class SignUpCard extends React.Component {
                     </ul>
 
                     <div className="labelContainer">
-                        <p>Already a member?<br></br><a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
+                        <p>Already a member?<br></br><a className="bold" onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a></p>
                     </div>
 
                 </div>
