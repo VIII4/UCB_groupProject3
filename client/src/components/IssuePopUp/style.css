@@ -1,0 +1,43 @@
+.lineColor {
+  color: black;
+  background-color: black;
+  height: 4px;
+}
+
+.buttonsDiv {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.voteButton {
+  /* text */
+  font-size: 0.7rem;
+  color: white;
+
+  /* btn size */
+  width: 2.5rem;
+  height: 2.5rem;
+
+  /* background */
+
+  background-color: rgba(11, 3, 45, 0.95);
+
+  border-radius: 3rem;
+}
+
+.reportButton {
+  float: right;
+  /* text */
+  font-size: 0.7rem;
+  color: white;
+
+  /* btn size */
+  width: 2.5rem;
+  height: 2.5rem;
+
+  /* background */
+
+  background-color: rgba(11, 3, 45, 0.95);
+
+  border-radius: 3rem;
+}
