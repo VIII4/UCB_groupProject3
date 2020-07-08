@@ -20,6 +20,7 @@ class Map extends Component {
 
       showingReportPanel: false,
       showingConfirmPanel: true,
+      showingIssueDetails: false,
       reportingType: "",
     };
   }
@@ -99,6 +100,7 @@ class Map extends Component {
 
   render() {
     const {
+      localGovt,
       currentLocation,
       localIssues,
       selectedIssue,
@@ -154,6 +156,7 @@ class Map extends Component {
               }}
             >
               <IssuesPopUp
+                localGovt={localGovt}
                 selectedIssue={selectedIssue}
                 onVoteClick={onVoteClick}
                 onResolveClick={onResolveClick}

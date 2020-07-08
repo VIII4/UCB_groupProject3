@@ -11,6 +11,7 @@ export default class ReportForm extends Component {
       issueType: this.props.typeSelected,
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     };
   }
 
@@ -31,6 +32,11 @@ export default class ReportForm extends Component {
     }
     const files = Array.from(event.target.files);
     this.setState({ imageFiles: files });
+    let _imagePreviewLinks = [];
+    files.forEach((file) =>
+      _imagePreviewLinks.push(window.URL.createObjectURL(file))
+    );
+    this.setState({ imagePreviewLinks: _imagePreviewLinks });
   };
 
   handleSubmitClick = (event) => {
@@ -83,18 +89,28 @@ export default class ReportForm extends Component {
       issueType: "Structural",
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     });
   };
   render() {
+    const { imagePreviewLinks } = this.state;
     return (
       <div>
         <form className="form">
+          {imagePreviewLinks && (
+            <>
+              {imagePreviewLinks.map((imgSrc) => (
+                <img className="img-thumb" src={imgSrc} alt="Test"></img>
+              ))}
+            </>
+          )}
           <ul>
 
             <li className="headerReportFormContainer">
               <h3 className="bold">Report</h3>
             </li>
 
+            
             <li>
               <input
                 value={this.state.descValue}
