@@ -49,21 +49,17 @@ class IssueCard extends React.Component {
                             <h3 className="bold">{selectedIssue.category}</h3>
                         </div>
                         <ul className="labelContainer">
+
                             <li>
                                 <div>
-                                    {selectedIssue.images.map((imageURL) => {
-                                        return (
-                                            <Carousel>
-                                                console.log(imageURL)
-                                                <div>
-                                                    <img src={imageURL} />
-                                                    <p className="legend">Legend 1</p>
-                                                </div>
-                                            </Carousel>
-                                        );
-                                    })}
+                                    <Carousel>
+                                        {selectedIssue.images.map((imageURL) => {
+                                            return <img src={imageURL} />;
+                                        })}
+                                    </Carousel>
                                 </div>
                             </li>
+
                             <li className="labelContainer">
                                 <a>Status: {selectedIssue.status}</a>
                                 <a className="floatRight">Votes: {selectedIssue.voteCount}</a>
