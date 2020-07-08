@@ -1,12 +1,18 @@
 import React from "react";
 import ReportIssueButton from "../ReportIssueButton";
 import ReportForm from "../ReportForm";
-import "./style.css";
+import "./IssuePanel.css";
 
 export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
-    <div className="overViewPanel">
-      <div className="buttonPanel">
+    <div className="overViewPanel center">
+
+      {/* <div className="overViewPanelInnerContainer">
+        <h3 className="bold">Report</h3>
+      </div> */}
+
+      {/* first row */}
+      <div className="buttonPanelContainer">
         {/* Will need to create hook with issue type state and to report form from button click */}
         {/* <ReportForm submitIssueReport={submitIssueReport} /> */}
         <ReportIssueButton
@@ -26,7 +32,9 @@ export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
           onReportIssueClick={onReportIssueClick}
         />
       </div>
-      <div className="buttonPanel center">
+
+      {/* second row */}
+      <div className="buttonPanelContainer center">
         <ReportIssueButton
           issueType="Vandalism"
           onReportIssueClick={onReportIssueClick}

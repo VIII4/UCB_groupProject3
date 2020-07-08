@@ -1,4 +1,5 @@
 import React from "react";
+import "./issueIcon.css"
 import {
   GiPlantsAndAnimals,
   GiPowerLightning,
