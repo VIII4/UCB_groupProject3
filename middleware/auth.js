@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
                     msg: "No token, denied"
                 })
 
-        const verified = jwt.verify(token, "askdjfhsejhkgfjshk");
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
         if (!verified)
             return res
                 .sendStatus(401)

@@ -63,7 +63,7 @@ const login = router.route('/login').post((req, res) => {
   console.log(password, "password")
   //pulls user data by username from usersDB
   const user = User.findOne({username})
-  console.log(user, "help")
+  // console.log(user, "help")
   // console.log(user , "user")
   // console.log({username})
   user.then(function (user) {
@@ -76,16 +76,21 @@ const login = router.route('/login').post((req, res) => {
         res.sendStatus(403)
       }
       
+
+      const userID = user.then((someUser) => { return someUser._id })
+
       //if right send 200
-      console.log(res , "ressss")
       console.log("Dumbass")
-      console.log(user._id, "ME HINOY")
+      
+    
+
+    user.then(function (currentUser) {
       const token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        user: '_id'
-      }, "askdjfhsejhkgfjshk");
+        id: currentUser._id,
+        username: username
+      }, process.env.JWT_SECRET);
       console.log(token, "token")
-    user.then(function (currentUser) {
       console.log(currentUser, "current")
       console.log(currentUser._id, "currentID")
      const result = res.json({
@@ -95,7 +100,6 @@ const login = router.route('/login').post((req, res) => {
       return result ;
     })
     })
-    .then(verify)
     .catch(function (error) {
       console.log("Error authenticating user: ");
       console.log(error);
@@ -105,12 +109,15 @@ const login = router.route('/login').post((req, res) => {
  const verify = router.post("/tokenIsValid" , async (req, res) => {
     try {
       const token = req.header("x-auth-token");
+      console.log(token , "OIOIOIOIOIOI")
       if (!token) return res.json(false);
 
-      const verified = jwt.verify(token, "askdjfhsejhkgfjshk");
+      const verified = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(verified, "IOIOIO")
       if (!verified) return res.json(false);
 
       const user = User.findById(verified.id);
+      // console.log(user , "more like loser")
       if (!user) return res.json(false);
 
 
@@ -119,6 +126,15 @@ const login = router.route('/login').post((req, res) => {
 
     }
 
+
+  })
+
+  router.get("/" , auth , async (req, res) => {
+    const user = await User.findById(req.user);
+    res.json({
+      username: user.username,
+      id: user._id,
+    }) ;
 
   })
 

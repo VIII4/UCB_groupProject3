@@ -13,14 +13,18 @@ const issueRouter = require("./routes/issue");
 const app = express();
 const bodyParser = require('body-parser');
 
-const { json } = require("express");
+const {
+  json
+} = require("express");
 // const userDB = require("userDB")
 // const PORT = process.env.PORT || 3001;
 
 
-const PORT = process.env.PORT || 5004;
+const PORT = process.env.PORT || 3001;
 // Define middleware here
-app.use(express.urlencoded({ extended: true })); ////allows us to determine route
+app.use(express.urlencoded({
+  extended: true
+})); ////allows us to determine route
 app.use(express.json()); ///allows us to parse json
 app.use(formData.parse()); // allows us to parse form data
 
@@ -43,7 +47,9 @@ if (process.env.NODE_ENV === "production") {
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/caren";
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true }, (err) => {
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true
+  }, (err) => {
     if (err) throw err;
     console.log("Database error occurred");
   })
