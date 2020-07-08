@@ -10,7 +10,10 @@ export default function IssuesPopUp({
   return (
     <>
       <div>
-        <h3>{selectedIssue.category}</h3>
+        <h3>
+          <strong>{selectedIssue.category}</strong>
+        </h3>
+        <hr className="lineColor"></hr>
         <p>{selectedIssue.descr}</p>
         {/* TESTING Display images if there are any */}
         {selectedIssue.images.length > 0 && (
@@ -19,13 +22,18 @@ export default function IssuesPopUp({
             issueDesc={selectedIssue.descr}
           />
         )}
-
-        <button type="button" onClick={onVoteClick}>
-          A
-        </button>
-        <button type="button" onClick={onResolveClick}>
-          B
-        </button>
+        <div className="buttonsDiv">
+          <button className="voteButton" type="button" onClick={onVoteClick}>
+            Vote
+          </button>
+          <button
+            className="reportButton"
+            type="button"
+            onClick={onResolveClick}
+          >
+            Resolve
+          </button>
+        </div>
       </div>
     </>
   );
