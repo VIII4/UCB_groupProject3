@@ -1,0 +1,23 @@
+/* ReportIssueButton */
+
+.reportBtn {
+    /* text */
+    font-size: 1.5rem;
+    color: black;
+    
+    
+    /* btn size */
+    width: 3rem;
+    height: 3rem;
+
+    /* background */
+    background-color: white;
+    /* background-color: rgba(11, 3, 45, 0.95); */
+    backdrop-filter: blur(3px);
+    padding: .25rem;
+    border-radius: 3rem;
+}
+
+.reportBtnInnerContainer {
+    padding: .25rem;
+}

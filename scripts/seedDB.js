@@ -2,13 +2,19 @@ const mongoose = require("mongoose");
 const Issue = require("../models/issue");
 const User = require("../models/users");
 
-// This file empties the Books collection and inserts the books below
+// ============== //
+// local mongoose //
+// ============== //
+// npm run seed ...
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/caren");
 
-//mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/caren");
-mongoose.connect(
-  process.env.MONGODB_URI ||
-    "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2"
-);
+// =============== //
+// heroku mongoose //
+// =============== //
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//   "mongodb://carenUser:groupProject3@ds145208.mlab.com:45208/heroku_kgv68jn2"
+// );
 
 const issueSeed = [
   //Oakland

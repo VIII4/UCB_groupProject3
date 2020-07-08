@@ -12,8 +12,7 @@
 
 /* format card parent */
 .cardContainer {
-
-    /* overlay */
+    /* coordinate */
     z-index: var(--cardZindex);
     position: absolute; /* super important */
 
@@ -21,17 +20,19 @@
     width: 100vw;
     height: 100vh;
 
+    /* offset */
+    padding-top: 64px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 64px;
+
     /* text formatting */
     display: block;
-    text-align: right;
+    text-align: left;
     
-    padding: 20px;
-    /* background-color: rgba(0, 255, 170, 0.15); */
-    background-image: linear-gradient(rgba(0, 172, 252, 0.15), rgba(0, 255, 179, 0.15));
+    /* color/styling */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15));
     backdrop-filter: blur(3px);
-    /* background-color: white; */
-    border-radius: 0.5rem;
-    box-shadow: var(--boxShadowSettings);
 }
 
 /* format card children (contents) */
@@ -42,15 +43,31 @@
     color: black;
 }
 
-.closeBtn {
-    top: 20%;
-    width: 50%;
-    float: right;
-    width: auto;
-    position: absolute;
-    display: block;
-}
-
 .cardInnards {
     display: block;
+}
+.cardInnards input {
+    float: right;
+}
+
+.headerContainer {
+    position: relative;
+    padding-top: 32px;
+    padding-bottom: 16px;
+
+    line-height: 1px;
+    border-bottom: 3px solid #000;
+}
+.labelContainer {
+    position: relative;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: block;
+}
+.labelContainer button {
+    float: right;
+}
+
+.bold {
+    font-weight: bolder;
 }

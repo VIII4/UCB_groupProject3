@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./ReportForm.css";
 import { set } from "mongoose";
 import { FaImages } from "react-icons/fa";
 
@@ -8,9 +8,10 @@ export default class ReportForm extends Component {
     super(props);
     this.state = {
       // issueType: props.issueType,
-      issueType: "Structural",
+      issueType: this.props.typeSelected,
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     };
   }
 
@@ -31,11 +32,19 @@ export default class ReportForm extends Component {
     }
     const files = Array.from(event.target.files);
     this.setState({ imageFiles: files });
+    let _imagePreviewLinks = [];
+    files.forEach((file) =>
+      _imagePreviewLinks.push(window.URL.createObjectURL(file))
+    );
+    this.setState({ imagePreviewLinks: _imagePreviewLinks });
   };
 
   handleSubmitClick = (event) => {
     event.preventDefault();
     const { issueType, descValue, imageFiles } = this.state;
+    const types = ["image/png", "image/jpeg", "image/gif"];
+    let error = false;
+    const errorMsg = [];
 
     // Need a Validation for
     // Validate all files submitted
@@ -52,44 +61,87 @@ export default class ReportForm extends Component {
     };
     const formData = new FormData();
     imageFiles.forEach((file, index) => {
-      formData.append(`file[${index}]`, file);
+      if (types.every((type) => file.type !== type)) {
+        errorMsg.push(`'${file.type}' is not a supported format`);
+        error = true;
+        return;
+      }
+
+      // #3 Catching files that are too large on the client
+      if (file.size > 150000) {
+        errorMsg.push(
+          `'${file.name}' is too large, please pick a smaller file`
+        );
+        error = true;
+        return;
+      }
+
+      formData.append(index, file);
     });
 
-    //execute submitIssue from props, then set state to null
-    this.props.submitIssueReport(data, formData);
+    //if no errors execute submitIssue from props, then set state to null
+    if (!error) this.props.submitIssueReport(data, formData);
+    else {
+      errorMsg.map((msg) => alert(msg));
+    }
     // reset state
     this.setState({
       issueType: "Structural",
       descValue: "",
       imageFiles: null,
+      imagePreviewLinks: [],
     });
   };
   render() {
+    const { imagePreviewLinks } = this.state;
     return (
       <div>
         <form className="form">
-          <input
-            value={this.state.descValue}
-            name="descValue"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Description"
-          />
-          <div className="upload-button">
-            <label htmlFor="multi">
-              <FaImages className="upload-icon" />
-            </label>
-            <input
-              className="image-input"
-              type="file"
-              id="multi"
-              onChange={this.handleImageLoad}
-              multiple
-            />
-          </div>
-          <button onClick={this.handleSubmitClick}> Submit</button>
+          {imagePreviewLinks && (
+            <>
+              {imagePreviewLinks.map((imgSrc) => (
+                <img className="img-thumb" src={imgSrc} alt="Test"></img>
+              ))}
+            </>
+          )}
+          <ul>
+
+            <li className="headerReportFormContainer">
+              <h3 className="bold">Report</h3>
+            </li>
+
+            
+            <li>
+              <input
+                value={this.state.descValue}
+                name="descValue"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Description"
+              />
+
+              <input
+                className="image-input"
+                type="file"
+                id="multi"
+                onChange={this.handleImageLoad}
+                multiple
+              />
+
+              <div className="uploadBtnContainer">
+                <label htmlFor="multi">
+                  <FaImages className="upload-icon" />
+                </label>
+              </div>
+            </li>
+
+            <li className="reportFormBtnContainer">
+              <button className="reportFormBtn" onClick={this.handleSubmitClick}> Submit</button>
+            </li>
+          </ul>
         </form>
-      </div>
+      </div >
+
     );
   }
 }

@@ -1,14 +1,15 @@
 import React from "react";
 import Map from "../components/Map";
 import Card from "../components/Card";
+import RefreshBtn from "../components/RefreshBtn";
 import API from "../utils/API";
 
 class Main extends React.Component {
   //Local refresh interval method ref
   loadIssueSequenceID; //TO DO: add clear interval method
   // Interval Timer
-  loadIssueIntervalTime = 10; //in secs
-
+  loadIssueIntervalTime = 25; //in secs
+  loading = this.props.loading;
   constructor(props) {
     super(props);
 
@@ -16,11 +17,14 @@ class Main extends React.Component {
       //TO DO: Receive userdata info from props and store to state
 
       //Current Location
+      zipCode: "",
       currentLocation: {
         lat: 37.804363,
         lng: -122.271111,
       },
 
+      //Local Govt Contacts Info
+      localGovt: [],
       //Local Issue to render to map
       localIssues: [],
       // Current Issue Selected
@@ -43,12 +47,24 @@ class Main extends React.Component {
               lng: position.coords.longitude,
             },
           }));
+          API.getZipcode(this.state.currentLocation)
+            .then((res) => {
+              let zipCode = res.data.results[0].address_components.find(
+                (component) => {
+                  if (component.types.includes("postal_code")) return component;
+                }
+              ).long_name;
+              this.setState({ zipCode: zipCode });
+            })
+            .then(() => {
+              this.getLocalGovt();
+            });
         },
         (error) => console.log(error)
       );
       //Check for Local issues
       this.getLocalIssues(this.state.currentLocation);
-      // TO DO: EXTRACT so we can clear interval before starting new one, specifically for manual refresh
+
       //start interval sequence to check for local issues
       this.loadIssueSequenceID = setInterval(() => {
         this.getLocalIssues(this.state.currentLocation);
@@ -67,6 +83,7 @@ class Main extends React.Component {
   };
 
   getLocalIssues = () => {
+    this.loading(true);
     API.getIssues()
       .then((res) => {
         /* Filter issues array and return array with issues within radius */
@@ -84,14 +101,46 @@ class Main extends React.Component {
         });
         //console.log(_localIssues);
         this.setState({ localIssues: _localIssues });
+        this.props.loading(false);
       })
       .catch((err) => console.log(err));
+  };
+
+  getLocalGovt = () => {
+    API.getGovContacts(this.state.zipCode).then((res) => {
+      let localGovt = [];
+      for (var i = 0; i < res.data.officials.length; i++) {
+        // create an empty object and populate with data
+        let newGovObj = {};
+        newGovObj.office = res.data.offices[i].name
+          ? res.data.offices[i].name
+          : "Info not available";
+        newGovObj.name = res.data.officials[i].name
+          ? res.data.officials[i].name
+          : "Info not available";
+        newGovObj.phones = res.data.officials[i].phones
+          ? res.data.officials[i].phones
+          : "Phone number not available";
+        newGovObj.twitter = res.data.officials[i].channels
+          ? res.data.officials[i].channels[0].id
+          : "Twitter not available";
+        newGovObj.urls = res.data.officials[i].urls
+          ? res.data.officials[i].urls
+          : "Info not available";
+
+        // append newGovObj to arrayList
+        localGovt.push(newGovObj);
+      }
+      // set current state
+      this.setState({ localGovt: localGovt });
+    });
   };
   //#endregion
 
   //#region Handler Methods
   onManualRefreshClick = () => {
     this.getLocalIssues();
+    console.log("manual refresh");
   };
 
   setSelectedIssue = (issue) => {
@@ -149,24 +198,36 @@ class Main extends React.Component {
   };
 
   submitIssueReport = (data, formdata) => {
-    // Add additional required information to new issue
-    data.createdby = "testUser";
-    data.votecount = 1;
-    data.status = "Voting";
-    data.zipcode = 94602;
-    data.date = Date();
-    data.votedby = ["testUserID"];
-    data.latlng = this.state.currentLocation;
-
-    //Send Api request for database info then send request to upload images
-    API.createIssue(data)
+    this.loading(true);
+    // Upload images first, recieve urls then add to data base, need a loading screen
+    API.uploadImages(formdata)
       .then((res) => {
         console.log(res);
-        // TO DO: Run image upload fetch request here
-      })
-      .catch((err) => console.log(err));
+        // Compile data with images then add to DB
+        data.createdby = "testUser";
+        data.votecount = 1;
+        data.status = "Voting";
+        data.zipcode = 94602;
+        data.date = Date();
+        data.votedby = ["testUserID"];
+        data.latlng = this.state.currentLocation;
+        data.images = res.data;
 
-    alert("Issue has been submitted");
+        //Send Api request to create issue in database
+        API.createIssue(data)
+          .then((res) => {
+            console.log(res);
+            this.loading(false);
+          })
+          .catch((err) => console.log(err));
+
+        alert("Issue has been submitted");
+      })
+      .catch((err) =>
+        err.json().then((e) => {
+          console.log(e.message);
+        })
+      );
   };
 
   onResolveClick = () => {
@@ -197,14 +258,26 @@ class Main extends React.Component {
     this.getUpdatedLocation();
   };
 
+  // =================== //
+  // PROGRAM ENTRY POINT //
+  // =================== //
   render() {
-    const { currentLocation, localIssues, selectedIssue } = this.state;
+    const {
+      currentLocation,
+      localIssues,
+      selectedIssue,
+      zipCode,
+      localGovt,
+    } = this.state;
 
     return (
       <div>
         {/* visibility can be set in css,but for 
             clarity it is done here instead */}
+        <RefreshBtn onManualRefreshClick={this.onManualRefreshClick} />
         <Card
+          zipCode={zipCode}
+          localGovt={localGovt}
           localIssues={localIssues}
           selectedIssue={selectedIssue}
           setSelectedIssue={this.setSelectedIssue}
@@ -212,6 +285,7 @@ class Main extends React.Component {
           visibility="hidden"
         />
         <Map
+          localGovt={localGovt}
           currentLocation={currentLocation}
           localIssues={localIssues}
           selectedIssue={selectedIssue}

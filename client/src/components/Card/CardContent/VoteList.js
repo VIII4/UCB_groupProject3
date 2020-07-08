@@ -2,36 +2,69 @@ import React from "react";
 import "../Card.css";
 
 class VoteList extends React.Component {
-  DoSomething = () => {
-    console.log("Event Triggered");
-  };
+    // card methods
+    CloseCardInnards = () => {
+        // collect html collection --> convert to array
+        var cardInnardsList = Array.prototype.slice.call(document.getElementsByClassName("cardInnards"));
 
-  // GetDBIssues = () => {
-  //     var tagList = [];
-  //     for (var i = 0; i < 5; i++) {
-  //         tagList.push(<a>Issue A</a>, <button onClick={this.DoSomething, <br></br>}>Vote</button>)
-  //     }
-  //     return tagList;
-  // }
+        // hide all card innards with common className
+        cardInnardsList.forEach(element => {
+            element.style.display = "none";
+        });
+    }
+    CloseCard = () => {
+        // hide card containter
+        document.getElementById("cardContainer").style.visibility = "hidden";
+        this.CloseCardInnards();
+    };
+    OpenCard = (event, type) => {
+        // first close any open cards
+        this.CloseCardInnards();
 
-  render() {
-    // <h4> should be in main card not innards
-    return (
-      // this.props is coming from App.js --> Main.js --> Card.js
-      <div id="voteCardContent" className="textBlock cardInnards">
-        <h4>{this.props.header}</h4>
-        <hr></hr>
-        {this.props.localIssues.map((issue) => {
-          return (
-            <li>
-              <a>{issue.category}</a>
-              <button onClick={this.props.onVoteClick}>Vote</button>
-            </li>
-          );
-        })}
-      </div>
-    );
-  }
+        // show card parent
+        document.getElementById("cardContainer").style.visibility = "visible";
+
+        // using type input render the appropriate card innards
+        switch (type) {
+            // set to visible by id since they are unique
+            case "about":
+                document.getElementById("aboutCardContent").style.display = "block";
+                break;
+            case "contacts":
+                document.getElementById("contactsCardContent").style.display = "block";
+                break;
+            case "logIn":
+                document.getElementById("logInCardContent").style.display = "block";
+                break;
+            case "signUp":
+                document.getElementById("signUpCardContent").style.display = "block";
+                break;
+        }
+
+        // close sidebar after cards render
+        this.CloseSidebar()
+    };
+
+    render() {
+        return (
+            // this.props is coming from App.js --> Main.js --> Card.js
+            <div id="voteCardContent" className="textBlock cardInnards">
+                <div className="headerContainer">
+                    <h3 className="bold">{this.props.header}</h3>
+                </div>
+                <div>
+                    {this.props.localIssues.map((issue) => {
+                        return (
+                            <li className="labelContainer">
+                                <a onClick={(event) => { this.OpenCard(event, this.props.setSelectedIssue(this.props.selectedIssue)) }}>{issue.category} </a>
+                                <button onClick={this.props.onVoteClick}>Vote</button>
+                            </li>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
 }
 
 export default VoteList;

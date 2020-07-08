@@ -1,0 +1,29 @@
+#logInFieldsContainer {
+    position: relative;
+    display: block;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+
+#switchToSignUp {
+    position: relative;
+    padding-top: 8px;
+    padding-bottom: 16px;
+}
+
+.labelContainer {
+    display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#logInBtn {
+    /* position: absolute; */
+    position: sticky;
+    bottom: 10%;
+
+    width: 100vw;
+    height: auto;
+
+    padding: 32px;
+}

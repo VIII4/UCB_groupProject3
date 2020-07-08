@@ -1,3 +1,30 @@
-body {
+/* FIXING CSS ISSUES AFTER RESET */
+
+/* super important for screen properties to work properly */
+*{margin:0; padding:0;}
+html, body {
+    width: 100vw;
+    height:100vh;
     font-family: "Roboto", sans-serif;
+}
+
+/* super important for padding to work properly */
+* { box-sizing: border-box; }
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* this was supposed to be orientation lock, not quite that but does make things better */
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
 }

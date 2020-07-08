@@ -7,8 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import mapStyles from "../../utils/mapStyles";
-import API from "../../utils/API";
-import IssuesPanel from "../IssuePanel";
+import ReportPanel from "../ReportPanel";
 import IssuesPopUp from "../IssuePopUp";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
@@ -20,6 +19,8 @@ class Map extends Component {
       isLoading: false,
 
       showingReportPanel: false,
+      showingConfirmPanel: true,
+      showingIssueDetails: false,
       reportingType: "",
     };
   }
@@ -34,7 +35,8 @@ class Map extends Component {
     visibility: "visible",
 
     width: "100vw",
-    height: "105vh",
+    height: "100vh",
+    maxWidth: "100%",
     zIndex: 1,
 
     // this is critical for full screen
@@ -44,8 +46,8 @@ class Map extends Component {
   //Options
   options = {
     disableDefaultUI: true,
-    styles: mapStyles.wy,
-    zoomControl: true,
+    styles: mapStyles.mostlyGrayScale,
+    clickableIcons: false,
   };
 
   //
@@ -98,6 +100,7 @@ class Map extends Component {
 
   render() {
     const {
+      localGovt,
       currentLocation,
       localIssues,
       selectedIssue,
@@ -153,24 +156,20 @@ class Map extends Component {
               }}
             >
               <IssuesPopUp
+                localGovt={localGovt}
                 selectedIssue={selectedIssue}
                 onVoteClick={onVoteClick}
                 onResolveClick={onResolveClick}
               />
             </InfoWindow>
           )}
-          {/* Enable Report Issue pop up panel */}
+          {/* Enable report issue pop up panel and additional details panel*/}
           {this.state.showingReportPanel && (
-            <OverlayView
-              position={currentLocation}
-              mapPaneName={OverlayView.FLOAT_PANE}
-            >
-              <IssuesPanel
-                onReportIssueClick={onReportIssueClick}
-                // Testing
-                submitIssueReport={submitIssueReport}
-              ></IssuesPanel>
-            </OverlayView>
+            <ReportPanel
+              currentLocation={currentLocation}
+              onReportIssueClick={onReportIssueClick}
+              submitIssueReport={submitIssueReport}
+            />
           )}
         </GoogleMap>
       </LoadScript>

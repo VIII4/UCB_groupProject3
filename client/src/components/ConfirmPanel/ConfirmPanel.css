@@ -1,0 +1,31 @@
+.buttonPanel {
+  padding: 0rem;
+}
+
+.buttonPanel.hide {
+  visibility: hidden;
+}
+
+.confirmPanel {
+  /* color/styling */
+  background-color: rgba(11, 3, 45, 0.95);
+  backdrop-filter: blur(3px);
+
+  padding: 1.5rem;
+  border-radius: 15px;
+  position: relative;
+  right: 50%;
+  bottom: 12rem;
+}
+.confirmPanel.hide {
+  visibility: hidden;
+}
+.confirmPanel input {
+  border-radius: 0rem;
+}
+
+
+.center {
+  margin: auto;
+  width: 75%;
+}

@@ -16,12 +16,12 @@ class Sidebar extends React.Component {
     OpenSidebar = () => {
         document.getElementById("carenSidebar").style.width = "30vw";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
-        document.getElementById("main").style.marginLeft = "30vw";
+        document.getElementById("openBtnLogoContainer").style.marginLeft = "30vw";
     };
     CloseSidebar = () => {
         document.getElementById("carenSidebar").style.width = "0px";
         document.getElementById("carenSidebar").style.borderRight = "border-right: 5px solid #000"
-        document.getElementById("main").style.marginLeft = "0px";
+        document.getElementById("openBtnLogoContainer").style.marginLeft = "0px";
     };
 
     // card methods
@@ -55,11 +55,11 @@ class Sidebar extends React.Component {
             case "contacts":
                 document.getElementById("contactsCardContent").style.display = "block";
                 break;
-            case "login":
-                document.getElementById("loginCardContent").style.display = "block";
+            case "logIn":
+                document.getElementById("logInCardContent").style.display = "block";
                 break;
-            case "register":
-                document.getElementById("registerCardContent").style.display = "block";
+            case "signUp":
+                document.getElementById("signUpCardContent").style.display = "block";
                 break;
         }
 
@@ -88,21 +88,36 @@ class Sidebar extends React.Component {
             <div>
 
                 {/* top row with open button and logo */}
-                <div id="main">
+                <div id="openBtnLogoContainer">
                     {/* sidebar open button */}
                     <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 
                     {/* app logo */}
-                    <a className="logo" onClick={this.CloseCard}>Care'n</a>
+                    <a className="logo bold" onClick={this.CloseCard}>Care'n</a>
                 </div>
 
                 {/* sidebar contents */}
-                <div id="carenSidebar" className="sidebar">
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "login") }}>Log In</a>
-                    <a id="aTag" onClick={(event) => { this.OpenCard(event, "register") }}>Register</a>
-                </div>
+                <ul id="carenSidebar" className="sidebar">
+                    <li>
+                        <a onClick={(event) => { this.OpenCard(event, "about") }}>About</a>
+                    </li>
+                    <li>
+                        <a onClick={(event) => { this.OpenCard(event, "contacts") }}>Contact</a>
+                    </li>
+                    <li>
+                        <a onClick={(event) => { this.OpenCard(event, "logIn") }}>Log In</a>
+                    </li>
+                    <li>
+                        <a onClick={(event) => { this.OpenCard(event, "signUp") }}>Sign Up</a>
+                    </li>
+
+                    <div id="sidebarLogo">
+                        <a className="logo bold" onClick={this.CloseCard}>Care'n</a>
+                    </div>
+
+                </ul>
+
+
 
             </div>
         )
