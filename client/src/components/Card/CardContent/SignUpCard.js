@@ -80,7 +80,7 @@ class SignUpCard extends React.Component {
             <div id="signUpCardContent" className="cardInnards">
 
                 <div className="headerContainer">
-                    <h4>{this.props.header}</h4>
+                    <h3 className="bold">{this.props.header}</h3>
                 </div>
 
                 <div>

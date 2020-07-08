@@ -93,7 +93,7 @@ class Sidebar extends React.Component {
                     <button className="openbtn" onClick={this.OpenSidebarToggle}>☰</button>
 
                     {/* app logo */}
-                    <a className="logo" onClick={this.CloseCard}>Care'n</a>
+                    <a className="logo bold" onClick={this.CloseCard}>Care'n</a>
                 </div>
 
                 {/* sidebar contents */}
@@ -112,7 +112,7 @@ class Sidebar extends React.Component {
                     </li>
 
                     <div id="sidebarLogo">
-                        <a onClick={this.CloseCard}>Care'n</a>
+                        <a className="logo bold" onClick={this.CloseCard}>Care'n</a>
                     </div>
 
                 </ul>

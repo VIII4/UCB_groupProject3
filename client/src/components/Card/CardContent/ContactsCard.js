@@ -68,29 +68,31 @@ class ContactsCard extends React.Component {
     return (
       // this.props is coming from App.js --> Main.js --> Card.js
       <div id="contactsCardContent" className="textBlock cardInnards">
-        <div className="headerContainer">
-          <h4>{this.props.header}</h4>
-        </div>
+        <div className="headerContainer bold">
+                    <h3 className="bold">{this.props.header}</h3>
+                </div>
 
         <div>
           {/* use map to loop through each entry | {obj} data */}
           {this.state.newGovObj.map((element) => {
             return (
               <ul className="labelContainer">
-                <li>{element.name}</li>
-                <li>{element.office}</li>
-                <li>
-                  <a href={"tel:" + element.phones}>{element.phones}</a>
-                </li>
-                <li>
-                  <a href={"https://twitter.com/" + element.twitter}>
-                    @{element.twitter}
-                  </a>
-                </li>
-                <li>
-                  <a href={element.urls}>website</a>
-                </li>
-              </ul>
+                                <li className="bold">
+                                    {element.name}
+                                </li>
+                                <li>
+                                    {element.office}
+                                </li>
+                                <li>
+                                    <a href={"tel:" + element.phones}>{element.phones}</a>
+                                </li>
+                                <li>
+                                    <a href={"https://twitter.com/" + element.twitter}>@{element.twitter}</a>
+                                </li>
+                                <li>
+                                    <a href={element.urls}>website</a>
+                                </li>
+                            </ul>
             );
           })}
         </div>
