@@ -17,7 +17,7 @@ router
   .delete(userController.remove);
 
 //Auth 
-router.route('/add').post((req, res) => {
+const register = router.route('/add').post((req, res) => {
   console.log(req.body, "req"); ///app incoming post request.usersname is part of request body
   // console.log(res, "res")
   const username = req.body.username;
@@ -53,7 +53,7 @@ router.route('/add').post((req, res) => {
   //   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/login').post((req, res) => {
+const login = router.route('/login').post((req, res) => {
 
   // console.log(req, "reqlogin")
   // console.log(res.json, "reslogin")
@@ -62,9 +62,7 @@ router.route('/login').post((req, res) => {
   const password = req.body.hashedPassword;
   console.log(password, "password")
   //pulls user data by username from usersDB
-  const user = User.findOne({
-    username
-  })
+  const user = User.findOne({username})
   console.log(user, "help")
   // console.log(user , "user")
   // console.log({username})
@@ -77,7 +75,9 @@ router.route('/login').post((req, res) => {
       if (!samePassword) {
         res.sendStatus(403)
       }
+      
       //if right send 200
+      console.log(res , "ressss")
       console.log("Dumbass")
       console.log(user._id, "ME HINOY")
       const token = jwt.sign({
@@ -85,24 +85,24 @@ router.route('/login').post((req, res) => {
         user: '_id'
       }, "askdjfhsejhkgfjshk");
       console.log(token, "token")
-      
-      res.json({
-        token,
-        user: {
-          id: user._id ,
-          username: user.username
-
-        }
+    user.then(function (currentUser) {
+      console.log(currentUser, "current")
+      console.log(currentUser._id, "currentID")
+     const result = res.json({
+        currentUser,
+        token
       });
-
+      return result ;
     })
+    })
+    .then(verify)
     .catch(function (error) {
       console.log("Error authenticating user: ");
       console.log(error);
     });
 });
 
-  router.post("/tokenIsValid" , async (req, res) => {
+ const verify = router.post("/tokenIsValid" , async (req, res) => {
     try {
       const token = req.header("x-auth-token");
       if (!token) return res.json(false);
@@ -123,4 +123,4 @@ router.route('/login').post((req, res) => {
   })
 
 
-module.exports = router;
+module.exports = router, register , login
