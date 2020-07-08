@@ -143,7 +143,15 @@ class Main extends React.Component {
   //#region Handler Methods
   onManualRefreshClick = () => {
     this.getLocalIssues();
-    console.log("manual refresh");
+    //TESTING COMMENT API REQUEST
+    alert("Testing API Request");
+    API.updateIssue("5f055bf880abbd548461a810", {
+      addtlcomments: { username: "testUser", comment: "Hellloooooooo" },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   setSelectedIssue = (issue) => {
@@ -250,6 +258,16 @@ class Main extends React.Component {
     });
   };
 
+  onCommentSubmission = (issueID, comment) => {
+    API.updateIssue(issueID, {
+      addtlcomments: { username: "testUser", comment: comment },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   //#endregion
 
   //Life Cycle Events
@@ -281,6 +299,7 @@ class Main extends React.Component {
           selectedIssue={selectedIssue}
           setSelectedIssue={this.setSelectedIssue}
           onVoteClick={this.onVoteClick}
+          onCommentSubmission={this.onCommentSubmission}
           visibility="hidden"
         />
         <Map
@@ -291,6 +310,7 @@ class Main extends React.Component {
           setSelectedIssue={this.setSelectedIssue}
           onVoteClick={this.onVoteClick}
           onReportIssueClick={this.onReportIssueClick}
+          onCommentSubmission={this.onCommentSubmission}
           onResolveClick={this.onReportIssueClick}
           submitIssueReport={this.submitIssueReport}
         />

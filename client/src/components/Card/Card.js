@@ -16,6 +16,7 @@ export default function Card({
   selectedIssue,
   setSelectedIssue,
   onVoteClick,
+  onCommentSubmission,
   visibility,
 }) {
   //                     //
@@ -35,7 +36,10 @@ export default function Card({
           header="Local Government Contacts"
           display="none"
         />
-        <IssueCard selectedIssue={selectedIssue} />
+        <IssueCard
+          selectedIssue={selectedIssue}
+          onCommentSubmission={onCommentSubmission}
+        />
         <VoteList
           setSelectedIssue={setSelectedIssue}
           selectedIssue={selectedIssue}
