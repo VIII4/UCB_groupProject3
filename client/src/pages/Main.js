@@ -23,6 +23,9 @@ class Main extends React.Component {
         lng: -122.271111,
       },
 
+      //Current User Logged in
+      //
+
       //Local Govt Contacts Info
       localGovt: [],
       //Local Issue to render to map

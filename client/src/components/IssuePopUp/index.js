@@ -7,6 +7,33 @@ export default function IssuesPopUp({
   onVoteClick,
   onResolveClick,
 }) {
+  const CloseCardInnards = () => {
+    // collect html collection --> convert to array
+    var cardInnardsList = Array.prototype.slice.call(
+      document.getElementsByClassName("cardInnards")
+    );
+
+    // hide all card innards with common className
+    cardInnardsList.forEach((element) => {
+      element.style.display = "none";
+    });
+  };
+  const OpenCard = (event, type) => {
+    // first close any open cards
+    CloseCardInnards();
+
+    // show card parent
+    document.getElementById("cardContainer").style.visibility = "visible";
+
+    if (document.getElementById("issueCardContent")) {
+      // using type input render the appropriate card innards
+      document.getElementById("issueCardContent").style.display = "block";
+    }
+
+    // close sidebar after cards render
+    //this.CloseSidebar();
+  };
+
   return (
     <>
       <div>
@@ -34,6 +61,13 @@ export default function IssuesPopUp({
             Resolve
           </button>
         </div>
+        <a
+          onClick={(event) => {
+            OpenCard(event);
+          }}
+        >
+          Details
+        </a>
       </div>
     </>
   );
