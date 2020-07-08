@@ -8,7 +8,7 @@ const userSchema = new Schema({
         trim: true,
         minlength: 6
         },
-  password: {type: String},      
+  hashedPassword: {type: String},      
   remainingvotes: {type: Number},
     
 }, {timestamps: true

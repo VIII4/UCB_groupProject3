@@ -1,5 +1,7 @@
 require("dotenv").config();
 const express = require("express");
+const bcrypt = require("bcrypt")
+
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
 const formData = require("express-form-data");
@@ -9,8 +11,14 @@ const usersRouter = require("./routes/users");
 const issueRouter = require("./routes/issue");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const bodyParser = require('body-parser');
 
+const { json } = require("express");
+// const userDB = require("userDB")
+// const PORT = process.env.PORT || 3001;
+
+
+const PORT = process.env.PORT || 5004;
 // Define middleware here
 app.use(express.urlencoded({ extended: true })); ////allows us to determine route
 app.use(express.json()); ///allows us to parse json
