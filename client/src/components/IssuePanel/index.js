@@ -7,9 +7,9 @@ export default function IssuesPanel({ onReportIssueClick, submitIssueReport }) {
   return (
     <div className="overViewPanel center">
 
-      <div className="overViewPanelInnerContainer">
+      {/* <div className="overViewPanelInnerContainer">
         <h3 className="bold">Report</h3>
-      </div>
+      </div> */}
 
       {/* first row */}
       <div className="buttonPanelContainer">
