@@ -10,7 +10,7 @@ export default {
   getGovContacts: function (zipCode) {
     return axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?includeOffices=true&levels=adminstrativeArea1&key=${API_KEY}&address=` +
-      zipCode
+        zipCode
     );
   },
 
@@ -54,6 +54,11 @@ export default {
   // Deletes issue with given id
   deleteIssue: function (id) {
     return axios.delete("/issue/" + id);
+  },
+
+  //Add Comment
+  addComment: function (id, data) {
+    return axios.put("/issue/comments/" + id, data);
   },
 
   // Image Upload request
