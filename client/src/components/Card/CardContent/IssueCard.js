@@ -14,7 +14,7 @@ class IssueCard extends React.Component {
             document.getElementsByClassName("cardInnards")
         );
 
-        // hide all card innards with common className
+        // hide all card innards with common class
         cardInnardsList.forEach((element) => {
             element.style.display = "none";
         });
@@ -50,10 +50,10 @@ class IssueCard extends React.Component {
                         </div>
                         <ul className="labelContainer">
                             <li>
-                                <div>
+                                <div className="heightRestriction">
                                     <Carousel>
                                         {selectedIssue.images.map((imageURL) => {
-                                            return <img src={imageURL} />;
+                                            return <img className="heightRestriction" src={imageURL} />;
                                         })}
                                     </Carousel>
                                 </div>
@@ -66,14 +66,27 @@ class IssueCard extends React.Component {
 
                             <li className="labelContainer">{selectedIssue.descr}</li>
 
-                            {/* IYAN, THIS IS WHERE THE COMMENT SECTION SHOULD GO */}
-                            <li className="labelContainer">
+                            <li>
+                                <p>Comments go here</p>
+                            </li>
+
+                            <li>
                                 <button onClick={this.props.onVoteClick}>Vote</button>
+                            </li>
+
+                            <li>
+                                <button onClick={this.props.onVoteClick}>Vote</button>
+                            </li>
+
+                            <li className="labelContainer">
+                                <textarea className="textBox" rows="4" cols="50" name="comment" form="usrform">
+                                    Enter text here...</textarea>
                             </li>
 
                             <li>
                                 <a onClick={this.OpenCard}>Back</a>
                             </li>
+
                         </ul>
                     </div>
                 )}
