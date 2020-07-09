@@ -7,18 +7,32 @@ import "./IssueCard.css";
 import "../Card.css";
 
 class IssueCard extends React.Component {
-    // card methods
-    CloseCardInnards = () => {
-        // collect html collection --> convert to array
-        var cardInnardsList = Array.prototype.slice.call(
-            document.getElementsByClassName("cardInnards")
-        );
-
-        // hide all card innards with common class
-        cardInnardsList.forEach((element) => {
-            element.style.display = "none";
-        });
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentValue: "",
     };
+    
+     handleInputChange = (event) => {
+    // Getting the value and name of the input which triggered the change
+    let value = event.target.value;
+    let name = event.target.name;
+
+    // Updating the input's state
+    this.setState({ [name]: value });
+  };
+
+  handleSubmitClick = (event) => {
+    alert("Hello");
+    event.preventDefault();
+    this.props.onCommentSubmission(
+      this.props.selectedIssue,
+      this.state.commentValue
+    );
+    this.setState({ commentValue: "" });
+  };
+
+
     CloseCard = () => {
         // hide card containter
         document.getElementById("cardContainer").style.visibility = "hidden";
@@ -77,18 +91,30 @@ class IssueCard extends React.Component {
                             <br></br>
 
                             <li className="labelContainer">
-                                <textarea className="textBox" rows="4" cols="50" name="comment">
-                                    Enter text here...
-                                </textarea>
+                               <textarea
+                                value={this.state.commentValue}
+                                className="textBox"
+                                rows="4"
+                                cols="50"
+                                name="commentValue"
+                                onChange={this.handleInputChange}
+                                type="text"
+                                form="usrform"
+                                placeholder="Add comments here"
+                                ></textarea>
 
-                                <button onClick={this.props.onVoteClick}>Vote</button>
+                                <button onClick={this.props.handleSubmitClick}>
+                                  Add Comment
+                                </button>
                             </li>
 
                             <br></br>
                             <br></br>
 
                             <li className="labelContainer">
-                                <p>Comments go here</p>
+                               {selectedIssue.addtlcomments.map((commentObj) => {
+                                  return <p>{commentObj.comment}</p>;
+                                })}
                             </li>
 
                         </ul>
@@ -97,6 +123,10 @@ class IssueCard extends React.Component {
             </div>
         );
     }
+  };
+
+ 
+  
 }
 
 export default IssueCard;
