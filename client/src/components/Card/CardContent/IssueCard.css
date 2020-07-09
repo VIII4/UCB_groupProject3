@@ -14,3 +14,17 @@
 .floatRight {
   float: right;
 }
+
+.heightRestriction {
+  max-width: 50vw;
+  max-height: auto;
+  width: 50vw;
+  height: auto;
+  
+}
+
+
+/* =============================== */
+.textBox {
+  width: 80vw;
+}
