@@ -64,27 +64,31 @@ class IssueCard extends React.Component {
                                 <a className="floatRight">Votes: {selectedIssue.voteCount}</a>
                             </li>
 
-                            <li className="labelContainer">{selectedIssue.descr}</li>
-
-                            <li>
-                                <p>Comments go here</p>
+                            <li className="labelContainer">
+                                <button id="floatLeft" onClick={this.OpenCard}>Back</button>
+                                <button className="floatRight" onClick={this.props.onVoteClick}>Vote</button>
                             </li>
 
-                            <li>
-                                <button onClick={this.props.onVoteClick}>Vote</button>
-                            </li>
+                            <br></br>
+                            <br></br>
 
-                            <li>
-                                <button onClick={this.props.onVoteClick}>Vote</button>
-                            </li>
+                            <li className="labelContainer bold">{selectedIssue.descr}</li>
+
+                            <br></br>
 
                             <li className="labelContainer">
-                                <textarea className="textBox" rows="4" cols="50" name="comment" form="usrform">
-                                    Enter text here...</textarea>
+                                <textarea className="textBox" rows="4" cols="50" name="comment">
+                                    Enter text here...
+                                </textarea>
+
+                                <button onClick={this.props.onVoteClick}>Vote</button>
                             </li>
 
-                            <li>
-                                <a onClick={this.OpenCard}>Back</a>
+                            <br></br>
+                            <br></br>
+
+                            <li className="labelContainer">
+                                <p>Comments go here</p>
                             </li>
 
                         </ul>
