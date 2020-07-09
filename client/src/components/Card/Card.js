@@ -37,6 +37,7 @@ export default function Card({
           display="none"
         />
         <IssueCard
+          onVoteClick={onVoteClick}
           selectedIssue={selectedIssue}
           onCommentSubmission={onCommentSubmission}
         />
