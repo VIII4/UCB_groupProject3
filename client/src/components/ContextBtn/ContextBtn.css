@@ -13,28 +13,28 @@
 
 /* format card parent */
 #contextBtnContainer {
-  /* coordinate */
-  z-index: var(--sidebarZindex);
-  position: absolute; /* super important */
-  bottom: 0%;
+    /* coordinate */
+    z-index: var(--sidebarZindex);
+    position: absolute; /* super important */
+    bottom: 0%;
 
-  /* size */
-  width: 50vw;
-  height: auto;
+    /* size */
+    width: 50vw;
+    height: auto;
 
-  /* offset */
-  padding-top: 32px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 32px;
+    /* offset */
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
 
-  /* color */
-  /* background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 1.0)); */
+    /* color */
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 1.0)); */
 
-  /* text formatting */
-  display: block;
-  text-align: left;
-}
+    /* text formatting */
+    display: block;
+    text-align: left;
+
 
 .contextBtn {
   /* coordinate */
