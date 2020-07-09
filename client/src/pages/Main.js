@@ -160,7 +160,7 @@ class Main extends React.Component {
 
   onVoteClick = () => {
     // TESTING - with manual user id entrance, will need to get this from cookies or State
-    let userId = "5f062cbf563f3d2d184330ab";
+    let userId = "5f065921f938a110b0b804d0";
     API.getUser(userId).then((res) => {
       let userData = res.data;
       API.getSingleIssue(this.state.selectedIssue._id).then((res) => {
