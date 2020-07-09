@@ -7,30 +7,31 @@ import "./IssueCard.css";
 import "../Card.css";
 
 class IssueCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      commentValue: "",
+    constructor(props) {
+        super(props);
+        this.state = {
+            commentValue: "",
+        }
     };
-    
-     handleInputChange = (event) => {
-    // Getting the value and name of the input which triggered the change
-    let value = event.target.value;
-    let name = event.target.name;
 
-    // Updating the input's state
-    this.setState({ [name]: value });
-  };
+    handleInputChange = (event) => {
+        // Getting the value and name of the input which triggered the change
+        let value = event.target.value;
+        let name = event.target.name;
 
-  handleSubmitClick = (event) => {
-    alert("Hello");
-    event.preventDefault();
-    this.props.onCommentSubmission(
-      this.props.selectedIssue,
-      this.state.commentValue
-    );
-    this.setState({ commentValue: "" });
-  };
+        // Updating the input's state
+        this.setState({ [name]: value });
+    };
+
+    handleSubmitClick = (event) => {
+        alert("Hello");
+        event.preventDefault();
+        this.props.onCommentSubmission(
+            this.props.selectedIssue,
+            this.state.commentValue
+        );
+        this.setState({ commentValue: "" });
+    };
 
 
     CloseCard = () => {
@@ -91,20 +92,20 @@ class IssueCard extends React.Component {
                             <br></br>
 
                             <li className="labelContainer">
-                               <textarea
-                                value={this.state.commentValue}
-                                className="textBox"
-                                rows="4"
-                                cols="50"
-                                name="commentValue"
-                                onChange={this.handleInputChange}
-                                type="text"
-                                form="usrform"
-                                placeholder="Add comments here"
+                                <textarea
+                                    value={this.state.commentValue}
+                                    className="textBox"
+                                    rows="4"
+                                    cols="50"
+                                    name="commentValue"
+                                    onChange={this.handleInputChange}
+                                    type="text"
+                                    form="usrform"
+                                    placeholder="Add comments here"
                                 ></textarea>
 
                                 <button onClick={this.props.handleSubmitClick}>
-                                  Add Comment
+                                    Add Comment
                                 </button>
                             </li>
 
@@ -112,8 +113,8 @@ class IssueCard extends React.Component {
                             <br></br>
 
                             <li className="labelContainer">
-                               {selectedIssue.addtlcomments.map((commentObj) => {
-                                  return <p>{commentObj.comment}</p>;
+                                {selectedIssue.addtlcomments.map((commentObj) => {
+                                    return <p>{commentObj.comment}</p>;
                                 })}
                             </li>
 
@@ -123,10 +124,7 @@ class IssueCard extends React.Component {
             </div>
         );
     }
-  };
-
- 
-  
 }
+
 
 export default IssueCard;
