@@ -11,6 +11,10 @@
   display: inline;
 }
 
+#floatLeft {
+  float: left;
+}
+
 .floatRight {
   float: right;
 }
@@ -26,5 +30,5 @@
 
 /* =============================== */
 .textBox {
-  width: 80vw;
+  width: 83vw;
 }
