@@ -32,7 +32,16 @@ class IssueCard extends React.Component {
         );
         this.setState({ commentValue: "" });
     };
+    // card methods
+    CloseCardInnards = () => {
+        // collect html collection --> convert to array
+        var cardInnardsList = Array.prototype.slice.call(document.getElementsByClassName("cardInnards"));
 
+        // hide all card innards with common className
+        cardInnardsList.forEach(element => {
+            element.style.display = "none";
+        });
+    }
 
     CloseCard = () => {
         // hide card containter
