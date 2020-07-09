@@ -24,6 +24,7 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   insertComment: function (req, res) {
+    console.log(req.body);
     Issue.findOneAndUpdate({ _id: req.params.id }, { $push: req.body })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));

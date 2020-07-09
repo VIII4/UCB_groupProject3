@@ -4,6 +4,9 @@ const issueController = require("../controllers/issueController");
 // Matches with "/issue"
 router.route("/").get(issueController.findAll).post(issueController.create);
 
+//Matches with "/issue/comments/"
+router.route("/comments/:id").put(issueController.insertComment);
+
 // Matches with "/api/issue/:id"
 router
   .route("/:id")

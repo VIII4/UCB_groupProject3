@@ -145,13 +145,6 @@ class Main extends React.Component {
     this.getLocalIssues();
     //TESTING COMMENT API REQUEST
     alert("Testing API Request");
-    API.updateIssue("5f055bf880abbd548461a810", {
-      addtlcomments: { username: "testUser", comment: "Hellloooooooo" },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
   };
 
   setSelectedIssue = (issue) => {
@@ -259,7 +252,7 @@ class Main extends React.Component {
   };
 
   onCommentSubmission = (issueID, comment) => {
-    API.updateIssue(issueID, {
+    API.addComment(issueID, {
       addtlcomments: { username: "testUser", comment: comment },
     })
       .then((res) => {
